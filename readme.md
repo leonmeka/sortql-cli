@@ -76,6 +76,8 @@ Here's and example of a queries.sql file:
 -- COPY folders FROM '...' WHERE property = '...'  AND/OR property = '...' TO '...'
 -- ARCHIVE folders FROM '...' WHERE property = '...' AND/OR property = '...' TO '...'
 
+-- supported properties: name, extension, size, created, modified, accessed
+
 -- Example: Selecting all folders and files from the directory
 SELECT files FROM ''
 ```
