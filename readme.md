@@ -16,9 +16,7 @@ Features include:
 
 <hr style="border: 1px solid #f0f0f0; margin-top: 2em; margin-bottom: 2em;">
 
-
 https://github.com/leonmeka/sortql-cli/assets/15350962/7f62b92c-33f2-4f61-ba01-7e287f38f517
-
 
 Example: Automated workflow for cleaning up the mess on your desktop.
 
@@ -48,7 +46,7 @@ Before you begin, ensure you have installed Node.js and a package manager. You c
 To install <b>sortQL</b>, run the following command:
 
 ```bash
-npm install -g @sortql/sortql
+npm install -g npx @sortql/sortql-cli
 ```
 
 This will install <b>sortQL</b> globally on your computer, allowing you to run it from any directory.
