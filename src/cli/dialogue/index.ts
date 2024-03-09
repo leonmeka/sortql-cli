@@ -35,9 +35,11 @@ export async function promptDirectory() {
     validate: async (input) => {
       if (!input)
         return console.log(chalk.red("Please enter a directory")), false;
+
       try {
         const stats = await fs.stat(input);
         if (!stats.isDirectory()) throw new Error();
+
         return true;
       } catch {
         console.log(chalk.red("Please enter a valid directory"));
@@ -45,6 +47,7 @@ export async function promptDirectory() {
       }
     },
   });
+
   return directory;
 }
 
@@ -57,9 +60,11 @@ export async function promptQueries() {
     validate: async (input) => {
       if (!input)
         return console.log(chalk.red("Please enter a file path")), false;
+
       try {
         const stats = await fs.stat(input);
         if (!stats.isFile()) throw new Error();
+
         return true;
       } catch {
         console.log(chalk.red("Please enter a valid file path"));
@@ -67,6 +72,7 @@ export async function promptQueries() {
       }
     },
   });
+
   return queries;
 }
 
@@ -78,5 +84,6 @@ export async function promptWatch() {
       "Do you want to watch the directory for changes and rerun queries?",
     default: false,
   });
+
   return watch;
 }

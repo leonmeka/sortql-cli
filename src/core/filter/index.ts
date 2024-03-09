@@ -110,27 +110,25 @@ export class Filter {
   }
 
   async apply(query: Query, results: string[] = []): Promise<string[]> {
-    if (!existsSync(this.directory)) return results;
+    const startPath = path.join(this.directory, query.from);
+    if (!existsSync(startPath)) return results;
 
-    const entries = await readdir(path.join(this.directory, query.from), {
-      withFileTypes: true,
-    });
+    const entries = await readdir(startPath, { withFileTypes: true });
     const filtered = entries.filter((entry) => entry.name !== ".DS_Store");
 
     for (const dirent of filtered) {
-      const entryPath = path.join(this.directory, query.from, dirent.name);
+      const entryPath = path.join(startPath, dirent.name);
 
-      if (
-        (dirent.isFile() && query.target === "files") ||
-        (dirent.isDirectory() && query.target === "folders")
-      ) {
+      if (dirent.isFile() && query.target === "files") {
         if (await this.isMatch(entryPath, query.where)) {
           results.push(entryPath);
         }
       }
 
-      if (dirent.isDirectory()) {
-        await new Filter(entryPath).apply(query, results);
+      if (dirent.isDirectory() && query.target === "folders") {
+        if (await this.isMatch(entryPath, query.where)) {
+          results.push(entryPath);
+        }
       }
     }
 
