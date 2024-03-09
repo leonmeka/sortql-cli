@@ -37,11 +37,20 @@ MOVE files FROM '' WHERE extension = '(xlsx|xls)' TO 'spreadsheets'
 
 # Getting Started
 
-## Installation
+## Prerequisites
 
 Before you begin, ensure you have installed Node.js and a package manager. You can use npm, pnpm, bun or yarn. We'll use npm in this example.
 
 - [Node.js](https://nodejs.org/en/download/)
+- [bun] (https://bun.sh)
+
+For bun, you can install it using curl:
+
+```bash
+curl -fsSL https://bun.sh/install | bash
+```
+
+## Installation
 
 To install <b>sortQL</b>, run the following command:
 
