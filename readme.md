@@ -124,6 +124,10 @@ That's it. Feel free to play around with the queries.sql file and see how <b>sor
 
 If you encounter any issues while using <b>sortQL</b>, please create an issue [here](https://github.com/leonmeka/sortql/issues/new).
 
+# Contributing
+
+To contribute to this project, please take a look at the [contributing](contributing.md) guidelines.
+
 # License
 
 <b>sortQL</b> is open-source software licensed under the MIT License. See the [License](LICENSE) file for more information.
