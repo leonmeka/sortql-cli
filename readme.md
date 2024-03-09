@@ -114,7 +114,9 @@ Addtionally, you can specify if you want to watch for changes. This will automat
 ? Do you want to watch the directory for changes and rerun queries? (y/N) y
 ```
 
-Once you press enter, <b>sortQL</b> will start running the queries and applying the operations to the specified directory.
+Once you press enter, <b>sortQL</b> will save your configuration in `~/.config/.sortql`. This will allow you to run <b>sortQL</b> without having to specify the path to the queries.sql file and the directory every time you run it.
+
+After saving the configuration, <b>sortQL</b> will start running the queries and display the results in the terminal.
 
 ### You're all set!
 
@@ -131,3 +133,7 @@ To contribute to this project, please take a look at the [contributing](contribu
 # License
 
 <b>sortQL</b> is open-source software licensed under the MIT License. See the [License](LICENSE) file for more information.
+
+```
+
+```

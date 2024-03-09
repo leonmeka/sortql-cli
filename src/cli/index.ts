@@ -1,8 +1,9 @@
 import chalk from "chalk";
+import { homedir } from "os";
 import path from "path";
 import chokidar from "chokidar";
 
-import { readFile } from "fs/promises";
+import { readFile, writeFile, access } from "fs/promises";
 
 import { QueryClient } from "@sortql/core";
 import {
@@ -38,11 +39,14 @@ async function runQueries(client: QueryClient, queries: string) {
 
 async function watchDirectory(
   client: QueryClient,
-  directory: string,
-  queries: string
+  config: {
+    directory: string;
+    queries: string;
+    watch: boolean;
+  }
 ) {
   chokidar
-    .watch(directory, {
+    .watch(config.directory, {
       ignored: /(^|[\/\\])\../,
       persistent: true,
       ignorePermissionErrors: true,
@@ -53,26 +57,56 @@ async function watchDirectory(
         return;
       }
 
-      printHeader(directory, queries, true);
-      await runQueries(client, queries);
+      printHeader(config);
+      await runQueries(client, config.queries);
     });
+}
+
+async function checkConfig() {
+  const filePath = path.join(homedir(), ".sortql");
+
+  try {
+    console.log(chalk.blue("→ Checking for .sortql config file..."));
+
+    await access(filePath);
+    const config = JSON.parse(await readFile(filePath, { encoding: "utf8" }));
+
+    console.log(chalk.green(`→ Found .sortql config file in ${filePath} \n`));
+
+    return config;
+  } catch (error) {
+    console.error(chalk.yellow("→ No .sortql config found. \n"));
+
+    const directory = await promptDirectory();
+    const queries = await promptQueries();
+    const watch = await promptWatch();
+
+    const config = { directory, queries, watch };
+
+    await writeFile(filePath, JSON.stringify(config, null, 2), {
+      encoding: "utf8",
+    });
+
+    console.log(
+      chalk.green(`→ Created default .sortql config file in ${filePath}`)
+    );
+
+    return config;
+  }
 }
 
 export async function initSortQLCLI() {
   printHeader();
+  const config = await checkConfig();
 
-  const queries = path.resolve(await promptQueries());
-  const directory = path.resolve(await promptDirectory());
-  const client = new QueryClient(directory);
+  const client = new QueryClient(config.directory);
 
-  const isWatching = await promptWatch();
-
-  if (isWatching) {
-    await watchDirectory(client, directory, queries);
+  if (config.watch) {
+    await watchDirectory(client, config);
   }
 
-  if (!isWatching) {
-    printHeader(directory, queries);
-    await runQueries(client, queries);
+  if (!config.watch) {
+    printHeader(config);
+    await runQueries(client, config.queries);
   }
 }
