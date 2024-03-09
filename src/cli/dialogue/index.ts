@@ -1,12 +1,8 @@
 import chalk from "chalk";
 import inquirer from "inquirer";
-import path from "path";
-import { homedir } from "os";
 import { promises as fs } from "fs";
 
-const VERSION = "1.0.7";
-const GITHUB_URL = "https://github.com/leonmeka/sortql";
-const CONFIG_PATH = path.join(homedir(), ".sortql");
+import { VERSION, GITHUB_URL, CONFIG_PATH } from "@sortql/cli";
 
 export function printHeader(config?: {
   directory: string;

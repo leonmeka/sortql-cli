@@ -13,6 +13,10 @@ import {
   promptWatch,
 } from "@sortql/cli/dialogue";
 
+export const VERSION = "1.0.7";
+export const GITHUB_URL = "https://github.com/leonmeka/sortql";
+export const CONFIG_PATH = path.join(homedir(), ".sortql");
+
 let isBlocked = false;
 
 async function runQueries(client: QueryClient, queries: string) {
@@ -63,42 +67,44 @@ async function watchDirectory(
 }
 
 async function updateConfig(filePath: string) {
-  console.log(chalk.blue("→ Entering configuration mode..."));
+  console.log(chalk.blue("→ Entering configuration mode... \n"));
 
   const directory = await promptDirectory();
   const queries = await promptQueries();
   const watch = await promptWatch();
 
-  const newConfig = { directory, queries, watch };
+  const config = { directory, queries, watch };
 
-  await writeFile(filePath, JSON.stringify(newConfig, null, 2), {
+  await writeFile(filePath, JSON.stringify(config, null, 2), {
     encoding: "utf8",
   });
 
   console.log(chalk.green("→ Created new .sortql config! \n"));
 
-  return newConfig;
+  return config;
 }
 
 async function checkConfig() {
-  const filePath = path.join(homedir(), ".sortql");
-
   if (process.argv.includes("--config")) {
-    return await updateConfig(filePath);
+    return await updateConfig(CONFIG_PATH);
   }
 
   try {
     console.log(chalk.blue("→ Checking for .sortql config file..."));
 
-    await access(filePath);
-    const config = JSON.parse(await readFile(filePath, { encoding: "utf8" }));
+    await access(CONFIG_PATH);
+    const config = JSON.parse(
+      await readFile(CONFIG_PATH, { encoding: "utf8" })
+    );
 
-    console.log(chalk.green(`→ Found .sortql config file in ${filePath} \n`));
+    console.log(
+      chalk.green(`→ Found .sortql config file in ${CONFIG_PATH} \n`)
+    );
 
     return config;
   } catch (error) {
     console.error(chalk.yellow("→ No .sortql config found. \n"));
-    return await updateConfig(filePath);
+    return await updateConfig(CONFIG_PATH);
   }
 }
 
