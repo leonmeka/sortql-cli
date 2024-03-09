@@ -3,7 +3,7 @@ import inquirer from "inquirer";
 
 import { promises as fs } from "fs";
 
-const VERSION = "1.0.2";
+const VERSION = "1.0.3";
 const GITHUB_URL = "https://github.com/leonmeka/sortql";
 
 export function printHeader(
