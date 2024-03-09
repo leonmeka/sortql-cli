@@ -39,12 +39,11 @@ MOVE files FROM '' WHERE extension = '(xlsx|xls)' TO 'spreadsheets'
 
 ## Prerequisites
 
-Before you begin, ensure you have installed Node.js and a package manager. You can use npm, pnpm, bun or yarn. We'll use npm in this example.
+Before you begin, ensure you have installed Node.js:
 
 - [Node.js](https://nodejs.org/en/download/)
-- [bun](https://bun.sh)
 
-For bun, you can install it using curl:
+This project also depends on the bun runtime. You can install it by running the following command:
 
 ```bash
 curl -fsSL https://bun.sh/install | bash
