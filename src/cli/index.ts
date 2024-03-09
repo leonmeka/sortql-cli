@@ -62,8 +62,30 @@ async function watchDirectory(
     });
 }
 
+async function updateConfig(filePath: string) {
+  console.log(chalk.blue("→ Entering configuration mode..."));
+
+  const directory = await promptDirectory();
+  const queries = await promptQueries();
+  const watch = await promptWatch();
+
+  const newConfig = { directory, queries, watch };
+
+  await writeFile(filePath, JSON.stringify(newConfig, null, 2), {
+    encoding: "utf8",
+  });
+
+  console.log(chalk.green("→ Created new .sortql config! \n"));
+
+  return newConfig;
+}
+
 async function checkConfig() {
   const filePath = path.join(homedir(), ".sortql");
+
+  if (process.argv.includes("--config")) {
+    return await updateConfig(filePath);
+  }
 
   try {
     console.log(chalk.blue("→ Checking for .sortql config file..."));
@@ -76,22 +98,7 @@ async function checkConfig() {
     return config;
   } catch (error) {
     console.error(chalk.yellow("→ No .sortql config found. \n"));
-
-    const directory = await promptDirectory();
-    const queries = await promptQueries();
-    const watch = await promptWatch();
-
-    const config = { directory, queries, watch };
-
-    await writeFile(filePath, JSON.stringify(config, null, 2), {
-      encoding: "utf8",
-    });
-
-    console.log(
-      chalk.green(`→ Created default .sortql config file in ${filePath}`)
-    );
-
-    return config;
+    return await updateConfig(filePath);
   }
 }
 

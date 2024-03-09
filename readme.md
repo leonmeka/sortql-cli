@@ -114,7 +114,7 @@ Addtionally, you can specify if you want to watch for changes. This will automat
 ? Do you want to watch the directory for changes and rerun queries? (y/N) y
 ```
 
-Once you press enter, <b>sortQL</b> will save your configuration in `~/.sortql`. This will allow you to run <b>sortQL</b> without having to specify the path to the queries.sql file and the directory every time you run it.
+Once you press enter, <b>sortQL</b> will save your configuration in `~/.sortql`. This will allow you to run <b>sortQL</b> without having to specify the path to the queries.sql file and the directory every time you run it. To change the configuration, simply run `npx sortql --config`.
 
 After saving the configuration, <b>sortQL</b> will start running the queries and display the results in the terminal.
 
