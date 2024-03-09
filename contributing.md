@@ -40,6 +40,8 @@ powershell -c "irm bun.sh/install.ps1|iex"
 
 ## Installation
 
+Next, you will need to clone the repository and install the dependencies.
+
 ### Clone the Repository
 
 ```bash
@@ -49,6 +51,7 @@ git clone [your-fork-url]
 ### Install Dependencies
 
 ```bash
+cd [project-name]
 bun install
 ```
 
