@@ -112,10 +112,12 @@ Operations are divided into two categories: file operations and folder operation
 Working with the name property:
 
 ```sql
+-- Select files with a specific name
 SELECT files FROM '' WHERE name = 'example.txt'
 ```
 
 ```sql
+-- Select files with a name that matches a pattern
 SELECT files FROM '' WHERE name = 'example.*'
 ```
 
@@ -127,10 +129,12 @@ SELECT files FROM '' WHERE name = 'example.*'
 Working with the extension property:
 
 ```sql
+-- Select files with a specific extension
 SELECT files FROM '' WHERE extension = 'txt'
 ```
 
 ```sql
+-- Select files with extensions other than 'txt' and 'pdf'
 SELECT files FROM '' WHERE extension != '(txt|pdf)'
 ```
 
@@ -142,10 +146,12 @@ SELECT files FROM '' WHERE extension != '(txt|pdf)'
 Working with the size property:
 
 ```sql
+-- Select files with file size greater than 100000 bytes (= 100KB)
 SELECT files FROM '' WHERE size > 100000
 ```
 
 ```sql
+-- Select files with file size less than or equal to 1000000 bytes (= 1MB)
 SELECT files FROM '' WHERE size <= 1000000
 ```
 
@@ -157,10 +163,12 @@ SELECT files FROM '' WHERE size <= 1000000
 Working with the created property:
 
 ```sql
+-- Select files created after a specific date
 SELECT files FROM '' WHERE created > '2021-01-01'
 ```
 
 ```sql
+-- Select files created before a specific date
 SELECT files FROM '' WHERE created < '2021-01-01'
 ```
 
@@ -172,10 +180,12 @@ SELECT files FROM '' WHERE created < '2021-01-01'
 Working with the modified property:
 
 ```sql
+-- Select files modified after a specific date
 SELECT files FROM '' WHERE modified > '2021-01-01'
 ```
 
 ```sql
+-- Select files modified before a specific date
 SELECT files FROM '' WHERE modified < '2021-01-01'
 ```
 
@@ -187,10 +197,12 @@ SELECT files FROM '' WHERE modified < '2021-01-01'
 Working with the accessed property:
 
 ```sql
+-- Select files accessed after a specific date
 SELECT files FROM '' WHERE accessed > '2021-01-01'
 ```
 
 ```sql
+-- Select files accessed before a specific date
 SELECT files FROM '' WHERE accessed < '2021-01-01'
 ```
 
@@ -204,10 +216,12 @@ SELECT files FROM '' WHERE accessed < '2021-01-01'
 Working with the name property:
 
 ```sql
+-- Select folders with a specific name
 SELECT folders FROM '' WHERE name = 'example'
 ```
 
 ```sql
+-- Select folders with a name that matches a pattern
 SELECT folders FROM '' WHERE name = 'example.*'
 ```
 
@@ -229,13 +243,13 @@ SELECT folders FROM '' WHERE name = 'example.*'
 You can use these operators to compare properties with specific values. Below are some examples of using conditional operators:
 
 ```sql
--- Select files with a specific extension
+-- Select files with file size greater than 100000 bytes (= 100KB)
 SELECT files FROM '' WHERE size > 100000
 ```
 
 ```sql
--- Move files created after a specific date to a different location
-MOVE files FROM '' WHERE created >= '2021-01-01' TO 'new-folder'
+-- Move files created between specific dates to a different location
+MOVE files FROM '' WHERE created >= '2021-01-01' AND created <= '2021-12-31' TO 'projects_2021'
 ```
 
 ```sql
@@ -250,6 +264,7 @@ Additionally, you can combine multiple conditions using the logical operators **
 A valid example of using logical operators:
 
 ```sql
+-- Select big files created after a specific date
 SELECT files FROM '' WHERE size > 100000 AND created > '2021-01-01'
 ```
 
@@ -260,6 +275,7 @@ SELECT files FROM '' WHERE size > 100000 AND created > '2021-01-01'
 Here's an example of using regular expressions to match files with a specific extension:
 
 ```sql
+-- Select files with extensions other than 'txt' and 'pdf'
 SELECT files FROM '' WHERE extension = '(txt|pdf)'
 ```
 
@@ -280,7 +296,7 @@ MOVE files FROM '' WHERE extension = '(xlsx|xls)' TO 'spreadsheets'
 
 ### Example 2: Deleting Files Older Than a Specific Date
 
-You have a directory with a large number of files and want to delete all files that were created before a certain date. Here's how you can do this with **sortQL**:
+You have a directory with a large number of files and want to delete bigger files that are older than a specific date. Here's how you can achieve this with **sortQL**:
 
 ```sql
 -- Delete files older than a specific date
@@ -293,7 +309,7 @@ You have a directory with a large number of files and want to archive files that
 
 ```sql
 -- Archive files based on size
-ARCHIVE files FROM '' WHERE size > 100000 TO 'archive'
+ARCHIVE files FROM '' WHERE size > 100000000 TO 'archive'
 ```
 
 ### Example 4: Copying Folders Based on Name
@@ -302,5 +318,5 @@ You have a directory with several subfolders and want to copy all folders that c
 
 ```sql
 -- Copy folders based on name
-COPY folders FROM '' WHERE name = '*project*' TO 'projects'
+COPY folders FROM '' WHERE name = '*project*' TO 'old-projects'
 ```
