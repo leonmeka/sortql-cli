@@ -3,106 +3,103 @@ import path from "path";
 import { QueryClient } from "@sortql/core";
 
 const directory = path.join(process.cwd(), "./tests/mock-directory");
+let client: QueryClient;
 
-describe("QueryClient", () => {
-  beforeEach(async () => {
-    if (!fs.existsSync(directory)) {
+const createTestFile = (fileName: string, content = "") => {
+  fs.writeFileSync(path.join(directory, fileName), content);
+};
+
+const fileExists = (filePath: string) =>
+  fs.existsSync(path.join(directory, filePath));
+
+describe("File Operations", () => {
+  beforeEach(() => {
+    client = new QueryClient(directory);
+
+    if (!fileExists("")) {
       fs.mkdirSync(directory, { recursive: true });
     }
   });
 
-  afterEach(async () => {
-    if (fs.existsSync(directory)) {
+  afterEach(() => {
+    if (fileExists("")) {
       fs.rmdirSync(directory, { recursive: true });
     }
   });
 
   it("should select a file", async () => {
-    // Setup
-    fs.writeFileSync(path.join(directory, "test.txt"), "Hello World");
-
-    const content = `SELECT * FROM ''`;
-    const client = new QueryClient(directory);
+    // Arrange
+    const testFileName = "test.txt";
+    createTestFile(testFileName);
 
     // Act
-    await client.run(content);
+    await client.run(`SELECT * FROM ''`);
 
     // Assert
-    expect(fs.existsSync(path.join(directory, "test.txt"))).toBe(true);
+    expect(fileExists(testFileName)).toBe(true);
   });
 
   it("should delete a file", async () => {
-    // Setup
-    fs.writeFileSync(path.join(directory, "test.txt"), "");
-
-    const content = `DELETE files FROM ''`;
-    const client = new QueryClient(directory);
+    // Arrange
+    const testFileName = "test.txt";
+    createTestFile(testFileName);
 
     // Act
-    await client.run(content);
+    await client.run(`DELETE files FROM ''`);
 
     // Assert
-    expect(fs.existsSync(path.join(directory, "test.txt"))).toBe(false);
+    expect(fileExists(testFileName)).toBe(false);
   });
 
   it("should move a file", async () => {
-    // Setup
-    fs.writeFileSync(path.join(directory, "test.txt"), "");
-
-    const content = `MOVE files FROM '' TO 'moved'`;
-    const client = new QueryClient(directory);
+    // Arrange
+    const testFileName = "test.txt";
+    createTestFile(testFileName);
 
     // Act
-    await client.run(content);
+    await client.run(`MOVE files FROM '' TO 'moved'`);
 
     // Assert
-    expect(fs.existsSync(path.join(directory, "test.txt"))).toBe(false);
-    expect(fs.existsSync(path.join(directory, "moved/test.txt"))).toBe(true);
+    expect(fileExists(testFileName)).toBe(false);
+    expect(fileExists("moved/test.txt")).toBe(true);
   });
 
   it("should copy a file", async () => {
-    // Setup
-    fs.writeFileSync(path.join(directory, "test.txt"), "");
-
-    const content = `COPY files FROM '' TO 'copied'`;
-    const client = new QueryClient(directory);
+    // Arrange
+    const testFileName = "test.txt";
+    createTestFile(testFileName);
 
     // Act
-    await client.run(content);
+    await client.run(`COPY files FROM '' TO 'copied'`);
 
     // Assert
-    expect(fs.existsSync(path.join(directory, "test.txt"))).toBe(true);
-    expect(fs.existsSync(path.join(directory, "copied/test.txt"))).toBe(true);
+    expect(fileExists(testFileName)).toBe(true);
+    expect(fileExists("copied/test.txt")).toBe(true);
   });
 
   it("should archive a file", async () => {
-    // Setup
-    fs.writeFileSync(path.join(directory, "test.txt"), "");
-
-    const content = `ARCHIVE files FROM '' TO 'archive.zip'`;
-    const client = new QueryClient(directory);
+    // Arrange
+    const testFileName = "test.txt";
+    createTestFile(testFileName);
 
     // Act
-    await client.run(content);
+    await client.run(`ARCHIVE files FROM '' TO 'archive.zip'`);
 
     // Assert
-    expect(fs.existsSync(path.join(directory, "archive.zip"))).toBe(true);
+    expect(fileExists("archive.zip")).toBe(true);
   });
 
   it("should unarchive a file", async () => {
-    // Setup
-    fs.writeFileSync(path.join(directory, "test.txt"), "");
+    // Arrange
+    const testFileName = "test.txt";
+    createTestFile(testFileName);
 
-    const content = `
-    ARCHIVE files FROM '' TO 'archive.zip';
-    UNARCHIVE files FROM '' TO 'unarchived'
-    `;
-    const client = new QueryClient(directory);
+    await client.run(`ARCHIVE files FROM '' TO 'archive.zip'`);
 
     // Act
-    await client.run(content);
+    await client.run(`UNARCHIVE files FROM '' TO 'unarchived'`);
 
     // Assert
-    expect(fs.existsSync(path.join(directory, "test.txt"))).toBe(true);
+    expect(fileExists("unarchived")).toBe(true);
   });
 });

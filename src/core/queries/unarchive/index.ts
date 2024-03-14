@@ -1,8 +1,8 @@
 import path from "path";
 import chalk from "chalk";
-import unzipper from "unzipper";
+import AdmZip from "adm-zip";
 
-import { createReadStream } from "fs";
+import {} from "fs/promises";
 
 import { Query } from "@sortql/core/queries";
 import { Target } from "@sortql/core/parsers";
@@ -45,7 +45,7 @@ export class UnarchiveQuery extends Query {
     );
 
     console.log(
-      chalk.yellowBright(`   ↳ [UNARCHIVE]: ${results.length} to ${to}`)
+      chalk.yellowBright(`   ↳ [UNARCHIVE]: ${filtered.length} to ${to}`)
     );
 
     if (filtered.length === 0) {
@@ -53,9 +53,9 @@ export class UnarchiveQuery extends Query {
     }
 
     for (const result of filtered) {
-      const destination = path.join(directory, to, path.basename(result));
+      const destination = path.join(directory, to);
 
-      createReadStream(result).pipe(unzipper.Extract({ path: destination }));
+      new AdmZip(result).extractAllTo(destination, true);
     }
   }
 }
