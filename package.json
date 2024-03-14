@@ -1,6 +1,6 @@
 {
   "name": "@sortql/sortql-cli",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "author": "Leon Meka",
   "license": "MIT",
   "description": "A file management automation tool with SQL-like syntax",
