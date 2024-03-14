@@ -1,6 +1,6 @@
 # sortQL Documentation
 
-Welcome to the official documentation for **sortQL**, a powerful file management automation tool designed to simplify file and directory operations with an SQL-like syntax. This documentation is intended to provide you with all the information you need to get started, understand **sortQL**'s functionalities, and apply its features to your projects effectively.
+Welcome to the official documentation for **sortQL**, a powerful file management automation tool designed to simplify file and folder operations with an SQL-like syntax. This documentation is intended to provide you with all the information you need to get started, understand **sortQL**'s functionalities, and apply its features to your projects effectively.
 
 ## Table of Contents
 
@@ -24,7 +24,7 @@ To get started, please refer to our [quick start guide](../readme.md#quick-start
 
 ## Query Syntax
 
-**sortQL**'s syntax is inspired by SQL and is designed to be intuitive and easy to use. The syntax consists of a set of operations and properties that allow you to perform various file and directory operations. The basic structure of a **sortQL** query is as follows:
+**sortQL**'s syntax is inspired by SQL and is designed to be intuitive and easy to use. The syntax consists of a set of operations and properties that allow you to perform various file and folder operations. The basic structure of a **sortQL** query is as follows:
 
 ```sql
 ACTION target FROM path WHERE property = value AND/OR property = value TO path
@@ -227,7 +227,7 @@ SELECT folders FROM '' WHERE name = 'example.*'
 
 ## Advanced Usage
 
-**sortQL** supports advanced features such as conditional operators and regular expressions to provide more flexibility and control over file and directory operations.
+**sortQL** supports advanced features such as conditional operators and regular expressions to provide more flexibility and control over file and folder operations.
 
 ### Conditional Operators
 
@@ -285,7 +285,7 @@ Below we list a few examples of how **sortQL** can be used and go into more deta
 
 ### Example 1: Moving Documents to a Different Subfolder
 
-Suppose you have a directory containing various types of files, including documents, presentations, and spreadsheets. You want to move these files to separate subfolders based on their file extensions. Here's how you can achieve this using **sortQL**:
+Suppose you have a directory containing various types of files, including documents, presentations, and spreadsheets. You want to move these files to separate subfolders based on their file extensions:
 
 ```sql
 -- Move documents to a different subfolder
@@ -296,7 +296,7 @@ MOVE files FROM '' WHERE extension = '(xlsx|xls)' TO 'spreadsheets'
 
 ### Example 2: Deleting Files Older Than a Specific Date
 
-You have a directory with a large number of files and want to delete bigger files that are older than a specific date. Here's how you can achieve this with **sortQL**:
+You have a directory with a large number of files and want to delete bigger files that are older than a specific date:
 
 ```sql
 -- Delete files older than a specific date
@@ -305,7 +305,7 @@ DELETE files FROM '' WHERE created < '2021-01-01'
 
 ### Example 3: Archiving Files Based on Size
 
-You have a directory with a large number of files and want to archive files that are larger than 100MB. Here's how you can achieve this with **sortQL**:
+You have a directory with a large number of files and want to archive files that are larger than 100MB:
 
 ```sql
 -- Archive files based on size
@@ -314,7 +314,7 @@ ARCHIVE files FROM '' WHERE size > 100000000 TO 'archive'
 
 ### Example 4: Copying Folders Based on Name
 
-You have a directory with several subfolders and want to copy all folders that contain the word "project" in their name to a different location. Here's how you can do this with **sortQL**:
+You have a directory with several subfolders and want to copy all folders that contain the word "project" in their name to a different location:
 
 ```sql
 -- Copy folders based on name

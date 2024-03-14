@@ -25,15 +25,15 @@
 
 # About
 
-<b>sortQL</b> is a simple, yet powerful, file management automation tool that allows you to define complex operations using a declarative SQL-like syntax. It's designed to help you automate file and directory operations, such as moving, copying, deleting, and archiving files, based on predefined conditions.
+<b>sortQL</b> is a simple, yet powerful, file management automation tool that allows you to define complex operations using a declarative SQL-like syntax. It's designed to help you automate file and folder operations, such as moving, copying, deleting, and archiving files, based on predefined conditions.
 
 Features include:
 
-- <b>Simple Installation:</b> Install globally using npm, pnpm, bun or yarn, and run from any directory.
+- <b>Simple Installation:</b> Install globally and run from any directory using npx.
 
-- <b>Declarative Syntax:</b> Define complex file and directory operations in a simple, readable .SQL file.
+- <b>Declarative Syntax:</b> Define complex file and folder operations in a simple, readable .SQL file.
 
-- <b>Watch Mode:</b> Automatically re-run the queries whenever a file or directory is added, removed, or modified.
+- <b>Watch Mode:</b> Automatically re-run the queries whenever a file or folder is added, removed, or modified.
 
 - <b>Cross-Platform:</b> Works seamlessly across different operating systems, including Windows, macOS, and Linux.
 
@@ -125,7 +125,7 @@ Next, you will be prompted to enter a directory where you want to run the querie
 
 ### 5. Want to watch for changes?
 
-Addtionally, you can specify if you want to watch for changes. This will automatically re-run the queries whenever a file or directory is added, removed, or modified.
+Addtionally, you can specify if you want to watch for changes. This will automatically re-run the queries whenever a file or folder is added, removed, or modified.
 
 ```bash
 ? Do you want to watch the directory for changes and rerun queries? (y/N) y
