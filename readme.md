@@ -35,7 +35,9 @@ MOVE files FROM '' WHERE extension = '(pptx|ppt)' TO 'presentations'
 MOVE files FROM '' WHERE extension = '(xlsx|xls)' TO 'spreadsheets'
 ```
 
-# Getting Started
+For more information on how to use <b>sortQL</b>, please refer to the [documentation](./docs/documentation.md).
+
+# Quick Start
 
 ## Prerequisites
 
@@ -68,24 +70,6 @@ Before running <b>sortQL</b>, you need to create the queries.sql file. In this f
 Here's and example of a queries.sql file:
 
 ```sql
--- Here's a list of all currently supported commands:
--- FILE OPERATIONS:
--- SELECT files FROM '...' WHERE property = '...' AND/OR property = '...'
--- DELETE files FROM '...' WHERE property = '...' AND/OR property = '...'
--- MOVE files FROM '...' WHERE property = '...' AND/OR property = '...' TO '...'
--- COPY files FROM '...' WHERE property = '...'  AND/OR property = '...' TO '...'
--- ARCHIVE files FROM '...' WHERE property = '...'  AND/OR property = '...' TO '...'
--- UNARCHIVE files FROM '...' WHERE property = '...'  AND/OR property = '...' TO '...'
-
--- DIRECTORY OPERATIONS:
--- SELECT folders FROM '...' WHERE property = '...' AND/OR property = '...'
--- DELETE folders FROM '...' WHERE property = '...' AND/OR property = '...'
--- MOVE folders FROM '...' WHERE property = '...'  AND/OR property = '...' TO '...'
--- COPY folders FROM '...' WHERE property = '...'  AND/OR property = '...' TO '...'
--- ARCHIVE folders FROM '...' WHERE property = '...' AND/OR property = '...' TO '...'
-
--- supported properties: name, extension, size, created, modified, accessed
-
 -- Example: Selecting all folders and files from the directory
 SELECT files FROM ''
 ```
@@ -138,6 +122,10 @@ To update <b>sortQL</b> to the latest version, simply run the following command:
 ```bash
 npm update -g @sortql/sortql-cli
 ```
+
+# Documentation
+
+For more information on how to use <b>sortQL</b>, please refer to the [documentation](./docs/documentation.md). It provides a detailed overview of the query syntax, supported operations, and properties as well as some examples on how you might use <b>sortQL</b> in your projects.
 
 # Troubleshooting
 
