@@ -11,10 +11,9 @@ export abstract class Query {
     public where?: LogicalCondition
   ) {
     this.filter = new Filter(directory);
-    this.validate();
   }
 
-  abstract validate(): void;
+  abstract validate(this: this): void;
 
   abstract execute(): Promise<void>;
 }

@@ -16,6 +16,7 @@ export class MoveQuery extends Query {
     where?: LogicalCondition
   ) {
     super(directory, target, from, where);
+    this.validate();
   }
 
   validate() {

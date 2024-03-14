@@ -16,6 +16,7 @@ export class CopyQuery extends Query {
     where?: LogicalCondition
   ) {
     super(directory, target, from, where);
+    this.validate();
   }
 
   validate() {
@@ -38,7 +39,6 @@ export class CopyQuery extends Query {
     await mkdir(path.join(directory, to), { recursive: true });
 
     for (const result of results) {
-      console.log("   ↳ [COPY]", result, to);
       const destintation = path.join(directory, to, path.basename(result));
 
       if (target === "folders") {

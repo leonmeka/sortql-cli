@@ -17,6 +17,7 @@ export class UnarchiveQuery extends Query {
     where?: LogicalCondition
   ) {
     super(directory, target, from, where);
+    this.validate();
   }
 
   validate() {
@@ -24,7 +25,7 @@ export class UnarchiveQuery extends Query {
       throw new SyntaxError("   ↳ [UNARCHIVE] Cannot unarchive folders");
     }
 
-    if (path.extname(this.to) === "") {
+    if (path.extname(this.to) !== "") {
       throw new SyntaxError("   ↳ [UNARCHIVE] Cannot unarchive to a file");
     }
 
@@ -39,16 +40,19 @@ export class UnarchiveQuery extends Query {
     const { directory, to } = this;
 
     const results = await this.filter.apply(this);
+    const filtered = results.filter(
+      (result) => path.extname(result) === ".zip"
+    );
 
     console.log(
       chalk.yellowBright(`   ↳ [UNARCHIVE]: ${results.length} to ${to}`)
     );
 
-    if (results.length === 0) {
+    if (filtered.length === 0) {
       return;
     }
 
-    for (const result of results) {
+    for (const result of filtered) {
       const destination = path.join(directory, to, path.basename(result));
 
       createReadStream(result).pipe(unzipper.Extract({ path: destination }));

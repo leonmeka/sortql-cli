@@ -2,6 +2,7 @@ import path from "path";
 import chalk from "chalk";
 import archiver from "archiver";
 
+import { stat } from "fs/promises";
 import { createWriteStream } from "fs";
 
 import { Query } from "@sortql/core/queries";
@@ -17,11 +18,12 @@ export class ArchiveQuery extends Query {
     where?: LogicalCondition
   ) {
     super(directory, target, from, where);
+    this.validate();
   }
 
-  validate() {
-    if (path.extname(this.to) !== "") {
-      throw new SyntaxError("   ↳ [ARCHIVE] Cannot archive to a folder");
+  async validate() {
+    if (path.extname(this.to) === "") {
+      throw new SyntaxError("   ↳ [ARCHIVE] Destination cannot be a directory");
     }
 
     if (this.to === this.from) {
@@ -33,7 +35,6 @@ export class ArchiveQuery extends Query {
 
   async execute() {
     const { directory, target, to } = this;
-
     const results = await this.filter.apply(this);
 
     console.log(
