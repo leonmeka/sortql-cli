@@ -1,3 +1,23 @@
+<h1 align="center">sortQL</h1>
+
+<p align="center">
+  <img src="https://github.com/leonmeka/sortql-cli/assets/15350962/c37fab56-5006-4e4d-84b5-00b2698525b0" alt="angular-logo" width="350px"/>
+  <br>
+  <em>A file management automation tool with SQL-like syntax.</em>
+  <br>
+</p>
+
+<p align="center">
+  <a href="#quick-start">Quick Start</a>
+  ·
+  <a href="./docs/documentation.md">Documentation</a>
+  ·
+  <a href="https://github.com/leonmeka/sortql-cli/issues"> 
+  Submit an Issue</a>
+  <br>
+  <br>
+</p>
+
 # About
 
 <b>sortQL</b> is a simple, yet powerful, file management automation tool that allows you to define complex operations using a declarative SQL-like syntax. It's designed to help you automate file and directory operations, such as moving, copying, deleting, and archiving files, based on predefined conditions.
