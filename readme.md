@@ -18,6 +18,13 @@
   <br>
 </p>
 
+<p align="center">
+  <img alt="NPM Version" src="https://img.shields.io/npm/v/%40sortql%2Fsortql-cli">
+  <img alt="NPM Downloads" src="https://img.shields.io/npm/dt/%40sortql%2Fsortql-cli">
+  <img alt="NPM License" src="https://img.shields.io/npm/l/%40sortql%2Fsortql-cli">
+  <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/leonmeka/sortql-cli">
+</p>
+
 # About
 
 <b>sortQL</b> is a simple, yet powerful, file management automation tool that allows you to define complex operations using a declarative SQL-like syntax. It's designed to help you automate file and directory operations, such as moving, copying, deleting, and archiving files, based on predefined conditions.
