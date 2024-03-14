@@ -1,10 +1,10 @@
-name: sortQL CI/CD
+name: CI/CD
 
 on: [push, pull_request]
 
 jobs:
   test:
-    name: Test 🧪
+    name: Run Tests 🧪
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
