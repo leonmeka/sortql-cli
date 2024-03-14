@@ -108,7 +108,8 @@ Operations are divided into two categories: file operations and folder operation
 
 > [!NOTE]  
 > Allowed values: Any string. Regular expressions are supported.
-> Working with the name property:
+
+Working with the name property:
 
 ```sql
 SELECT files FROM '' WHERE name = 'example.txt'
@@ -234,7 +235,7 @@ SELECT files FROM '' WHERE size > 100000
 
 ```sql
 -- Move files created after a specific date to a different location
-MOVE files FROM '' WHERE created => '2021-01-01' TO 'new-folder'
+MOVE files FROM '' WHERE created >= '2021-01-01' TO 'new-folder'
 ```
 
 ```sql
