@@ -1,5 +1,3 @@
-<h1 align="center">sortQL</h1>
-
 <p align="center">
   <img src="https://github.com/leonmeka/sortql-cli/assets/15350962/c37fab56-5006-4e4d-84b5-00b2698525b0" alt="angular-logo" width="350px"/>
   <br>
