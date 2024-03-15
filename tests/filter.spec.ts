@@ -2,17 +2,27 @@ import { doesExist, createFile, createFolder } from "tests/utils";
 import { mkdir, rmdir } from "node:fs/promises";
 import path from "path";
 
+import {
+  describe,
+  beforeEach,
+  afterEach,
+  it,
+  expect,
+  spyOn,
+  Mock,
+} from "bun:test";
+
 import { QueryClient } from "@sortql/core";
 
 const directory = path.join(process.cwd(), "./tests/mock-directory");
 
 describe("File Filters", () => {
   let client: QueryClient;
-  let consoleSpy: jest.SpyInstance;
+  let spy: Mock<any>;
 
   beforeEach(async () => {
     client = new QueryClient(directory);
-    consoleSpy = jest.spyOn(console, "log");
+    spy = spyOn(console, "log");
 
     if (!(await doesExist(directory, ""))) {
       await mkdir(directory, { recursive: true });
@@ -20,7 +30,7 @@ describe("File Filters", () => {
   });
 
   afterEach(async () => {
-    consoleSpy.mockRestore();
+    spy.mockRestore();
 
     if (await doesExist(directory, "")) {
       await rmdir(directory, { recursive: true });
@@ -36,9 +46,7 @@ describe("File Filters", () => {
     await client.run(`SELECT files FROM '' WHERE name = 'test'`);
 
     // Assert
-    expect(consoleSpy).toHaveBeenCalledWith(
-      expect.stringContaining("[SELECT]: 1")
-    );
+    expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 1"));
   });
 
   it("should only select .txt files", async () => {
@@ -52,9 +60,7 @@ describe("File Filters", () => {
 
     // Assert
 
-    expect(consoleSpy).toHaveBeenCalledWith(
-      expect.stringContaining("[SELECT]: 1")
-    );
+    expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 1"));
   });
 
   it("should only select files which match a given regex", async () => {
@@ -67,9 +73,7 @@ describe("File Filters", () => {
     await client.run(`SELECT files FROM '' WHERE extension = '(txt|json|csv)'`);
 
     // Assert
-    expect(consoleSpy).toHaveBeenCalledWith(
-      expect.stringContaining("[SELECT]: 3")
-    );
+    expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 3"));
   });
 
   it("should only select files with a size greater than 1000", async () => {
@@ -81,9 +85,7 @@ describe("File Filters", () => {
     await client.run(`SELECT files FROM '' WHERE size > 1000`);
 
     // Assert
-    expect(consoleSpy).toHaveBeenCalledWith(
-      expect.stringContaining("[SELECT]: 1")
-    );
+    expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 1"));
   });
 
   it("should only select files with a size less than 1000", async () => {
@@ -95,9 +97,7 @@ describe("File Filters", () => {
     await client.run(`SELECT files FROM '' WHERE size < 1000`);
 
     // Assert
-    expect(consoleSpy).toHaveBeenCalledWith(
-      expect.stringContaining("[SELECT]: 1")
-    );
+    expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 1"));
   });
 
   it("should only select files with a size equal to 1000", async () => {
@@ -109,9 +109,7 @@ describe("File Filters", () => {
     await client.run(`SELECT files FROM '' WHERE size = 1000`);
 
     // Assert
-    expect(consoleSpy).toHaveBeenCalledWith(
-      expect.stringContaining("[SELECT]: 1")
-    );
+    expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 1"));
   });
 
   it("should only select files with a size not equal to 1000", async () => {
@@ -123,9 +121,7 @@ describe("File Filters", () => {
     await client.run(`SELECT files FROM '' WHERE size != 1000`);
 
     // Assert
-    expect(consoleSpy).toHaveBeenCalledWith(
-      expect.stringContaining("[SELECT]: 1")
-    );
+    expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 1"));
   });
 
   it("should only select files with a size greater than 1000 and less than 1002", async () => {
@@ -138,9 +134,7 @@ describe("File Filters", () => {
     await client.run(`SELECT files FROM '' WHERE size > 1000 AND size < 1002`);
 
     // Assert
-    expect(consoleSpy).toHaveBeenCalledWith(
-      expect.stringContaining("[SELECT]: 1")
-    );
+    expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 1"));
   });
 
   it("should only select files with a size greater than 1000 or less than 1001", async () => {
@@ -152,9 +146,7 @@ describe("File Filters", () => {
     await client.run(`SELECT files FROM '' WHERE size > 1000 OR size < 1001`);
 
     // Assert
-    expect(consoleSpy).toHaveBeenCalledWith(
-      expect.stringContaining("[SELECT]: 2")
-    );
+    expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 2"));
   });
 
   it("should only select files with a size greater than 1000 and with a name that contains 'hello'", async () => {
@@ -169,9 +161,7 @@ describe("File Filters", () => {
     );
 
     // Assert
-    expect(consoleSpy).toHaveBeenCalledWith(
-      expect.stringContaining("[SELECT]: 1")
-    );
+    expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 1"));
   });
 
   it("should only select files created after 01/01/2024", async () => {
@@ -183,9 +173,7 @@ describe("File Filters", () => {
     await client.run(`SELECT files FROM '' WHERE created > '01/01/2024'`);
 
     // Assert
-    expect(consoleSpy).toHaveBeenCalledWith(
-      expect.stringContaining("[SELECT]: 2")
-    );
+    expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 2"));
   });
 
   it("should only select files modified after 01/01/2024", async () => {
@@ -197,9 +185,7 @@ describe("File Filters", () => {
     await client.run(`SELECT files FROM '' WHERE modified > '01/01/2024'`);
 
     // Assert
-    expect(consoleSpy).toHaveBeenCalledWith(
-      expect.stringContaining("[SELECT]: 2")
-    );
+    expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 2"));
   });
 
   it("should only select files accessed after 01/01/2024", async () => {
@@ -211,19 +197,17 @@ describe("File Filters", () => {
     await client.run(`SELECT files FROM '' WHERE accessed > '01/01/2024'`);
 
     // Assert
-    expect(consoleSpy).toHaveBeenCalledWith(
-      expect.stringContaining("[SELECT]: 2")
-    );
+    expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 2"));
   });
 });
 
 describe("Folder Filters", () => {
   let client: QueryClient;
-  let consoleSpy: jest.SpyInstance;
+  let spy: Mock<any>;
 
   beforeEach(async () => {
     client = new QueryClient(directory);
-    consoleSpy = jest.spyOn(console, "log");
+    spy = spyOn(console, "log");
 
     if (!(await doesExist(directory, ""))) {
       await mkdir(directory, { recursive: true });
@@ -231,7 +215,7 @@ describe("Folder Filters", () => {
   });
 
   afterEach(async () => {
-    consoleSpy.mockRestore();
+    spy.mockRestore();
 
     if (await doesExist(directory, "")) {
       await rmdir(directory, { recursive: true });
@@ -247,9 +231,7 @@ describe("Folder Filters", () => {
     await client.run(`SELECT folders FROM '' WHERE name = 'test'`);
 
     // Assert
-    expect(consoleSpy).toHaveBeenCalledWith(
-      expect.stringContaining("[SELECT]: 1")
-    );
+    expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 1"));
   });
 
   it("should only select folders which match a given regex", async () => {
@@ -263,8 +245,6 @@ describe("Folder Filters", () => {
     await client.run(`SELECT folders FROM '' WHERE name = 'test-[0-9]'`);
 
     // Assert
-    expect(consoleSpy).toHaveBeenCalledWith(
-      expect.stringContaining("[SELECT]: 3")
-    );
+    expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 3"));
   });
 });

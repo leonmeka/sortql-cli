@@ -74,8 +74,16 @@ Before you begin, ensure you have installed Node.js:
 
 This project also depends on the bun runtime. You can install it by running the following command:
 
+### MacOS and Linux
+
 ```bash
 curl -fsSL https://bun.sh/install | bash
+```
+
+### Windows
+
+```bash
+powershell -c "irm bun.sh/install.ps1|iex"
 ```
 
 ## Installation

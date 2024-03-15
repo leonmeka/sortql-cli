@@ -2,17 +2,27 @@ import { doesExist, createFile, createFolder } from "tests/utils";
 import { mkdir, rmdir } from "node:fs/promises";
 import path from "path";
 
+import {
+  describe,
+  beforeEach,
+  afterEach,
+  it,
+  expect,
+  spyOn,
+  Mock,
+} from "bun:test";
+
 import { QueryClient } from "@sortql/core";
 
 const directory = path.join(process.cwd(), "./tests/mock-directory");
 
 describe("File Operations", () => {
   let client: QueryClient;
-  let consoleSpy: jest.SpyInstance;
+  let spy: Mock<any>;
 
   beforeEach(async () => {
     client = new QueryClient(directory);
-    consoleSpy = jest.spyOn(console, "log");
+    spy = spyOn(console, "log");
 
     if (!(await doesExist(directory, ""))) {
       await mkdir(directory, { recursive: true });
@@ -20,7 +30,7 @@ describe("File Operations", () => {
   });
 
   afterEach(async () => {
-    consoleSpy.mockRestore();
+    spy.mockRestore();
 
     if (await doesExist(directory, "")) {
       await rmdir(directory, { recursive: true });
@@ -36,9 +46,7 @@ describe("File Operations", () => {
     await client.run(`SELECT files FROM ''`);
 
     // Assert
-    expect(consoleSpy).toHaveBeenCalledWith(
-      expect.stringContaining("[SELECT]: 1")
-    );
+    expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 1"));
   });
 
   it("should delete a file", async () => {
@@ -108,11 +116,11 @@ describe("File Operations", () => {
 
 describe("Folder Operations", () => {
   let client: QueryClient;
-  let consoleSpy: jest.SpyInstance;
+  let spy: Mock<any>;
 
   beforeEach(async () => {
     client = new QueryClient(directory);
-    consoleSpy = jest.spyOn(console, "log");
+    spy = spyOn(console, "log");
 
     if (!(await doesExist(directory, ""))) {
       await mkdir(directory, { recursive: true });
@@ -120,7 +128,7 @@ describe("Folder Operations", () => {
   });
 
   afterEach(async () => {
-    consoleSpy.mockRestore();
+    spy.mockRestore();
 
     if (await doesExist(directory, "")) {
       await rmdir(directory, { recursive: true });
@@ -139,9 +147,7 @@ describe("Folder Operations", () => {
     // Assert
     expect(await doesExist(directory, testFolder)).toBe(true);
     expect(await doesExist(directory, `${testFolder}/test.txt`)).toBe(true);
-    expect(consoleSpy).toHaveBeenCalledWith(
-      expect.stringContaining("[SELECT]: 1")
-    );
+    expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 1"));
   });
 
   it("should delete a folder", async () => {
@@ -156,9 +162,7 @@ describe("Folder Operations", () => {
     // Assert
     expect(await doesExist(directory, testFolder)).toBe(false);
     expect(await doesExist(directory, `${testFolder}/test.txt`)).toBe(false);
-    expect(consoleSpy).toHaveBeenCalledWith(
-      expect.stringContaining("[DELETE]: 1")
-    );
+    expect(spy).toHaveBeenCalledWith(expect.stringContaining("[DELETE]: 1"));
   });
 
   it("should move a folder", async () => {
@@ -174,9 +178,7 @@ describe("Folder Operations", () => {
     expect(await doesExist(directory, testFolder)).toBe(false);
     expect(await doesExist(directory, "moved/test-folder")).toBe(true);
     expect(await doesExist(directory, "moved/test-folder/test.txt")).toBe(true);
-    expect(consoleSpy).toHaveBeenCalledWith(
-      expect.stringContaining("[MOVE]: 1")
-    );
+    expect(spy).toHaveBeenCalledWith(expect.stringContaining("[MOVE]: 1"));
   });
 
   it("should copy a folder", async () => {
@@ -194,9 +196,7 @@ describe("Folder Operations", () => {
     expect(await doesExist(directory, "copied/test-folder/test.txt")).toBe(
       true
     );
-    expect(consoleSpy).toHaveBeenCalledWith(
-      expect.stringContaining("[COPY]: 1")
-    );
+    expect(spy).toHaveBeenCalledWith(expect.stringContaining("[COPY]: 1"));
   });
 
   it("should archive a folder", async () => {
@@ -209,8 +209,6 @@ describe("Folder Operations", () => {
 
     // Assert
     expect(await doesExist(directory, "archive.zip")).toBe(true);
-    expect(consoleSpy).toHaveBeenCalledWith(
-      expect.stringContaining("[ARCHIVE]: 1")
-    );
+    expect(spy).toHaveBeenCalledWith(expect.stringContaining("[ARCHIVE]: 1"));
   });
 });
