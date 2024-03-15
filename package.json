@@ -6,6 +6,7 @@
   "description": "A file management automation tool with SQL-like syntax",
   "scripts": {
     "dev": "bun --watch index.ts",
+    "test": "bun test --coverage",
     "build": "bun build index.ts --outdir dist --target bun --minify && npm link",
     "prepare": "husky"
   },

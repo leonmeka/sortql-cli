@@ -61,7 +61,7 @@ bun install
 Once you have cloned the repository and installed the dependencies, you can start developing by running the following command:
 
 ```bash
-bun dev
+bun run dev
 ```
 
 This will start the cli in development mode, allowing you to make changes and see the results in real-time.
@@ -71,5 +71,13 @@ This will start the cli in development mode, allowing you to make changes and se
 We're using jest for testing core functionality. To run the tests, simply run the following command:
 
 ```bash
-bun test
+bun run test
+```
+
+## Building
+
+To build the project, run the following command:
+
+```bash
+bun run build
 ```
