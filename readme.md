@@ -96,9 +96,9 @@ npm install -g npx @sortql/sortql-cli
 
 This will install **sortQL** globally on your computer, allowing you to run it from any directory.
 
-# Upgrading
+## Upgrading
 
-In case you already have **sortQL** installed, you can upgrade to the latest version by running the following command:
+In case you already have **sortQL** installed, you can upgrade to the latest version with:
 
 ```bash
 npm upgrade -g @sortql/sortql-cli
