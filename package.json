@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "bun --watch index.ts",
     "test": "jest",
-    "build": "bun build index.ts --outdir dist --target bun --minify --sourcemap=external",
+    "build": "bun build index.ts --outdir dist --target bun --minify",
     "prepare": "husky"
   },
   "dependencies": {
