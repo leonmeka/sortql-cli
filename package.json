@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "bun --watch index.ts",
     "test": "jest",
-    "build": "bun build index.ts --outdir dist --target bun",
+    "build": "bun build index.ts --outdir dist --target bun --minify --sourcemap=external",
     "prepare": "husky"
   },
   "dependencies": {
@@ -37,6 +37,9 @@
   "bin": {
     "sortql": "dist/index.js"
   },
+  "files": [
+    "dist/"
+  ],
   "keywords": [
     "file-management",
     "command-line-tool",
