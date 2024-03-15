@@ -97,7 +97,6 @@ export class Filter {
         const regexNotEquals = new RegExp(literalValue as string);
         return !regexNotEquals.test(value.toString());
       case ">":
-        console.log(value, literalValue);
         return value > literalValue;
       case "<":
         return value < literalValue;

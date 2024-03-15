@@ -27,7 +27,7 @@
 
 # About
 
-<b>sortQL</b> is a simple, yet powerful, file management automation tool that allows you to define complex operations using a declarative SQL-like syntax. It's designed to help you automate file and folder operations, such as moving, copying, deleting, and archiving files, based on predefined conditions.
+<b>sortQL</b> is a simple, yet powerful, file management automation tool that allows you to define complex operations using a declarative SQL-like syntax. It's designed to help you automate workflows, such as moving, copying, deleting, and archiving files, based on predefined conditions.
 
 Features include:
 
@@ -51,7 +51,7 @@ Example: Automated workflow for cleaning up the mess on your desktop.
 
 # How it Works
 
-At the heart of <b>sortQL</b> is the queries.sql file, which contains a list of operations to be executed. Each operation is defined in a single line, which specifies the type of operation, the files or directories to be affected, and the conditions that must be met. Users, who are already familiar with SQL, will get the hang of it in no time.
+At the heart of <b>sortQL</b> is the queries.sql file, which contains a set of operations to be executed. Each operation is defined in a single line, which specifies the type of operation, the files or directories to be affected, and the conditions that must be met. Users, who are already familiar with SQL, will get the hang of it in no time.
 
 Here's an example of a queries.sql file, which moves files with specific extensions to a different subfolder:
 

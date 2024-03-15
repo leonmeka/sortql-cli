@@ -1,6 +1,6 @@
 # sortQL Documentation
 
-Welcome to the official documentation for **sortQL**, a powerful file management automation tool designed to simplify file and folder operations with an SQL-like syntax. This documentation is intended to provide you with all the information you need to get started, understand **sortQL**'s functionalities, and apply its features to your projects effectively.
+Welcome to the official documentation for **sortQL**. This documentation provides a detailed overview of the query syntax, supported operations, and properties, as well as some examples on how you might use **sortQL** in your projects.
 
 ## Table of Contents
 
@@ -24,7 +24,7 @@ To get started, please refer to our [quick start guide](../readme.md#quick-start
 
 ## Query Syntax
 
-**sortQL**'s syntax is inspired by SQL and is designed to be intuitive and easy to use. The syntax consists of a set of operations and properties that allow you to perform various file and folder operations. The basic structure of a **sortQL** query is as follows:
+**sortQL**'s syntax is inspired by SQL and is designed to be intuitive and easy to use. The syntax consists of a set of operations and properties that allow you to perform various operations. The basic structure of a **sortQL** query is as follows:
 
 ```sql
 ACTION target FROM path WHERE property = value AND/OR property = value TO path
@@ -275,13 +275,18 @@ SELECT files FROM '' WHERE size > 100000 AND created > '01/01/2021'
 Here's an example of using regular expressions to match files with a specific extension:
 
 ```sql
--- Select files with extensions other than 'txt' and 'pdf'
+-- Select files with extensions 'txt' and 'pdf'
 SELECT files FROM '' WHERE extension = '(txt|pdf)'
+```
+
+```sql
+-- Select files with names that match a specific pattern
+SELECT files FROM '' WHERE name = 'example.*'
 ```
 
 ## Examples and Use Cases
 
-Below we list a few examples of how **sortQL** can be used and go into more detail about the different operations and their parameters.
+Below we list a few examples of how **sortQL** can be used:
 
 ### Example 1: Moving Documents to a Different Subfolder
 

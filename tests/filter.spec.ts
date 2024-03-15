@@ -8,6 +8,10 @@ const createFile = (name: string, content = "") => {
   fs.writeFileSync(path.join(directory, name), content);
 };
 
+const createFolder = (name: string) => {
+  fs.mkdirSync(path.join(directory, name), { recursive: true });
+};
+
 const exists = (filePath: string) =>
   fs.existsSync(path.join(directory, filePath));
 
@@ -63,7 +67,7 @@ describe("File Filters", () => {
     );
   });
 
-  it("should only select .txt, .json and .csv files (REGEX)", async () => {
+  it("should only select files which match a given regex", async () => {
     // Arrange
     createFile("test.txt");
     createFile("test.json");
@@ -219,6 +223,59 @@ describe("File Filters", () => {
     // Assert
     expect(consoleSpy).toHaveBeenCalledWith(
       expect.stringContaining("[SELECT]: 2")
+    );
+  });
+});
+
+describe("Folder Filters", () => {
+  let consoleSpy: jest.SpyInstance;
+  let client: QueryClient;
+
+  beforeEach(() => {
+    client = new QueryClient(directory);
+
+    if (!exists("")) {
+      fs.mkdirSync(directory, { recursive: true });
+    }
+
+    consoleSpy = jest.spyOn(console, "log");
+  });
+
+  afterEach(() => {
+    if (exists("")) {
+      fs.rmdirSync(directory, { recursive: true });
+    }
+
+    consoleSpy.mockRestore();
+  });
+
+  it("should only select folders with names that contain 'test'", async () => {
+    // Arrange
+    createFolder("test");
+    createFolder("hello");
+
+    // Act
+    await client.run(`SELECT folders FROM '' WHERE name = 'test'`);
+
+    // Assert
+    expect(consoleSpy).toHaveBeenCalledWith(
+      expect.stringContaining("[SELECT]: 1")
+    );
+  });
+
+  it("should only select folders which match a given regex", async () => {
+    // Arrange
+    createFolder("test-1");
+    createFolder("test-2");
+    createFolder("test-99");
+    createFolder("hello");
+
+    // Act
+    await client.run(`SELECT folders FROM '' WHERE name = 'test-[0-9]'`);
+
+    // Assert
+    expect(consoleSpy).toHaveBeenCalledWith(
+      expect.stringContaining("[SELECT]: 3")
     );
   });
 });
