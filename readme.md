@@ -27,7 +27,7 @@
 
 # About
 
-<b>sortQL</b> is a simple, yet powerful, file management automation tool that allows you to define complex operations using a declarative SQL-like syntax. It's designed to help you automate workflows, such as moving, copying, deleting, and archiving files, based on predefined conditions.
+**sortQL** is a simple, yet powerful, file management automation tool that allows you to define complex operations using a declarative SQL-like syntax. It's designed to help you automate workflows, such as moving, copying, deleting, and archiving files, based on predefined conditions.
 
 Features include:
 
@@ -51,7 +51,7 @@ Example: Automated workflow for cleaning up the mess on your desktop.
 
 # How it Works
 
-At the heart of <b>sortQL</b> is the queries.sql file, which contains a set of operations to be executed. Each operation is defined in a single line, which specifies the type of operation, the files or directories to be affected, and the conditions that must be met. Users, who are already familiar with SQL, will get the hang of it in no time.
+At the heart of **sortQL** is the queries.sql file, which contains a set of operations to be executed. Each operation is defined in a single line, which specifies the type of operation, the files or directories to be affected, and the conditions that must be met. Users, who are already familiar with SQL, will get the hang of it in no time.
 
 Here's an example of a queries.sql file, which moves files with specific extensions to a different subfolder:
 
@@ -62,7 +62,7 @@ MOVE files FROM '' WHERE extension = '(pptx|ppt)' TO 'presentations'
 MOVE files FROM '' WHERE extension = '(xlsx|xls)' TO 'spreadsheets'
 ```
 
-For more information on how to use <b>sortQL</b>, please refer to the [documentation](./docs/documentation.md).
+For more information on how to use **sortQL**, please refer to the [documentation](./docs/documentation.md).
 
 # Quick Start
 
@@ -88,17 +88,17 @@ powershell -c "irm bun.sh/install.ps1|iex"
 
 ## Installation
 
-To install <b>sortQL</b>, run the following command:
+To install **sortQL**, run the following command:
 
 ```bash
 npm install -g npx @sortql/sortql-cli
 ```
 
-This will install <b>sortQL</b> globally on your computer, allowing you to run it from any directory.
+This will install **sortQL** globally on your computer, allowing you to run it from any directory.
 
 # Upgrading
 
-In case you already have <b>sortQL</b> installed, you can upgrade to the latest version by running the following command:
+In case you already have **sortQL** installed, you can upgrade to the latest version by running the following command:
 
 ```bash
 npm upgrade -g @sortql/sortql-cli
@@ -108,7 +108,7 @@ npm upgrade -g @sortql/sortql-cli
 
 ### 1. Create a queries.sql file
 
-Before running <b>sortQL</b>, you need to create the queries.sql file. In this file, we're going to specify a set of operations to be executed. You can create it anywhere you like: in a project directory, in a subfolder, or even on your desktop.
+Before running **sortQL**, you need to create the queries.sql file. In this file, we're going to specify a set of operations to be executed. You can create it anywhere you like: in a project directory, in a subfolder, or even on your desktop.
 
 Here's and example of a queries.sql file:
 
@@ -119,7 +119,7 @@ SELECT files FROM ''
 
 ### 2. Run sortQL
 
-Now that you have the queries.sql file, you can run <b>sortQL</b> from the terminal. Simply run the following command:
+Now that you have the queries.sql file, you can run **sortQL** from the terminal. Simply run the following command:
 
 ```bash
 npx sortql
@@ -150,21 +150,21 @@ Addtionally, you can specify if you want to watch for changes. This will automat
 ```
 
 > [!NOTE]
-> Once you press enter, <b>sortQL</b> will save your configuration in `~/.sortql`. This will allow you to run <b>sortQL</b> without having to specify the path to the queries.sql file and the directory every time you run it. To change the configuration, simply run `npx sortql --config`.
+> Once you press enter, **sortQL** will save your configuration in `~/.sortql`. This will allow you to run **sortQL** without having to specify the path to the queries.sql file and the directory every time you run it. To change the configuration, simply run `npx sortql --config`.
 
-After saving the configuration, <b>sortQL</b> will start running the queries and display the results in the terminal.
+After saving the configuration, **sortQL** will start running the queries and display the results in the terminal.
 
 ### You're all set!
 
-That's it. Feel free to play around with the queries.sql file and see how <b>sortQL</b> behaves. In case you need to stop the process, simply enter <kbd>CTRL</kbd> + <kbd>C</kbd> in the terminal.
+That's it. Feel free to play around with the queries.sql file and see how **sortQL** behaves. In case you need to stop the process, simply enter <kbd>CTRL</kbd> + <kbd>C</kbd> in the terminal.
 
 # Documentation
 
-For more information on how to use <b>sortQL</b>, please refer to the [documentation](./docs/documentation.md). It provides a detailed overview of the query syntax, supported operations, and properties as well as some examples on how you might use <b>sortQL</b> in your projects.
+For more information on how to use **sortQL**, please refer to the [documentation](./docs/documentation.md). It provides a detailed overview of the query syntax, supported operations, and properties as well as some examples on how you might use **sortQL** in your projects.
 
 # Troubleshooting
 
-If you encounter any issues while using <b>sortQL</b>, please create an issue [here](https://github.com/leonmeka/sortql/issues/new).
+If you encounter any issues while using **sortQL**, please create an issue [here](https://github.com/leonmeka/sortql/issues/new).
 
 # Contributing
 
@@ -172,4 +172,4 @@ To contribute to this project, please take a look at the [contributing](contribu
 
 # License
 
-<b>sortQL</b> is open-source software licensed under the MIT License. See the [License](LICENSE) file for more information.
+**sortQL** is open-source software licensed under the MIT License. See the [License](LICENSE) file for more information.
