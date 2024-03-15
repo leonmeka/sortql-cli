@@ -21,6 +21,7 @@
   <img alt="NPM Downloads" src="https://img.shields.io/npm/dt/%40sortql%2Fsortql-cli">
   <img alt="NPM License" src="https://img.shields.io/npm/l/%40sortql%2Fsortql-cli">
   <img alt="GitHub Actions Workflow Status" src="https://img.shields.io/github/actions/workflow/status/leonmeka/sortql-cli/main.yaml">
+  <img alt="NPM License" src="https://img.shields.io/badge/PRs-welcome-brightgreen">
   <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/leonmeka/sortql-cli">
 </p>
 
