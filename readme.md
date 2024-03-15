@@ -8,7 +8,7 @@
 <p align="center">
   <a href="#quick-start">Quick Start</a>
   ·
-  <a href="./docs/documentation.md">Documentation</a>
+  <a href="DOCUMENTATION.md">Documentation</a>
   ·
   <a href="https://github.com/leonmeka/sortql-cli/issues"> 
   Submit an Issue</a>
@@ -62,7 +62,7 @@ MOVE files FROM '' WHERE extension = '(pptx|ppt)' TO 'presentations'
 MOVE files FROM '' WHERE extension = '(xlsx|xls)' TO 'spreadsheets'
 ```
 
-For more information on how to use **sortQL**, please refer to the [documentation](./docs/documentation.md).
+For more information on how to use **sortQL**, please refer to the [documentation](DOCUMENTATION.md).
 
 # Quick Start
 
@@ -160,7 +160,7 @@ That's it. Feel free to play around with the queries.sql file and see how **sort
 
 # Documentation
 
-For more information on how to use **sortQL**, please refer to the [documentation](./docs/documentation.md). It provides a detailed overview of the query syntax, supported operations, and properties as well as some examples on how you might use **sortQL** in your projects.
+For more information on how to use **sortQL**, please refer to the [documentation](DOCUMENTATION.md). It provides a detailed overview of the query syntax, supported operations, and properties as well as some examples on how you might use **sortQL** in your projects.
 
 # Troubleshooting
 
@@ -168,7 +168,7 @@ If you encounter any issues while using **sortQL**, please create an issue [here
 
 # Contributing
 
-To contribute to this project, please take a look at the [contributing](contributing.md) guidelines.
+To contribute to this project, please take a look at the [contributing](CONTRIBUTING.md) guidelines.
 
 # License
 

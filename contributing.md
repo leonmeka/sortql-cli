@@ -25,7 +25,7 @@ This project requires Node.js to be installed. If you don't have Node.js install
 
 ### Bun
 
-This projects internally uses the [bun package manager](https://bun.sh/docs/overview), [bun bundler](https://bun.sh/docs/bundler) and [bun runtime](https://bun.sh/docs/runtime) to manage dependencies as well as run and build the project. To get started, go ahead and install bun by running the following command:
+This projects internally uses the [bun package manager](https://bun.sh/overview), [bun bundler](https://bun.sh/bundler) and [bun runtime](https://bun.sh/runtime) to manage dependencies as well as run and build the project. To get started, go ahead and install bun by running the following command:
 
 #### MacOS and Linux
 
