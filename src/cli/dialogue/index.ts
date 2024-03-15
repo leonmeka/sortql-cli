@@ -1,5 +1,6 @@
 import chalk from "chalk";
 import inquirer from "inquirer";
+import boxen from "boxen";
 import { promises as fs } from "node:fs";
 
 import { VERSION, GITHUB_URL, CONFIG_PATH } from "@sortql/cli";
@@ -10,20 +11,36 @@ export function printHeader(config?: {
   watch: boolean;
 }) {
   console.clear();
-  console.log(chalk.blueBright("========================================"));
-  console.log(chalk.blueBright(`SortQL CLI`));
-  console.log(chalk.blueBright(`v.${VERSION}`));
-  console.log(chalk.blueBright(`${GITHUB_URL}`));
-  console.log(chalk.blueBright("========================================\n"));
+
+  const boxenOptions = {
+    padding: 1,
+    borderStyle: "round",
+    borderColor: "blue",
+  } as const;
+
+  const headerText =
+    chalk.blueBright(`v.${VERSION}\n`) +
+    chalk.blueBright(`MIT License\n`) +
+    chalk.blueBright(`${GITHUB_URL}`);
+
+  console.log(
+    boxen(headerText, {
+      title: "sortQL CLI",
+      titleAlignment: "center",
+      ...boxenOptions,
+    }) + "\n"
+  );
 
   if (!config) return;
 
-  console.log(chalk.gray(`sortQL is running with the following config:`));
-  console.log(chalk.gray(`- config: ${CONFIG_PATH}`));
-  console.log(chalk.gray(`- directory: ${config?.directory}`));
-  console.log(chalk.gray(`- queries: ${config?.queries}`));
-  console.log(chalk.gray(`- watch: ${config?.watch ? "enabled" : "disabled"}`));
-  console.log(chalk.gray("\n"));
+  const configDetails =
+    chalk.gray(`sortQL is running with the following config:\n`) +
+    chalk.gray(`- config: ${CONFIG_PATH}\n`) +
+    chalk.gray(`- directory: ${config?.directory}\n`) +
+    chalk.gray(`- queries: ${config?.queries}\n`) +
+    chalk.gray(`- watch: ${config?.watch ? "enabled" : "disabled"}`);
+
+  console.log(configDetails + "\n");
 }
 
 export async function promptDirectory() {

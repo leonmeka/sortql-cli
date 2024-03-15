@@ -1,7 +1,7 @@
 import chalk from "chalk";
-import { homedir } from "os";
 import path from "path";
 import chokidar from "chokidar";
+import { homedir } from "os";
 
 import { QueryClient } from "@sortql/core";
 import { printHeader } from "@sortql/cli/dialogue";
