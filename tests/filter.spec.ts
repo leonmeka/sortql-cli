@@ -180,13 +180,13 @@ describe("File Filters", () => {
     );
   });
 
-  it("should only select files created after 2/15/2024", async () => {
+  it("should only select files created after 01/01/2024", async () => {
     // Arrange
     createFile("test.txt");
     createFile("hello.txt");
 
     // Act
-    await client.run(`SELECT files FROM '' WHERE created > '2/15/2024'`);
+    await client.run(`SELECT files FROM '' WHERE created > '01/01/2024'`);
 
     // Assert
     expect(consoleSpy).toHaveBeenCalledWith(
@@ -194,13 +194,13 @@ describe("File Filters", () => {
     );
   });
 
-  it("should only select files modified after 2/15/2024", async () => {
+  it("should only select files modified after 01/01/2024", async () => {
     // Arrange
     createFile("test.txt");
     createFile("hello.txt");
 
     // Act
-    await client.run(`SELECT files FROM '' WHERE modified > '2/15/2024'`);
+    await client.run(`SELECT files FROM '' WHERE modified > '01/01/2024'`);
 
     // Assert
     expect(consoleSpy).toHaveBeenCalledWith(
@@ -208,13 +208,13 @@ describe("File Filters", () => {
     );
   });
 
-  it("should only select files accessed after 2/15/2024", async () => {
+  it("should only select files accessed after 01/01/2024", async () => {
     // Arrange
     createFile("test.txt");
     createFile("hello.txt");
 
     // Act
-    await client.run(`SELECT files FROM '' WHERE accessed > '2/15/2024'`);
+    await client.run(`SELECT files FROM '' WHERE accessed > '01/01/2024'`);
 
     // Assert
     expect(consoleSpy).toHaveBeenCalledWith(
