@@ -36,7 +36,7 @@ As you might notice, the query is made up of several components. Below is a brie
 - **target**: The type of target (= **files** or **folders**).
 - **path**: The path to the target files or folders.
 - **property**: The property to be checked (e.g., extension, size, created, etc.).
-- **value**: The value to be compared. (e.g., 'txt', 1000, '2021-01-01', etc.).
+- **value**: The value to be compared. (e.g., 'txt', 1000, '01/01/2021', etc.).
 - **AND/OR**: The logical operator to combine multiple conditions.
 - **TO**: The destination path used for some operations (e.g., MOVE, COPY, ARCHIVE, UNARCHIVE).
 
@@ -158,52 +158,52 @@ SELECT files FROM '' WHERE size <= 1000000
 #### **created**: The creation date of the file.
 
 > [!NOTE]  
-> Allowed values: Any date string in the format 'YYYY-MM-DD'. Comparison operators are supported.
+> Allowed values: Any date string in the format 'MM/DD/YYYY'. Comparison operators are supported.
 
 Working with the created property:
 
 ```sql
 -- Select files created after a specific date
-SELECT files FROM '' WHERE created > '2021-01-01'
+SELECT files FROM '' WHERE created > '01/01/2021'
 ```
 
 ```sql
 -- Select files created before a specific date
-SELECT files FROM '' WHERE created < '2021-01-01'
+SELECT files FROM '' WHERE created < '01/01/2021'
 ```
 
 #### **modified**: The last modified date of the file.
 
 > [!NOTE]  
-> Allowed values: Any date string in the format 'YYYY-MM-DD'. Comparison operators are supported.
+> Allowed values: Any date string in the format 'MM/DD/YYYY'. Comparison operators are supported.
 
 Working with the modified property:
 
 ```sql
 -- Select files modified after a specific date
-SELECT files FROM '' WHERE modified > '2021-01-01'
+SELECT files FROM '' WHERE modified > '01/01/2021'
 ```
 
 ```sql
 -- Select files modified before a specific date
-SELECT files FROM '' WHERE modified < '2021-01-01'
+SELECT files FROM '' WHERE modified < '01/01/2021'
 ```
 
 #### **accessed**: The last accessed date of the file.
 
 > [!NOTE]
-> Allowed values: Any date string in the format 'YYYY-MM-DD'. Comparison operators are supported.
+> Allowed values: Any date string in the format 'MM/DD/YYYY'. Comparison operators are supported.
 
 Working with the accessed property:
 
 ```sql
 -- Select files accessed after a specific date
-SELECT files FROM '' WHERE accessed > '2021-01-01'
+SELECT files FROM '' WHERE accessed > '01/01/2021'
 ```
 
 ```sql
 -- Select files accessed before a specific date
-SELECT files FROM '' WHERE accessed < '2021-01-01'
+SELECT files FROM '' WHERE accessed < '01/01/2021'
 ```
 
 #### Folder Properties
@@ -249,7 +249,7 @@ SELECT files FROM '' WHERE size > 100000
 
 ```sql
 -- Move files created between specific dates to a different location
-MOVE files FROM '' WHERE created >= '2021-01-01' AND created <= '2021-12-31' TO 'projects_2021'
+MOVE files FROM '' WHERE created >= '01/01/2021' AND created <= '12/31/2021' TO 'projects_2021'
 ```
 
 ```sql
@@ -265,7 +265,7 @@ A valid example of using logical operators:
 
 ```sql
 -- Select big files created after a specific date
-SELECT files FROM '' WHERE size > 100000 AND created > '2021-01-01'
+SELECT files FROM '' WHERE size > 100000 AND created > '01/01/2021'
 ```
 
 ### Regular Expressions
@@ -300,7 +300,7 @@ You have a directory with a large number of files and want to delete bigger file
 
 ```sql
 -- Delete files older than a specific date
-DELETE files FROM '' WHERE created < '2021-01-01'
+DELETE files FROM '' WHERE created < '01/01/2021'
 ```
 
 ### Example 3: Archiving Files Based on Size
