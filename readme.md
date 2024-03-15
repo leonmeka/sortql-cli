@@ -88,6 +88,14 @@ npm install -g npx @sortql/sortql-cli
 
 This will install <b>sortQL</b> globally on your computer, allowing you to run it from any directory.
 
+# Upgrading
+
+In case you already have <b>sortQL</b> installed, you can upgrade to the latest version by running the following command:
+
+```bash
+npm upgrade -g @sortql/sortql-cli
+```
+
 ## Usage
 
 ### 1. Create a queries.sql file
@@ -141,14 +149,6 @@ After saving the configuration, <b>sortQL</b> will start running the queries and
 ### You're all set!
 
 That's it. Feel free to play around with the queries.sql file and see how <b>sortQL</b> behaves. In case you need to stop the process, simply enter <kbd>CTRL</kbd> + <kbd>C</kbd> in the terminal.
-
-# Updating
-
-To update <b>sortQL</b> to the latest version, simply run the following command:
-
-```bash
-npm update -g @sortql/sortql-cli
-```
 
 # Documentation
 
