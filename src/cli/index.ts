@@ -3,8 +3,6 @@ import { homedir } from "os";
 import path from "path";
 import chokidar from "chokidar";
 
-import { readFile } from "fs/promises";
-
 import { QueryClient } from "@sortql/core";
 import { printHeader } from "@sortql/cli/dialogue";
 import { checkConfig } from "@sortql/cli/config";
@@ -23,11 +21,9 @@ async function runQueries(client: QueryClient, queries: string) {
   isBlocked = true;
 
   try {
-    const content = await readFile(queries, {
-      encoding: "utf8",
-    });
+    const content = Bun.file(queries);
 
-    await client.run(content);
+    await client.run(await content.text());
 
     console.log(chalk.green("→ Queries ran successfully!"));
   } catch (error) {

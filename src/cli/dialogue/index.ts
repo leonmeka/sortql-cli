@@ -1,6 +1,6 @@
 import chalk from "chalk";
 import inquirer from "inquirer";
-import { promises as fs } from "fs";
+import { promises as fs } from "node:fs";
 
 import { VERSION, GITHUB_URL, CONFIG_PATH } from "@sortql/cli";
 

@@ -2,7 +2,7 @@ import path from "path";
 import chalk from "chalk";
 import AdmZip from "adm-zip";
 
-import {} from "fs/promises";
+import {} from "node:fs/promises";
 
 import { Query } from "@sortql/core/queries";
 import { Target } from "@sortql/core/parsers";

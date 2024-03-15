@@ -1,6 +1,6 @@
 import path from "path";
-import { stat, readdir } from "fs/promises";
-import { existsSync, Stats } from "fs";
+import { stat, readdir } from "node:fs/promises";
+import { existsSync, Stats } from "node:fs";
 
 import { Query } from "@sortql/core/queries";
 

@@ -2,7 +2,7 @@ import path from "path";
 import chalk from "chalk";
 import archiver from "archiver";
 
-import { createWriteStream } from "fs";
+import { createWriteStream } from "node:fs";
 
 import { Query } from "@sortql/core/queries";
 import { Target } from "@sortql/core/parsers";

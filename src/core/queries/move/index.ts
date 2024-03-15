@@ -1,7 +1,7 @@
 import path from "path";
 import chalk from "chalk";
 
-import { mkdir, rename } from "fs/promises";
+import { mkdir, rename } from "node:fs/promises";
 
 import { Query } from "@sortql/core/queries";
 import { Target } from "@sortql/core/parsers";

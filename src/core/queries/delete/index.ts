@@ -1,6 +1,6 @@
 import chalk from "chalk";
 
-import { rm } from "fs/promises";
+import { rm } from "node:fs/promises";
 
 import { Query } from "@sortql/core/queries";
 import { Target } from "@sortql/core/parsers";
