@@ -20,11 +20,11 @@ Welcome to the official documentation for **sortQL**. This documentation provide
 
 ## Getting Started
 
-To get started, please refer to our [quick start guide](../readme.md#quick-start) in the project's file. This guide will walk you through the installation process and provide you with a basic understanding of how to use **sortQL**.
+To get started, please refer to our [quick start guide](../readme.md#quick-start). This guide will walk you through the installation process and provide you with a basic understanding of how to use **sortQL**.
 
 ## Query Syntax
 
-**sortQL**'s syntax is inspired by SQL and is designed to be intuitive and easy to use. The syntax consists of a set of operations and properties that allow you to perform various operations. The basic structure of a **sortQL** query is as follows:
+**sortQL**'s syntax is inspired by SQL and is designed to be intuitive and easy to use. The basic structure of a **sortQL** query is as follows:
 
 ```sql
 ACTION target FROM path WHERE property = value AND/OR property = value TO path
