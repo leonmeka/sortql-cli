@@ -85,25 +85,26 @@ export class Filter {
   }
 
   compareValues(
-    value: string | number,
-    literalValue: string,
+    value: string | number | Date,
+    literalValue: string | number | Date,
     operator: string
   ) {
     switch (operator) {
       case "=":
-        const regexEquals = new RegExp(literalValue);
+        const regexEquals = new RegExp(literalValue as string);
         return regexEquals.test(value.toString());
       case "!=":
-        const regexNotEquals = new RegExp(literalValue);
+        const regexNotEquals = new RegExp(literalValue as string);
         return !regexNotEquals.test(value.toString());
       case ">":
-        return Number(value) > Number(literalValue);
+        console.log(value, literalValue);
+        return value > literalValue;
       case "<":
-        return Number(value) < Number(literalValue);
+        return value < literalValue;
       case ">=":
-        return Number(value) >= Number(literalValue);
+        return value >= literalValue;
       case "<=":
-        return Number(value) <= Number(literalValue);
+        return value <= literalValue;
       default:
         return false;
     }

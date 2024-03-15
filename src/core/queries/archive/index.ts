@@ -2,7 +2,6 @@ import path from "path";
 import chalk from "chalk";
 import archiver from "archiver";
 
-import { stat } from "fs/promises";
 import { createWriteStream } from "fs";
 
 import { Query } from "@sortql/core/queries";
@@ -51,10 +50,10 @@ export class ArchiveQuery extends Query {
     archive.pipe(output);
 
     for (const result of results) {
-      const destination = path.join(directory, to, path.basename(result));
+      const destination = path.join(directory, to);
 
       if (target === "folders") {
-        archive.directory(destination, path.basename(result));
+        archive.directory(path.basename(result), destination);
       }
 
       if (target === "files") {
