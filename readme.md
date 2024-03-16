@@ -160,7 +160,7 @@ That's it. Feel free to play around with the queries.sql file and see how **sort
 
 # Documentation
 
-For more information on how to use **sortQL**, please refer to the [documentation](DOCUMENTATION.md). It provides a detailed overview of the query syntax, supported operations, and properties as well as some examples on how you might use **sortQL** in your projects.
+For more information on how to use **sortQL**, please refer to the [documentation](DOCUMENTATION.md).
 
 # Troubleshooting
 
