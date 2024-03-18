@@ -1,4 +1,5 @@
 import chalk from "chalk";
+import path from "path";
 
 import { Query } from "@sortql/core/queries";
 import { Target } from "@sortql/core/parsers";
@@ -20,6 +21,16 @@ export class SelectQuery extends Query {
   async execute() {
     const results = await this.filter.apply(this);
 
-    console.log(chalk.yellowBright(`   ↳ [SELECT]: ${results.length}`));
+    const hasResults = results.length > 0;
+    const relativeResults = results.map(
+      (result) => ` ${path.relative(this.directory, result)}`
+    );
+
+    console.log(
+      chalk.yellowBright(
+        `   ↳ [SELECT]: ${results.length}:`,
+        hasResults ? relativeResults : "No results found."
+      )
+    );
   }
 }
