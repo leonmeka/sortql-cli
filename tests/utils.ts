@@ -5,13 +5,10 @@ export const createFile = async (
   directory: string,
   name: string,
   content = ""
-) => {
-  await Bun.write(path.join(directory, name), content);
-};
+) => await Bun.write(path.join(directory, name), content);
 
-export const createFolder = async (directory: string, name: string) => {
+export const createFolder = async (directory: string, name: string) =>
   await mkdir(path.join(directory, name), { recursive: true });
-};
 
 export const doesExist = async (directory: string, filePath: string) =>
   await exists(path.join(directory, filePath));
