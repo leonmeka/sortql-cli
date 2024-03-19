@@ -10,6 +10,10 @@ export class Filter {
   async apply(statement: Statement): Promise<string[]> {
     const { target, from, where } = statement;
 
+    if (["files", "folders"].indexOf(target.value) === -1) {
+      throw new SyntaxError(`Unsupported target: '${target.value}'`);
+    }
+
     const startPath = path.join(this.directory, from.value);
 
     if (!(await exists(startPath))) return [];
