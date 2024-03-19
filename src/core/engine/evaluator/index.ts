@@ -56,7 +56,7 @@ export class Evaluator {
       name: parse(path).name,
       extension: parse(path).ext.slice(1),
       size: stats.size,
-      created: stats.ctime,
+      created: stats.birthtimeMs === 0 ? stats.ctime : stats.birthtime,
       modified: stats.mtime,
       accessed: stats.atime,
     };
