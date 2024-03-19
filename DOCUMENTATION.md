@@ -17,7 +17,7 @@ This documentation provides a detailed overview of the query syntax, supported o
    2. [Logical Operators](#logical-operators)
    3. [Regular Expressions](#regular-expressions)
 4. [Tips and Tricks](#helpful-tips)
-   1. [Probing Files and Folders](#probing-files-and-folders)]
+   1. [Probing Files and Folders](#probing-files-and-folders)
 5. [Examples and Use Cases](#examples-and-use-cases)
 
 ## Getting Started
