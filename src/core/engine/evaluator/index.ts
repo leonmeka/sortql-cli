@@ -52,13 +52,11 @@ export class Evaluator {
   static async getProperties(path: string): Promise<Properties> {
     const stats = await stat(path);
 
-    console.log(stats);
-
     return {
       name: parse(path).name,
       extension: parse(path).ext.slice(1),
       size: stats.size,
-      created: stats.birthtime,
+      created: stats.ctime,
       modified: stats.mtime,
       accessed: stats.atime,
     };
