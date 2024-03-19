@@ -12,11 +12,13 @@ This documentation provides a detailed overview of the query syntax, supported o
    2. [Supported Properties](#supported-properties)
       1. [File Properties](#file-properties)
       2. [Folder Properties](#folder-properties)
-3. [Examples and Use Cases](#examples-and-use-cases)
-4. [Advanced Usage](#advanced-usage)
+3. [Advanced Usage](#advanced-usage)
    1. [Conditional Operators](#conditional-operators)
    2. [Logical Operators](#logical-operators)
    3. [Regular Expressions](#regular-expressions)
+4. [Tips and Tricks](#helpful-tips)
+   1. [Probing Files and Folders](#probing-files-and-folders)]
+5. [Examples and Use Cases](#examples-and-use-cases)
 
 ## Getting Started
 
@@ -328,7 +330,7 @@ DELETE 'files' FROM '' WHERE 'extension' LIKE '?!(txt|pdf)'
 
 ### Logical Operators
 
-Additionally, you can combine multiple conditions using the logical operators **AND** and **OR**. Note that you cannot mix **AND** and **OR** in the same query.
+Additionally, you can combine multiple conditions using the logical operators **AND** and **OR**.
 
 A valid example of using logical operators:
 
@@ -353,6 +355,12 @@ SELECT 'files' FROM '' WHERE 'extension' LIKE '(txt|pdf)'
 SELECT 'files' FROM '' WHERE 'name' LIKE 'example.*'
 ```
 
+## Helpful Tips
+
+### Probing Files and Folders
+
+Before actually performing an operation, you can use the **SELECT** operation to probe the files or folders that match specific conditions. This can be useful to verify that the conditions are correct before performing the actual operation. Especially when using complex conditions, probing can help you avoid unintended consequences.
+
 ## Examples and Use Cases
 
 Below we list a few examples of how **sortQL** can be used:
@@ -370,7 +378,7 @@ MOVE 'files' FROM '' WHERE 'extension' LIKE '(xlsx|xls)' TO 'spreadsheets'
 
 ### Example 2: Deleting Files Older Than a Specific Date
 
-You have a directory with a large number of files and want to delete bigger files that are older than a specific date:
+You have a directory with a large number of files and want to delete files that are older than a specific date:
 
 ```sql
 -- Delete files older than a specific date
