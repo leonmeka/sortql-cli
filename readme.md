@@ -57,9 +57,9 @@ Here's an example of a queries.sql file, which moves files with specific extensi
 
 ```sql
 -- Move documents to a different subfolder
-MOVE 'files' FROM '' WHERE 'extension' = '(docx|doc|pdf)' TO 'documents'
-MOVE 'files' FROM '' WHERE 'extension' = '(pptx|ppt)' TO 'presentations'
-MOVE 'files' FROM '' WHERE 'extension' = '(xlsx|xls)' TO 'spreadsheets'
+MOVE 'files' FROM '' WHERE 'extension' LIKE '(docx|doc|pdf)' TO 'documents'
+MOVE 'files' FROM '' WHERE 'extension' LIKE '(pptx|ppt)' TO 'presentations'
+MOVE 'files' FROM '' WHERE 'extension' LIKE '(xlsx|xls)' TO 'spreadsheets'
 ```
 
 For more information on how to use **sortQL**, please refer to the [documentation](DOCUMENTATION.md).

@@ -28,7 +28,7 @@ To get started, please refer to our [quick start guide](../readme.md#quick-start
 
 ```sql
 -- This is a comment
-OPERATION 'target' FROM 'path' (WHERE 'property' = 'value') (AND/OR 'property' = 'value') (TO 'path')
+OPERATION 'target' FROM 'path' (WHERE 'property' <operator> 'value') (AND/OR 'property' <operator> 'value') (TO 'path')
 ```
 
 As you might notice, the query is made up of several components. Below is a brief explanation of each component:
@@ -37,6 +37,8 @@ As you might notice, the query is made up of several components. Below is a brie
 - **TARGET**: The type of target (= **'files'** or **'folders'**).
 - **FROM**: The source path where the operation will be performed.
 - **WHERE**: The condition used to filter files or folders based on specific properties (optional).
+- **PROPERTY**: The property to be used for filtering (e.g., name, extension, size, created, modified, accessed).
+- **OPERATOR**: The comparison operator used to compare the property with a specific value (e.g., =, !=, >, <, >=, <=, LIKE).
 - **AND/OR**: The logical operator to combine multiple conditions (optional).
 - **TO**: The destination path used for some operations (e.g., MOVE, COPY, ARCHIVE, UNARCHIVE).
 
@@ -111,12 +113,12 @@ Example:
 
 ```sql
 -- Select files with a specific name
-SELECT 'files' FROM '' WHERE 'name' = 'example.txt'
+SELECT 'files' FROM '' WHERE 'name' = 'example'
 ```
 
 ```sql
 -- Select files with a name that matches a pattern
-SELECT 'files' FROM '' WHERE 'name' = 'example.*'
+SELECT 'files' FROM '' WHERE 'name' LIKE 'example.*'
 ```
 
 #### **extension**: The file extension.
@@ -132,8 +134,8 @@ SELECT 'files' FROM '' WHERE 'extension' = 'txt'
 ```
 
 ```sql
--- Select files with extensions other than 'txt' and 'pdf'
-SELECT 'files' FROM '' WHERE 'extension' != '(txt|pdf)'
+-- Select files with extensions 'txt' and 'pdf'
+SELECT 'files' FROM '' WHERE 'extension' LIKE '(txt|pdf)'
 ```
 
 #### **size**: The size of the file in bytes.
@@ -162,12 +164,12 @@ Example:
 
 ```sql
 -- Select files created after a specific date
-SELECT 'files' FROM '' WHERE 'created' > '01/01/2021'
+SELECT 'files' FROM '' WHERE 'created' > '2021-01-01'
 ```
 
 ```sql
 -- Select files created before a specific date
-SELECT 'files' FROM '' WHERE 'created' < '01/01/2021'
+SELECT 'files' FROM '' WHERE 'created' < '2021-01-01'
 ```
 
 #### **modified**: The last modified date of the file.
@@ -179,12 +181,12 @@ Example:
 
 ```sql
 -- Select files modified after a specific date
-SELECT 'files' FROM '' WHERE 'modified' > '01/01/2021'
+SELECT 'files' FROM '' WHERE 'modified' > '2021-01-01'
 ```
 
 ```sql
 -- Select files modified before a specific date
-SELECT 'files' FROM '' WHERE 'modified' < '01/01/2021'
+SELECT 'files' FROM '' WHERE 'modified' < '2021-01-01'
 ```
 
 #### **accessed**: The last accessed date of the file.
@@ -196,12 +198,12 @@ Example:
 
 ```sql
 -- Select files accessed after a specific date
-SELECT 'files' FROM '' WHERE 'accessed' > '01/01/2021'
+SELECT 'files' FROM '' WHERE 'accessed' > '2021-01-01'
 ```
 
 ```sql
 -- Select files accessed before a specific date
-SELECT 'files' FROM '' WHERE 'accessed' < '01/01/2021'
+SELECT 'files' FROM '' WHERE 'accessed' < '2021-01-01'
 ```
 
 #### Folder Properties
@@ -220,7 +222,7 @@ SELECT 'folders' FROM '' WHERE 'name' = 'example'
 
 ```sql
 -- Select folders with a name that matches a pattern
-SELECT 'folders' FROM '' WHERE 'name' = 'example.*'
+SELECT 'folders' FROM '' WHERE 'name' LIKE 'project-*'
 ```
 
 #### **created**: The creation date of the folder.
@@ -232,12 +234,12 @@ Example:
 
 ```sql
 -- Select folders created after a specific date
-SELECT 'folders' FROM '' WHERE 'created' > '01/01/2021'
+SELECT 'folders' FROM '' WHERE 'created' > '2021-01-01'
 ```
 
 ```sql
 -- Select folders created before a specific date
-SELECT 'folders' FROM '' WHERE 'created' < '01/01/2021'
+SELECT 'folders' FROM '' WHERE 'created' < '2021-01-01'
 ```
 
 #### **modified**: The last modified date of the folder.
@@ -249,12 +251,12 @@ Example:
 
 ```sql
 -- Select folders modified after a specific date
-SELECT 'folders' FROM '' WHERE 'modified' > '01/01/2021'
+SELECT 'folders' FROM '' WHERE 'modified' > '2021-01-01'
 ```
 
 ```sql
 -- Select folders modified before a specific date
-SELECT 'folders' FROM '' WHERE 'modified' < '01/01/2021'
+SELECT 'folders' FROM '' WHERE 'modified' < '2021-01-01'
 ```
 
 #### **accessed**: The last accessed date of the folder.
@@ -266,12 +268,12 @@ Example:
 
 ```sql
 -- Select folders accessed after a specific date
-SELECT 'folders' FROM '' WHERE 'accessed' > '01/01/2021'
+SELECT 'folders' FROM '' WHERE 'accessed' > '2021-01-01'
 ```
 
 ```sql
 -- Select folders accessed before a specific date
-SELECT 'folders' FROM '' WHERE 'accessed' < '01/01/2021'
+SELECT 'folders' FROM '' WHERE 'accessed' < '2021-01-01'
 ```
 
 ## Advanced Usage
@@ -304,7 +306,7 @@ MOVE 'files' FROM '' WHERE 'created' >= '01-01-2021' AND 'created' <= '12-31-202
 
 ```sql
 -- Delete files with extensions other than 'txt' and 'pdf'
-DELETE 'files' FROM '' WHERE 'extension' != '(txt|pdf)'
+DELETE 'files' FROM '' WHERE 'extension' LIKE '?!(txt|pdf)'
 ```
 
 ### Logical Operators
@@ -315,7 +317,7 @@ A valid example of using logical operators:
 
 ```sql
 -- Select big files created after a specific date
-SELECT 'files' FROM '' WHERE 'size' > 100000 AND 'created' > '01/01/2021'
+SELECT 'files' FROM '' WHERE 'size' > 100000 AND 'created' > '2021-01-01'
 ```
 
 ### Regular Expressions
@@ -326,12 +328,12 @@ Here's an example of using regular expressions to match files with a specific ex
 
 ```sql
 -- Select files with extensions 'txt' and 'pdf'
-SELECT 'files' FROM '' WHERE 'extension' = '(txt|pdf)'
+SELECT 'files' FROM '' WHERE 'extension' LIKE '(txt|pdf)'
 ```
 
 ```sql
 -- Select files with names that match a specific pattern
-SELECT 'files' FROM '' WHERE 'name' = 'example.*'
+SELECT 'files' FROM '' WHERE 'name' LIKE 'example.*'
 ```
 
 ## Examples and Use Cases
@@ -344,9 +346,9 @@ Suppose you have a directory containing various types of files, including docume
 
 ```sql
 -- Move documents to a different subfolder
-MOVE 'files' FROM '' WHERE 'extension' = '(docx|doc|pdf)' TO 'documents'
-MOVE 'files' FROM '' WHERE 'extension' = '(pptx|ppt)' TO 'presentations'
-MOVE 'files' FROM '' WHERE 'extension' = '(xlsx|xls)' TO 'spreadsheets'
+MOVE 'files' FROM '' WHERE 'extension' LIKE '(docx|doc|pdf)' TO 'documents'
+MOVE 'files' FROM '' WHERE 'extension' LIKE '(pptx|ppt)' TO 'presentations'
+MOVE 'files' FROM '' WHERE 'extension' LIKE '(xlsx|xls)' TO 'spreadsheets'
 ```
 
 ### Example 2: Deleting Files Older Than a Specific Date
@@ -355,7 +357,7 @@ You have a directory with a large number of files and want to delete bigger file
 
 ```sql
 -- Delete files older than a specific date
-DELETE 'files' FROM '' WHERE 'created' < '01/01/2021'
+DELETE 'files' FROM '' WHERE 'created' < '2021-01-01'
 ```
 
 ### Example 3: Archiving Files Based on Size
@@ -373,5 +375,5 @@ You have a directory with several subfolders and want to copy all folders that c
 
 ```sql
 -- Copy folders based on name
-COPY 'folders' FROM '' WHERE 'name' = '*project*' TO 'old-projects'
+COPY 'folders' FROM '' WHERE 'name' LIKE '*project*' TO 'old-projects'
 ```

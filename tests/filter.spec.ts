@@ -43,7 +43,7 @@ describe("File Filters (non-compound)", () => {
     await createFile(directory, "hello.txt");
 
     // Act
-    await client.run(`SELECT 'files' FROM '' WHERE 'name' = 'test'`);
+    await client.run(`SELECT 'files' FROM '' WHERE 'name' LIKE 'test'`);
 
     // Assert
     expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 1"));
@@ -139,7 +139,7 @@ describe("File Filters (compound)", () => {
 
     // Act
     await client.run(
-      `SELECT 'files' FROM '' WHERE 'name' = 'test' AND 'extension' = 'txt'`
+      `SELECT 'files' FROM '' WHERE 'name' LIKE 'test' AND 'extension' = 'txt'`
     );
 
     // Assert
@@ -153,7 +153,7 @@ describe("File Filters (compound)", () => {
 
     // Act
     await client.run(
-      `SELECT 'files' FROM '' WHERE 'name' = 'test' AND 'extension' = 'txt' AND 'size' > '100'`
+      `SELECT 'files' FROM '' WHERE 'name' LIKE 'test' AND 'extension' = 'txt' AND 'size' > '100'`
     );
 
     // Assert
@@ -168,7 +168,7 @@ describe("File Filters (compound)", () => {
 
     // Act
     await client.run(
-      `SELECT 'files' FROM '' WHERE 'name' = 'test' OR 'extension' = 'txt'`
+      `SELECT 'files' FROM '' WHERE 'name' LIKE 'test' OR 'extension' = 'txt'`
     );
 
     // Assert
@@ -183,7 +183,7 @@ describe("File Filters (compound)", () => {
 
     // Act
     await client.run(
-      `SELECT 'files' FROM '' WHERE 'name' = 'test' OR 'extension' = 'txt' OR 'size' > '100'`
+      `SELECT 'files' FROM '' WHERE 'name' LIKE 'test' OR 'extension' = 'txt' OR 'size' > '100'`
     );
 
     // Assert
@@ -218,7 +218,7 @@ describe("Folder Filters (non-compound)", () => {
     await createFolder(directory, "hello");
 
     // Act
-    await client.run(`SELECT 'folders' FROM '' WHERE 'name' = 'test'`);
+    await client.run(`SELECT 'folders' FROM '' WHERE 'name' LIKE 'test'`);
 
     // Assert
     expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 1"));
@@ -294,7 +294,7 @@ describe("Folder Filters (compound)", () => {
 
     // Act
     await client.run(
-      `SELECT 'folders' FROM '' WHERE 'name' = 'test' AND 'created' > '2021-01-01'`
+      `SELECT 'folders' FROM '' WHERE 'name' LIKE 'test' AND 'created' > '2021-01-01'`
     );
 
     // Assert
@@ -309,7 +309,7 @@ describe("Folder Filters (compound)", () => {
 
     // Act
     await client.run(
-      `SELECT 'folders' FROM '' WHERE 'name' = 'test' AND 'created' > '2021-01-01' AND 'modified' > '2021-01-01'`
+      `SELECT 'folders' FROM '' WHERE 'name' LIKE 'test' AND 'created' > '2021-01-01' AND 'modified' > '2021-01-01'`
     );
 
     // Assert
@@ -324,7 +324,7 @@ describe("Folder Filters (compound)", () => {
 
     // Act
     await client.run(
-      `SELECT 'folders' FROM '' WHERE 'name' = 'test' AND 'created' > '2021-01-01' AND 'modified' > '2021-01-01'`
+      `SELECT 'folders' FROM '' WHERE 'name' LIKE 'test' AND 'created' > '2021-01-01' AND 'modified' > '2021-01-01'`
     );
 
     // Assert
@@ -339,7 +339,7 @@ describe("Folder Filters (compound)", () => {
 
     // Act
     await client.run(
-      `SELECT 'folders' FROM '' WHERE 'name' = 'test' OR 'created' > '2021-01-01' OR 'modified' > '2021-01-01'`
+      `SELECT 'folders' FROM '' WHERE 'name' LIKE 'test' OR 'created' > '2021-01-01' OR 'modified' > '2021-01-01'`
     );
 
     // Assert
@@ -385,13 +385,13 @@ describe("File Filters (comparative)", () => {
     // Arrange
     await createFile(directory, "test.txt");
     await createFile(directory, "hello.txt");
-    await createFile(directory, "test.js");
+    await createFile(directory, "test2.js");
 
     // Act
     await client.run(`SELECT 'files' FROM '' WHERE 'name' = 'test'`);
 
     // Assert
-    expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 2"));
+    expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 1"));
   });
 
   it("should only select files with != operator", async () => {
@@ -506,7 +506,7 @@ describe("Folder Filters (comparative)", () => {
     await client.run(`SELECT 'folders' FROM '' WHERE 'name' = 'test'`);
 
     // Assert
-    expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 2"));
+    expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 1"));
   });
 
   it("should only select folders with != operator", async () => {
@@ -519,7 +519,7 @@ describe("Folder Filters (comparative)", () => {
     await client.run(`SELECT 'folders' FROM '' WHERE 'name' != 'test'`);
 
     // Assert
-    expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 1"));
+    expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 2"));
   });
 
   it("should only select folders with > operator", async () => {

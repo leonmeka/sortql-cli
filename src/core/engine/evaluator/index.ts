@@ -53,7 +53,7 @@ export class Evaluator {
     const stats = await stat(path);
 
     return {
-      name: parse(path).base,
+      name: parse(path).name,
       extension: parse(path).ext.slice(1),
       size: stats.size,
       created: stats.birthtime,
@@ -85,10 +85,11 @@ export class Evaluator {
 
     switch (expression.operator) {
       case "LIKE":
-      case "EQUALS":
         return new RegExp(rightValue as string).test(leftValue as string);
+      case "EQUALS":
+        return leftValue === rightValue;
       case "NOT_EQUALS":
-        return !new RegExp(rightValue as string).test(leftValue as string);
+        return leftValue !== rightValue;
       case "GREATER_THAN":
         return leftValue > rightValue;
       case "LESS_THAN":
