@@ -158,7 +158,7 @@ Next, you will specify a path to the queries.sql file. Simply enter the full pat
 Addtionally, you can specify if you want to watch for changes. This will automatically re-run the queries whenever a file or folder is added, removed, or modified.
 
 ```bash
-? Do you want to watch the directory for changes and rerun queries? (y/N) y
+? Do you want to watch the directory for changes and rerun queries? (y/n) 'y'
 ```
 
 > [!NOTE]
