@@ -66,13 +66,13 @@ Operations are divided into two categories: **file** operations and **folder** o
   ```sql
   DELETE 'files' FROM ''
   ```
-- ARCHIVE: Archives files to a different location based on specific conditions.
+- ARCHIVE: Archives files to a zip file based on specific conditions.
   ```sql
-  ARCHIVE 'files' FROM '' TO 'archive'
+  ARCHIVE 'files' FROM '' TO 'archive.zip'
   ```
 - UNARCHIVE: Unarchives files to a different location based on specific conditions.
   ```sql
-  UNARCHIVE 'files' FROM '' TO 'unarchive'
+  UNARCHIVE 'files' FROM '' TO 'unarchived'
   ```
 
 #### Folder Operations
@@ -93,9 +93,9 @@ Operations are divided into two categories: **file** operations and **folder** o
   ```sql
   DELETE 'folders' FROM ''
   ```
-- ARCHIVE: Archives folders to a different location based on specific conditions.
+- ARCHIVE: Archives folders to a zip file based on specific conditions.
   ```sql
-  ARCHIVE 'folders' FROM '' TO 'archive'
+  ARCHIVE 'folders' FROM '' TO 'archive.zip'
   ```
 
 ### Supported Properties
@@ -366,7 +366,7 @@ You have a directory with a large number of files and want to archive files that
 
 ```sql
 -- Archive files based on size
-ARCHIVE 'files' FROM '' WHERE 'size' > 100000000 TO 'archive'
+ARCHIVE 'files' FROM '' WHERE 'size' > 100000000 TO 'archive.zip'
 ```
 
 ### Example 4: Copying Folders Based on Name
