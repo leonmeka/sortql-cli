@@ -164,7 +164,7 @@ Example:
 
 ```sql
 -- Select files with specific content
-SELECT 'files' FROM '' WHERE 'content' LIKE 'example'
+SELECT 'files' FROM '' WHERE 'content' = 'example'
 ```
 
 ```sql
