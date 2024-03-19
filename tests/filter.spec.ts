@@ -131,7 +131,7 @@ describe("File Filters (compound)", () => {
     }
   });
 
-  it("should only select files with names that contain 'test' and extensions that contain 'txt'", async () => {
+  it("should only select files with compound 'AND' operator", async () => {
     // Arrange
     await createFile(directory, "test.txt");
     await createFile(directory, "hello.txt");
@@ -146,8 +146,7 @@ describe("File Filters (compound)", () => {
     expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 1"));
   });
 
-  it("should only select files with names that contain 'test' and extensions that contain 'txt' and sizes that are greater than 100", async () => {
-    // Arrange
+  it("should only select files with multiple compound 'AND' operators", async () => {
     await createFile(directory, "test.txt", `${"_".repeat(200)}`);
     await createFile(directory, "hello.txt", `${"_".repeat(50)}`);
     await createFile(directory, "test.js", `${"_".repeat(200)}}`);
@@ -161,7 +160,7 @@ describe("File Filters (compound)", () => {
     expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 1"));
   });
 
-  it("should only select files with names that contain 'test' or extensions that contain 'txt'", async () => {
+  it("should only select files with compound 'OR' operator", async () => {
     // Arrange
     await createFile(directory, "test.txt");
     await createFile(directory, "hello.txt");
@@ -176,7 +175,7 @@ describe("File Filters (compound)", () => {
     expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 3"));
   });
 
-  it("should only select files with names that contain 'test' or extensions that contain 'txt' or sizes that are greater than 100", async () => {
+  it("should only select files with multiple compound 'OR' operators", async () => {
     // Arrange
     await createFile(directory, "test.txt", `${"_".repeat(200)}`);
     await createFile(directory, "hello.txt", `${"_".repeat(50)}`);
@@ -287,7 +286,7 @@ describe("Folder Filters (compound)", () => {
     }
   });
 
-  it("should only select folders with names that contain 'test' and created dates that are greater than 2021-01-01", async () => {
+  it("should only select folders with compound 'AND' operator", async () => {
     // Arrange
     await createFolder(directory, "test");
     await createFolder(directory, "hello");
@@ -302,7 +301,7 @@ describe("Folder Filters (compound)", () => {
     expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 2"));
   });
 
-  it("should only select folders with names that contain 'test' and created dates that are greater than 2021-01-01 and modified dates that are greater than 2021-01-01", async () => {
+  it("should only select folders with multiple compound 'AND' operators", async () => {
     // Arrange
     await createFolder(directory, "test");
     await createFolder(directory, "hello");
@@ -315,6 +314,36 @@ describe("Folder Filters (compound)", () => {
 
     // Assert
     expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 2"));
+  });
+
+  it("should only select folders with compound 'OR' operator", async () => {
+    // Arrange
+    await createFolder(directory, "test");
+    await createFolder(directory, "hello");
+    await createFolder(directory, "test2");
+
+    // Act
+    await client.run(
+      `SELECT 'folders' FROM '' WHERE 'name' = 'test' AND 'created' > '2021-01-01' AND 'modified' > '2021-01-01'`
+    );
+
+    // Assert
+    expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 2"));
+  });
+
+  it("should only select folders with multiple compound 'OR' operators", async () => {
+    // Arrange
+    await createFolder(directory, "test");
+    await createFolder(directory, "hello");
+    await createFolder(directory, "test2");
+
+    // Act
+    await client.run(
+      `SELECT 'folders' FROM '' WHERE 'name' = 'test' OR 'created' > '2021-01-01' OR 'modified' > '2021-01-01'`
+    );
+
+    // Assert
+    expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 3"));
   });
 });
 

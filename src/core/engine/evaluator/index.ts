@@ -19,7 +19,18 @@ export class Evaluator {
     expression: Expression,
     path: string
   ): Promise<boolean> {
-    return this.evaluateBinaryExpression(expression as BinaryExpression, path);
+    if (expression.type === "BinaryExpression") {
+      return this.evaluateBinaryExpression(
+        expression as BinaryExpression,
+        path
+      );
+    }
+
+    if (expression.type === "StringLiteral") {
+      return path.includes(expression.value);
+    }
+
+    throw new Error(`Unsupported expression type: ${expression.type}`);
   }
 
   private static convertToType(value: string, type: PropertyKey) {
