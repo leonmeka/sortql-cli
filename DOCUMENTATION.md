@@ -27,8 +27,8 @@ To get started, please refer to our [quick start guide](../readme.md#quick-start
 **sortQL**'s syntax is inspired by SQL and is designed to be intuitive and easy to use. The basic structure of a **sortQL** query is as follows:
 
 ```sql
--- This is a comment
-OPERATION 'target' FROM 'path' (WHERE 'property' <operator> 'value') (AND/OR 'property' <operator> 'value') (TO 'path')
+-- This is a comment: The basic structure of a sortQL query
+OPERATION '<target>' FROM '<path>' (WHERE '<property>' <operator> '<value>' (AND/OR '<property>' <operator> '<value>')) (TO '<path>')
 ```
 
 As you might notice, the query is made up of several components. Below is a brief explanation of each component:
