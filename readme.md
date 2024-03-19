@@ -114,7 +114,7 @@ Here's and example of a queries.sql file:
 
 ```sql
 -- Example: Selecting all folders and files from the directory
-SELECT files FROM ''
+SELECT 'files' FROM ''
 ```
 
 ### 2. Run sortQL
