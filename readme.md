@@ -17,12 +17,24 @@
 </p>
 
 <p align="center">
+  <a href="https://www.npmjs.com/package/@sortql/sortql-cli">
   <img alt="NPM Version" src="https://img.shields.io/npm/v/%40sortql%2Fsortql-cli">
+  </a>
+  <a href="https://www.npmjs.com/package/@sortql/sortql-cli">
   <img alt="NPM Downloads" src="https://img.shields.io/npm/dt/%40sortql%2Fsortql-cli">
+  </a>
+  <a href="https://www.npmjs.com/package/@sortql/sortql-cli">
   <img alt="NPM License" src="https://img.shields.io/npm/l/%40sortql%2Fsortql-cli">
-  <img alt="GitHub Actions Workflow Status" src="https://img.shields.io/github/actions/workflow/status/leonmeka/sortql-cli/main.yaml">
+  </a>
+  <a href="https://www.npmjs.com/package/@sortql/sortql-cli">
   <img alt="NPM License" src="https://img.shields.io/badge/PRs-welcome-brightgreen">
+  </a>
+  <a href="https://github.com/leonmeka/sortql-cli">
+  <img alt="GitHub Actions Workflow Status" src="https://img.shields.io/github/actions/workflow/status/leonmeka/sortql-cli/main.yaml">
+  </a>
+  <a href="https://github.com/leonmeka/sortql-cli">
   <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/leonmeka/sortql-cli">
+  </a>
 </p>
 
 # About
