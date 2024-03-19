@@ -27,7 +27,7 @@
 
 # About
 
-**sortQL** is a simple, yet powerful, file management automation tool that allows you to define complex operations using a declarative SQL-like syntax. It's designed to help you automate workflows, such as moving, copying, deleting, and archiving files, based on predefined conditions.
+**sortQL** is a simple, yet powerful, file management automation tool that offers a rich toolset of rule-based operations using a declarative SQL-like syntax. It's designed to help you automate workflows, such as moving, copying, deleting, and archiving files, based on predefined conditons.
 
 Features include:
 
@@ -51,15 +51,15 @@ Example: Automated workflow for cleaning up the mess on your desktop.
 
 # How it Works
 
-At the heart of **sortQL** is the queries.sql file, which contains a set of operations to be executed. Each operation is defined in a single line, which specifies the type of operation, the files or directories to be affected, and the conditions that must be met. Users, who are already familiar with SQL, will get the hang of it in no time.
+At the heart of **sortQL** is the queries.sql file, which contains a set of operations to be executed. Each operation is defined in a single line, which specifies the type of operation, the files or directories to be affected, and the conditions that must be met. Users, who are already worked with SQL, will find the syntax familiar.
 
-Here's an example of a queries.sql file, which moves files with specific extensions to a different subfolder:
+Here's an example of a queries.sql file, which moves files with specific extensions into respective subfolders:
 
 ```sql
 -- Move documents to a different subfolder
-MOVE files FROM '' WHERE extension = '(docx|doc|pdf)' TO 'documents'
-MOVE files FROM '' WHERE extension = '(pptx|ppt)' TO 'presentations'
-MOVE files FROM '' WHERE extension = '(xlsx|xls)' TO 'spreadsheets'
+MOVE 'files' FROM '' WHERE 'extension' = '(docx|doc|pdf)' TO 'documents'
+MOVE 'files' FROM '' WHERE 'extension' = '(pptx|ppt)' TO 'presentations'
+MOVE 'files' FROM '' WHERE 'extension' = '(xlsx|xls)' TO 'spreadsheets'
 ```
 
 For more information on how to use **sortQL**, please refer to the [documentation](DOCUMENTATION.md).
@@ -94,8 +94,6 @@ To install **sortQL**, run the following command:
 npm install -g npx @sortql/sortql-cli
 ```
 
-This will install **sortQL** globally on your computer, allowing you to run it from any directory.
-
 ## Upgrading
 
 In case you already have **sortQL** installed, you can upgrade to the latest version with:
@@ -108,7 +106,9 @@ npm upgrade -g @sortql/sortql-cli
 
 ### 1. Create a queries.sql file
 
-Before running **sortQL**, you need to create the queries.sql file. In this file, we're going to specify a set of operations to be executed. You can create it anywhere you like: in a project directory, in a subfolder, or even on your desktop.
+Before running **sortQL**, you need to create the queries.sql file. In this file, we're going to specify a set of operations to be executed.
+
+You can create it anywhere you like: in a project directory, in a subfolder, or even on your desktop.
 
 Here's and example of a queries.sql file:
 
@@ -125,20 +125,20 @@ Now that you have the queries.sql file, you can run **sortQL** from the terminal
 npx sortql
 ```
 
-### 3. Where is your queries.sql file located?
+### 3. Where do you want to run the queries?
 
-Upon start, you will be prompted to specify a path to the queries.sql file. Simply enter the full path to the file, or drag and drop the file into the terminal.
-
-```bash
-? Where is your queries.sql file located? '/Users/username/Desktop/queries.sql'
-```
-
-### 4. Where do you want to run the queries?
-
-Next, you will be prompted to enter a directory where you want to run the queries. This can be any directory on your computer, such as your desktop, documents folder, or a subfolder within a project directory.
+Upon start, you will be prompted to enter a directory where you want to run the queries. This can be any directory on your computer, such as your desktop, documents folder, or a subfolder within a project directory.
 
 ```bash
 ? Where do you want to run the queries? '/Users/username/Desktop/messy-folder'
+```
+
+### 4. Where is your queries.sql file located?
+
+Next, you will specify a path to the queries.sql file. Simply enter the full path to the file, or drag and drop the file into the terminal.
+
+```bash
+? Where is your queries.sql file located? '/Users/username/Desktop/queries.sql'
 ```
 
 ### 5. Want to watch for changes?
