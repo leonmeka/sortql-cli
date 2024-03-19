@@ -55,7 +55,7 @@ Features include:
 
 <hr style="border: 1px solid #f0f0f0; margin-top: 2em; margin-bottom: 2em;">
 
-https://github.com/leonmeka/sortql-cli/assets/15350962/7f62b92c-33f2-4f61-ba01-7e287f38f517
+https://github.com/leonmeka/sortql-cli/assets/15350962/5e9abf95-5d9f-41e5-bc6c-896019a73a88
 
 Example: Automated workflow for cleaning up the mess on your desktop.
 
