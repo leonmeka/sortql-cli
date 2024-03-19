@@ -68,11 +68,13 @@ This will start the cli in development mode, allowing you to make changes and se
 
 ## Testing
 
-We're using jest for testing core functionality. To run the tests, simply run the following command:
+We're using bun's built-in test runner for testing core functionality. To run the tests, simply run the following command:
 
 ```bash
 bun run test
 ```
+
+This will run all tests (*.spec.ts files) and prints the overall test coverage across the codebase. We aim for 100% coverage here.
 
 ## Building
 
