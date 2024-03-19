@@ -39,7 +39,7 @@ export class UnarchiveOperation extends Operation {
     );
 
     console.log(
-      chalk.yellowBright(`↳ [UNARCHIVE]: ${filtered.length} to ${to}`)
+      chalk.yellowBright(`↳ [UNARCHIVE]: ${filtered.length} to ${to.value}`)
     );
 
     if (filtered.length === 0) {

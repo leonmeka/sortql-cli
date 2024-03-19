@@ -30,7 +30,9 @@ export class ArchiveOperation extends Operation {
 
     const results = await this.filter.apply(this.statement);
 
-    console.log(chalk.yellowBright(`↳ [ARCHIVE]: ${results.length} to ${to}`));
+    console.log(
+      chalk.yellowBright(`↳ [ARCHIVE]: ${results.length} to ${to.value}`)
+    );
 
     if (results.length === 0) {
       return;

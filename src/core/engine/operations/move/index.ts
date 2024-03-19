@@ -31,7 +31,9 @@ export class MoveOperation extends Operation {
 
     await mkdir(path.join(this.directory, to.value), { recursive: true });
 
-    console.log(chalk.yellowBright(`↳ [MOVE]: ${results.length} to ${to}`));
+    console.log(
+      chalk.yellowBright(`↳ [MOVE]: ${results.length} to ${to.value}`)
+    );
 
     for (const result of results) {
       await rename(
