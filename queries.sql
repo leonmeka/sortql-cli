@@ -1,1 +1,0 @@
-SELECT 'files' FROM '' WHERE 'name' = 'tsconfig' OR 'name' = 'index'
