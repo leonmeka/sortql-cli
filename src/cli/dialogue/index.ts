@@ -1,12 +1,13 @@
 import chalk from "chalk";
 import inquirer from "inquirer";
 import boxen from "boxen";
+
 import { promises as fs } from "node:fs";
 
 import { VERSION, GITHUB_URL, CONFIG_PATH } from "@sortql/cli";
 
 function clearConsole() {
-  process.stdout.write("\u001b[3J\u001b[1J");
+  process.stdout.write("\u001b[3J");
   console.clear();
 }
 
