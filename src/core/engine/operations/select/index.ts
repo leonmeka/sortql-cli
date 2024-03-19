@@ -1,11 +1,11 @@
 import chalk from "chalk";
 import path from "path";
 
-import { Query } from "@sortql/core/engine/queries";
-import { SelectStatement } from "@sortql/core/parser/types";
+import { Operation } from "@sortql/core/engine/operations";
+import { Statement } from "@sortql/core/parser/types";
 
-export class SelectQuery extends Query {
-  constructor(directory: string, public statement: SelectStatement) {
+export class SelectOperation extends Operation {
+  constructor(directory: string, public statement: Statement) {
     super(directory);
     this.validate();
   }
@@ -22,7 +22,7 @@ export class SelectQuery extends Query {
 
     console.log(
       chalk.yellowBright(
-        `   ↳ [SELECT]: ${results.length}:`,
+        `↳ [SELECT]: ${results.length}:`,
         hasResults ? relativeResults : "No results found."
       )
     );

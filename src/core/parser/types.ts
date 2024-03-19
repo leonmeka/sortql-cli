@@ -3,6 +3,10 @@ export interface ASTNode {
   value?: any;
 }
 
+export interface StringLiteral extends ASTNode {
+  value: string;
+}
+
 export interface BinaryExpression extends ASTNode {
   operator: string;
   left: Expression;
@@ -17,10 +21,6 @@ export type Expression = BinaryExpression | LiteralExpression;
 
 export interface WhereClause extends ASTNode {
   condition: Expression;
-}
-
-export interface StringLiteral extends ASTNode {
-  value: string;
 }
 
 interface StatementBase extends ASTNode {

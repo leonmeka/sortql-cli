@@ -1,8 +1,8 @@
 import { Filter } from "@sortql/core/engine/filter";
 
-export abstract class Query {
-  public filter: Filter;
+export abstract class Operation {
   public directory: string;
+  public filter: Filter;
 
   constructor(directory: string) {
     this.directory = directory;

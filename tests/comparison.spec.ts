@@ -317,3 +317,237 @@ describe("Folder Filters (compound)", () => {
     expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 2"));
   });
 });
+
+// TEST COMPARIATIVE OPERATORS: LIKE, =, !=, >, <, >=, <=
+
+describe("File Filters (comparative)", () => {
+  let client: Client;
+  let spy: Mock<any>;
+
+  beforeEach(async () => {
+    client = new Client(directory);
+    spy = spyOn(console, "log");
+
+    if (!(await doesExist(directory, ""))) {
+      await mkdir(directory, { recursive: true });
+    }
+  });
+
+  afterEach(async () => {
+    spy.mockRestore();
+
+    if (await doesExist(directory, "")) {
+      await rmdir(directory, { recursive: true });
+    }
+  });
+
+  it("should only select files with LIKE operator", async () => {
+    // Arrange
+    await createFile(directory, "test.txt");
+    await createFile(directory, "hello.txt");
+    await createFile(directory, "test.js");
+
+    // Act
+    await client.run(`SELECT 'files' FROM '' WHERE 'name' LIKE 'test'`);
+
+    // Assert
+    expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 2"));
+  });
+
+  it("should only select files with = operator", async () => {
+    // Arrange
+    await createFile(directory, "test.txt");
+    await createFile(directory, "hello.txt");
+    await createFile(directory, "test.js");
+
+    // Act
+    await client.run(`SELECT 'files' FROM '' WHERE 'name' = 'test'`);
+
+    // Assert
+    expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 2"));
+  });
+
+  it("should only select files with != operator", async () => {
+    // Arrange
+    await createFile(directory, "test.txt");
+    await createFile(directory, "hello.txt");
+    await createFile(directory, "test.js");
+
+    // Act
+    await client.run(`SELECT 'files' FROM '' WHERE 'name' != 'test'`);
+
+    // Assert
+    expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 1"));
+  });
+
+  it("should only select files with > operator", async () => {
+    // Arrange
+    await createFile(directory, "test.txt", `${"_".repeat(200)}`);
+    await createFile(directory, "hello.txt", `${"_".repeat(50)}`);
+    await createFile(directory, "test.js", `${"_".repeat(200)}}`);
+
+    // Act
+    await client.run(`SELECT 'files' FROM '' WHERE 'size' > '100'`);
+
+    // Assert
+    expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 2"));
+  });
+
+  it("should only select files with < operator", async () => {
+    // Arrange
+    await createFile(directory, "test.txt", `${"_".repeat(200)}`);
+    await createFile(directory, "hello.txt", `${"_".repeat(50)}`);
+    await createFile(directory, "test.js", `${"_".repeat(200)}}`);
+
+    // Act
+    await client.run(`SELECT 'files' FROM '' WHERE 'size' < '100'`);
+
+    // Assert
+    expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 1"));
+  });
+
+  it("should only select files with >= operator", async () => {
+    // Arrange
+    await createFile(directory, "test.txt", `${"_".repeat(200)}`);
+    await createFile(directory, "test2.txt", `${"_".repeat(100)}`);
+    await createFile(directory, "hello.txt", `${"_".repeat(50)}`);
+    await createFile(directory, "test.js", `${"_".repeat(200)}}`);
+
+    // Act
+    await client.run(`SELECT 'files' FROM '' WHERE 'size' >= '100'`);
+
+    // Assert
+    expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 3"));
+  });
+
+  it("should only select files with <= operator", async () => {
+    // Arrange
+    await createFile(directory, "test.txt", `${"_".repeat(200)}`);
+    await createFile(directory, "test2.txt", `${"_".repeat(100)}`);
+    await createFile(directory, "hello.txt", `${"_".repeat(50)}`);
+    await createFile(directory, "test.js", `${"_".repeat(200)}}`);
+
+    // Act
+    await client.run(`SELECT 'files' FROM '' WHERE 'size' <= '100'`);
+
+    // Assert
+    expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 2"));
+  });
+});
+
+describe("Folder Filters (comparative)", () => {
+  let client: Client;
+  let spy: Mock<any>;
+
+  beforeEach(async () => {
+    client = new Client(directory);
+    spy = spyOn(console, "log");
+
+    if (!(await doesExist(directory, ""))) {
+      await mkdir(directory, { recursive: true });
+    }
+  });
+
+  afterEach(async () => {
+    spy.mockRestore();
+
+    if (await doesExist(directory, "")) {
+      await rmdir(directory, { recursive: true });
+    }
+  });
+
+  it("should only select folders with LIKE operator", async () => {
+    // Arrange
+    await createFolder(directory, "test");
+    await createFolder(directory, "hello");
+    await createFolder(directory, "test2");
+
+    // Act
+    await client.run(`SELECT 'folders' FROM '' WHERE 'name' LIKE 'test'`);
+
+    // Assert
+    expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 2"));
+  });
+
+  it("should only select folders with = operator", async () => {
+    // Arrange
+    await createFolder(directory, "test");
+    await createFolder(directory, "hello");
+    await createFolder(directory, "test2");
+
+    // Act
+    await client.run(`SELECT 'folders' FROM '' WHERE 'name' = 'test'`);
+
+    // Assert
+    expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 2"));
+  });
+
+  it("should only select folders with != operator", async () => {
+    // Arrange
+    await createFolder(directory, "test");
+    await createFolder(directory, "hello");
+    await createFolder(directory, "test2");
+
+    // Act
+    await client.run(`SELECT 'folders' FROM '' WHERE 'name' != 'test'`);
+
+    // Assert
+    expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 1"));
+  });
+
+  it("should only select folders with > operator", async () => {
+    // Arrange
+    await createFolder(directory, "test");
+    await createFolder(directory, "hello");
+    await createFolder(directory, "test2");
+
+    // Act
+    await client.run(`SELECT 'folders' FROM '' WHERE 'created' > '2021-01-01'`);
+
+    // Assert
+    expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 3"));
+  });
+
+  it("should only select folders with < operator", async () => {
+    // Arrange
+    await createFolder(directory, "test");
+    await createFolder(directory, "hello");
+    await createFolder(directory, "test2");
+
+    // Act
+    await client.run(`SELECT 'folders' FROM '' WHERE 'created' < '2021-01-01'`);
+
+    // Assert
+    expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 0"));
+  });
+
+  it("should only select folders with >= operator", async () => {
+    // Arrange
+    await createFolder(directory, "test");
+    await createFolder(directory, "hello");
+    await createFolder(directory, "test2");
+
+    // Act
+    await client.run(
+      `SELECT 'folders' FROM '' WHERE 'created' >= '2021-01-01'`
+    );
+
+    // Assert
+    expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 3"));
+  });
+
+  it("should only select folders with <= operator", async () => {
+    // Arrange
+    await createFolder(directory, "test");
+    await createFolder(directory, "hello");
+    await createFolder(directory, "test2");
+
+    // Act
+    await client.run(
+      `SELECT 'folders' FROM '' WHERE 'created' <= '2021-01-01'`
+    );
+
+    // Assert
+    expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 0"));
+  });
+});

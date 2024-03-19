@@ -1,20 +1,11 @@
-import {
-  ArchiveStatement,
-  CopyStatement,
-  DeleteStatement,
-  MoveStatement,
-  Query,
-  SelectStatement,
-  Statement,
-  UnarchiveStatement,
-} from "@sortql/core/parser/types";
+import { Query, Statement } from "@sortql/core/parser/types";
 
-import { SelectQuery } from "@sortql/core/engine/queries/select";
-import { DeleteQuery } from "@sortql/core/engine/queries/delete";
-import { MoveQuery } from "@sortql/core/engine/queries/move";
-import { ArchiveQuery } from "@sortql/core/engine/queries/archive";
-import { CopyQuery } from "@sortql/core/engine/queries/copy";
-import { UnarchiveQuery } from "@sortql/core/engine/queries/unarchive";
+import { SelectOperation } from "@sortql/core/engine/operations/select";
+import { DeleteOperation } from "@sortql/core/engine/operations/delete";
+import { MoveOperation } from "@sortql/core/engine/operations/move";
+import { ArchiveOperation } from "@sortql/core/engine/operations/archive";
+import { CopyOperation } from "@sortql/core/engine/operations/copy";
+import { UnarchiveOperation } from "@sortql/core/engine/operations/unarchive";
 
 export class Engine {
   private _query: Query | null = null;
@@ -34,51 +25,29 @@ export class Engine {
   private async executeStatement(statement: Statement): Promise<void> {
     if (!this._query) return;
 
-    let query;
+    const { directory } = this._query;
 
     switch (statement.type) {
       case "SelectStatement":
-        query = new SelectQuery(
-          this._query.directory,
-          statement as SelectStatement
-        );
+        await new SelectOperation(directory, statement).execute();
         break;
       case "DeleteStatement":
-        query = new DeleteQuery(
-          this._query.directory,
-          statement as DeleteStatement
-        );
+        await new DeleteOperation(directory, statement).execute();
         break;
       case "MoveStatement":
-        query = new MoveQuery(
-          this._query.directory,
-          statement as MoveStatement
-        );
+        await new MoveOperation(directory, statement).execute();
         break;
       case "CopyStatement":
-        query = new CopyQuery(
-          this._query.directory,
-          statement as CopyStatement
-        );
+        await new CopyOperation(directory, statement).execute();
         break;
       case "ArchiveStatement":
-        query = new ArchiveQuery(
-          this._query.directory,
-          statement as ArchiveStatement
-        );
+        await new ArchiveOperation(directory, statement).execute();
         break;
       case "UnarchiveStatement":
-        query = new UnarchiveQuery(
-          this._query.directory,
-          statement as UnarchiveStatement
-        );
+        await new UnarchiveOperation(directory, statement).execute();
         break;
       default:
         break;
-    }
-
-    if (query) {
-      await query.execute();
     }
   }
 }

@@ -1,4 +1,4 @@
-import { doesExist, createFile, createFolder } from "tests/utils.spec";
+import { doesExist, createFile, createFolder } from "tests/utils";
 import { mkdir, rmdir } from "node:fs/promises";
 import path from "path";
 

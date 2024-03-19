@@ -1,7 +1,7 @@
 import { ASTNode } from "@sortql/core/parser/types";
-import { TokenSpec } from "@sortql/core/tokenizer/types";
+import { Spec } from "@sortql/core/tokenizer/types";
 
-const spec = new TokenSpec([
+const spec = new Spec([
   // SKIP: WHITE SPACE, COMMENTS
   { pattern: /^\s+/, type: null },
   { pattern: /^--.*/, type: null },

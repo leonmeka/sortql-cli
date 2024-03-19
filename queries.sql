@@ -1,1 +1,1 @@
-SELECT 'files' FROM '' WHERE 'extension' LIKE 'lockb'
+SELECT 'files' FROM '' WHERE 'name' = 'tsconfig' OR 'name' = 'index'

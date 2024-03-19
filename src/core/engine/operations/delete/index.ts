@@ -2,11 +2,11 @@ import chalk from "chalk";
 
 import { rm } from "node:fs/promises";
 
-import { Query } from "@sortql/core/engine/queries";
-import { DeleteStatement } from "@sortql/core/parser/types";
+import { Operation } from "@sortql/core/engine/operations";
+import { Statement } from "@sortql/core/parser/types";
 
-export class DeleteQuery extends Query {
-  constructor(directory: string, public statement: DeleteStatement) {
+export class DeleteOperation extends Operation {
+  constructor(directory: string, public statement: Statement) {
     super(directory);
     this.validate();
   }
@@ -16,7 +16,7 @@ export class DeleteQuery extends Query {
   async execute() {
     const results = await this.filter.apply(this.statement);
 
-    console.log(chalk.yellowBright(`   ↳ [DELETE]: ${results.length}`));
+    console.log(chalk.yellowBright(`↳ [DELETE]: ${results.length}`));
 
     for (const result of results) {
       await rm(result, { recursive: true });

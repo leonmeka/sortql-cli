@@ -1,16 +1,16 @@
-interface TokenSpecItem {
+interface SpecItem {
   pattern: RegExp;
   type: string | null;
 }
 
-export class TokenSpec implements Iterable<TokenSpecItem> {
-  private items: TokenSpecItem[];
+export class Spec implements Iterable<SpecItem> {
+  private items: SpecItem[];
 
-  constructor(items: TokenSpecItem[]) {
+  constructor(items: SpecItem[]) {
     this.items = items;
   }
 
-  [Symbol.iterator](): Iterator<TokenSpecItem> {
+  [Symbol.iterator](): Iterator<SpecItem> {
     return this.items.values();
   }
 }

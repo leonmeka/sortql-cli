@@ -2,24 +2,24 @@ import path from "path";
 import chalk from "chalk";
 import AdmZip from "adm-zip";
 
-import { Query } from "@sortql/core/engine/queries";
-import { UnarchiveStatement } from "@sortql/core/parser/types";
+import { Operation } from "@sortql/core/engine/operations";
+import { Statement, UnarchiveStatement } from "@sortql/core/parser/types";
 
-export class UnarchiveQuery extends Query {
-  constructor(directory: string, public statement: UnarchiveStatement) {
+export class UnarchiveOperation extends Operation {
+  constructor(directory: string, public statement: Statement) {
     super(directory);
     this.validate();
   }
 
   validate() {
-    const { target, from, to } = this.statement;
+    const { target, from, to } = this.statement as UnarchiveStatement;
 
     if (target.value === "folders") {
-      throw new SyntaxError("   ↳ [UNARCHIVE] Cannot unarchive folders");
+      throw new SyntaxError("↳ [UNARCHIVE] Cannot unarchive folders");
     }
 
     if (path.extname(to.value) !== "") {
-      throw new SyntaxError("   ↳ [UNARCHIVE] Cannot unarchive to a file");
+      throw new SyntaxError("↳ [UNARCHIVE] Cannot unarchive to a file");
     }
 
     if (to === from) {
@@ -30,7 +30,7 @@ export class UnarchiveQuery extends Query {
   }
 
   async execute() {
-    const { to } = this.statement;
+    const { to } = this.statement as UnarchiveStatement;
 
     const results = await this.filter.apply(this.statement);
 
@@ -39,7 +39,7 @@ export class UnarchiveQuery extends Query {
     );
 
     console.log(
-      chalk.yellowBright(`   ↳ [UNARCHIVE]: ${filtered.length} to ${to}`)
+      chalk.yellowBright(`↳ [UNARCHIVE]: ${filtered.length} to ${to}`)
     );
 
     if (filtered.length === 0) {
