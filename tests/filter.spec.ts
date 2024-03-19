@@ -73,37 +73,37 @@ describe("File Filters (non-compound)", () => {
     expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 1"));
   });
 
-  it("should only select files with created dates that are greater than 2021-01-01", async () => {
+  it("should only select files with created dates that are greater than 01.01.2021", async () => {
     // Arrange
     await createFile(directory, "test.txt");
     await createFile(directory, "hello.txt");
 
     // Act
-    await client.run(`SELECT 'files' FROM '' WHERE 'created' > '2021-01-01'`);
+    await client.run(`SELECT 'files' FROM '' WHERE 'created' > '01.01.2021'`);
 
     // Assert
     expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 2"));
   });
 
-  it("should only select files with modified dates that are greater than 2021-01-01", async () => {
+  it("should only select files with modified dates that are greater than 01.01.2021", async () => {
     // Arrange
     await createFile(directory, "test.txt");
     await createFile(directory, "hello.txt");
 
     // Act
-    await client.run(`SELECT 'files' FROM '' WHERE 'modified' > '2021-01-01'`);
+    await client.run(`SELECT 'files' FROM '' WHERE 'modified' > '01.01.2021'`);
 
     // Assert
     expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 2"));
   });
 
-  it("should only select files with accessed dates that are greater than 2021-01-01", async () => {
+  it("should only select files with accessed dates that are greater than 01.01.2021", async () => {
     // Arrange
     await createFile(directory, "test.txt");
     await createFile(directory, "hello.txt");
 
     // Act
-    await client.run(`SELECT 'files' FROM '' WHERE 'accessed' > '2021-01-01'`);
+    await client.run(`SELECT 'files' FROM '' WHERE 'accessed' > '01.01.2021'`);
 
     // Assert
     expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 2"));
@@ -224,40 +224,40 @@ describe("Folder Filters (non-compound)", () => {
     expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 1"));
   });
 
-  it("should only select folders with created dates that are greater than 2021-01-01", async () => {
+  it("should only select folders with created dates that are greater than 01.01.2021", async () => {
     // Arrange
     await createFolder(directory, "test");
     await createFolder(directory, "hello");
 
     // Act
-    await client.run(`SELECT 'folders' FROM '' WHERE 'created' > '2021-01-01'`);
+    await client.run(`SELECT 'folders' FROM '' WHERE 'created' > '01.01.2021'`);
 
     // Assert
     expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 2"));
   });
 
-  it("should only select folders with modified dates that are greater than 2021-01-01", async () => {
+  it("should only select folders with modified dates that are greater than 01.01.2021", async () => {
     // Arrange
     await createFolder(directory, "test");
     await createFolder(directory, "hello");
 
     // Act
     await client.run(
-      `SELECT 'folders' FROM '' WHERE 'modified' > '2021-01-01'`
+      `SELECT 'folders' FROM '' WHERE 'modified' > '01.01.2021'`
     );
 
     // Assert
     expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 2"));
   });
 
-  it("should only select folders with accessed dates that are greater than 2021-01-01", async () => {
+  it("should only select folders with accessed dates that are greater than 01.01.2021", async () => {
     // Arrange
     await createFolder(directory, "test");
     await createFolder(directory, "hello");
 
     // Act
     await client.run(
-      `SELECT 'folders' FROM '' WHERE 'accessed' > '2021-01-01'`
+      `SELECT 'folders' FROM '' WHERE 'accessed' > '01.01.2021'`
     );
 
     // Assert
@@ -294,7 +294,7 @@ describe("Folder Filters (compound)", () => {
 
     // Act
     await client.run(
-      `SELECT 'folders' FROM '' WHERE 'name' LIKE 'test' AND 'created' > '2021-01-01'`
+      `SELECT 'folders' FROM '' WHERE 'name' LIKE 'test' AND 'created' > '01.01.2021'`
     );
 
     // Assert
@@ -309,7 +309,7 @@ describe("Folder Filters (compound)", () => {
 
     // Act
     await client.run(
-      `SELECT 'folders' FROM '' WHERE 'name' LIKE 'test' AND 'created' > '2021-01-01' AND 'modified' > '2021-01-01'`
+      `SELECT 'folders' FROM '' WHERE 'name' LIKE 'test' AND 'created' > '01.01.2021' AND 'modified' > '01.01.2021'`
     );
 
     // Assert
@@ -324,7 +324,7 @@ describe("Folder Filters (compound)", () => {
 
     // Act
     await client.run(
-      `SELECT 'folders' FROM '' WHERE 'name' LIKE 'test' AND 'created' > '2021-01-01' AND 'modified' > '2021-01-01'`
+      `SELECT 'folders' FROM '' WHERE 'name' LIKE 'test' AND 'created' > '01.01.2021' AND 'modified' > '01.01.2021'`
     );
 
     // Assert
@@ -339,7 +339,7 @@ describe("Folder Filters (compound)", () => {
 
     // Act
     await client.run(
-      `SELECT 'folders' FROM '' WHERE 'name' LIKE 'test' OR 'created' > '2021-01-01' OR 'modified' > '2021-01-01'`
+      `SELECT 'folders' FROM '' WHERE 'name' LIKE 'test' OR 'created' > '01.01.2021' OR 'modified' > '01.01.2021'`
     );
 
     // Assert
@@ -529,7 +529,7 @@ describe("Folder Filters (comparative)", () => {
     await createFolder(directory, "test2");
 
     // Act
-    await client.run(`SELECT 'folders' FROM '' WHERE 'created' > '2021-01-01'`);
+    await client.run(`SELECT 'folders' FROM '' WHERE 'created' > '01.01.2021'`);
 
     // Assert
     expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 3"));
@@ -542,7 +542,7 @@ describe("Folder Filters (comparative)", () => {
     await createFolder(directory, "test2");
 
     // Act
-    await client.run(`SELECT 'folders' FROM '' WHERE 'created' < '2021-01-01'`);
+    await client.run(`SELECT 'folders' FROM '' WHERE 'created' < '01.01.2021'`);
 
     // Assert
     expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 0"));
@@ -556,7 +556,7 @@ describe("Folder Filters (comparative)", () => {
 
     // Act
     await client.run(
-      `SELECT 'folders' FROM '' WHERE 'created' >= '2021-01-01'`
+      `SELECT 'folders' FROM '' WHERE 'created' >= '01.01.2021'`
     );
 
     // Assert
@@ -571,7 +571,7 @@ describe("Folder Filters (comparative)", () => {
 
     // Act
     await client.run(
-      `SELECT 'folders' FROM '' WHERE 'created' <= '2021-01-01'`
+      `SELECT 'folders' FROM '' WHERE 'created' <= '01.01.2021'`
     );
 
     // Assert

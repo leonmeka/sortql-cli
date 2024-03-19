@@ -164,12 +164,12 @@ Example:
 
 ```sql
 -- Select files created after a specific date
-SELECT 'files' FROM '' WHERE 'created' > '2021-01-01'
+SELECT 'files' FROM '' WHERE 'created' > '01.01.2021'
 ```
 
 ```sql
 -- Select files created before a specific date
-SELECT 'files' FROM '' WHERE 'created' < '2021-01-01'
+SELECT 'files' FROM '' WHERE 'created' < '01.01.2021'
 ```
 
 #### **modified**: The last modified date of the file.
@@ -181,12 +181,12 @@ Example:
 
 ```sql
 -- Select files modified after a specific date
-SELECT 'files' FROM '' WHERE 'modified' > '2021-01-01'
+SELECT 'files' FROM '' WHERE 'modified' > '01.01.2021'
 ```
 
 ```sql
 -- Select files modified before a specific date
-SELECT 'files' FROM '' WHERE 'modified' < '2021-01-01'
+SELECT 'files' FROM '' WHERE 'modified' < '01.01.2021'
 ```
 
 #### **accessed**: The last accessed date of the file.
@@ -198,12 +198,12 @@ Example:
 
 ```sql
 -- Select files accessed after a specific date
-SELECT 'files' FROM '' WHERE 'accessed' > '2021-01-01'
+SELECT 'files' FROM '' WHERE 'accessed' > '01.01.2021'
 ```
 
 ```sql
 -- Select files accessed before a specific date
-SELECT 'files' FROM '' WHERE 'accessed' < '2021-01-01'
+SELECT 'files' FROM '' WHERE 'accessed' < '01.01.2021'
 ```
 
 #### Folder Properties
@@ -234,12 +234,12 @@ Example:
 
 ```sql
 -- Select folders created after a specific date
-SELECT 'folders' FROM '' WHERE 'created' > '2021-01-01'
+SELECT 'folders' FROM '' WHERE 'created' > '01.01.2021'
 ```
 
 ```sql
 -- Select folders created before a specific date
-SELECT 'folders' FROM '' WHERE 'created' < '2021-01-01'
+SELECT 'folders' FROM '' WHERE 'created' < '01.01.2021'
 ```
 
 #### **modified**: The last modified date of the folder.
@@ -251,12 +251,12 @@ Example:
 
 ```sql
 -- Select folders modified after a specific date
-SELECT 'folders' FROM '' WHERE 'modified' > '2021-01-01'
+SELECT 'folders' FROM '' WHERE 'modified' > '01.01.2021'
 ```
 
 ```sql
 -- Select folders modified before a specific date
-SELECT 'folders' FROM '' WHERE 'modified' < '2021-01-01'
+SELECT 'folders' FROM '' WHERE 'modified' < '01.01.2021'
 ```
 
 #### **accessed**: The last accessed date of the folder.
@@ -268,12 +268,12 @@ Example:
 
 ```sql
 -- Select folders accessed after a specific date
-SELECT 'folders' FROM '' WHERE 'accessed' > '2021-01-01'
+SELECT 'folders' FROM '' WHERE 'accessed' > '01.01.2021'
 ```
 
 ```sql
 -- Select folders accessed before a specific date
-SELECT 'folders' FROM '' WHERE 'accessed' < '2021-01-01'
+SELECT 'folders' FROM '' WHERE 'accessed' < '01.01.2021'
 ```
 
 ## Advanced Usage
@@ -301,7 +301,7 @@ SELECT 'files' FROM '' WHERE 'size' > 100000
 
 ```sql
 -- Move files created between specific dates to a different location
-MOVE 'files' FROM '' WHERE 'created' >= '01-01-2021' AND 'created' <= '12-31-2021' TO 'projects_2021'
+MOVE 'files' FROM '' WHERE 'created' >= '01.01.2021' AND 'created' <= '31.12.2021' TO 'projects_2021'
 ```
 
 ```sql
@@ -317,7 +317,7 @@ A valid example of using logical operators:
 
 ```sql
 -- Select big files created after a specific date
-SELECT 'files' FROM '' WHERE 'size' > 100000 AND 'created' > '2021-01-01'
+SELECT 'files' FROM '' WHERE 'size' > 100000 AND 'created' > '01.01.2021'
 ```
 
 ### Regular Expressions
@@ -357,7 +357,7 @@ You have a directory with a large number of files and want to delete bigger file
 
 ```sql
 -- Delete files older than a specific date
-DELETE 'files' FROM '' WHERE 'created' < '2021-01-01'
+DELETE 'files' FROM '' WHERE 'created' < '01.01.2021'
 ```
 
 ### Example 3: Archiving Files Based on Size
