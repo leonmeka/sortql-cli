@@ -341,7 +341,9 @@ SELECT 'files' FROM '' WHERE 'size' > 100000 AND 'created' > '01.01.2021'
 
 ### Regular Expressions
 
-**sortQL** supports regular expressions for matching file and folder properties. In case you're not familiar with regular expressions, they are a powerful tool for pattern matching and can be used to match complex patterns in strings. To learn more about regular expressions, you can refer to the [MDN Web Docs](https://developer.mozilla.org/en-US/Web/JavaScript/Guide/Regular_Expressions).
+**sortQL** supports regular expressions for matching file and folder properties. In case you're not familiar with regular expressions, they are a powerful tool for pattern matching and can be used to match complex patterns in strings.
+
+To learn more about regular expressions, you can refer to the [MDN Web Docs](https://developer.mozilla.org/en-US/Web/JavaScript/Guide/Regular_Expressions).
 
 Here's an example of using regular expressions to match files with a specific extension:
 
