@@ -155,6 +155,23 @@ SELECT 'files' FROM '' WHERE 'size' > 100000
 SELECT 'files' FROM '' WHERE 'size' <= 1000000
 ```
 
+#### **content**: The content of the file.
+
+> [!NOTE]
+> Allowed values: Any string. Regular expressions are supported.
+
+Example:
+
+```sql
+-- Select files with specific content
+SELECT 'files' FROM '' WHERE 'content' LIKE 'example'
+```
+
+```sql
+-- Select files with content that matches a pattern (e.g., 'car', 'cars', 'racecar', 'carpet', etc.)
+SELECT 'files' FROM '' WHERE 'content' LIKE '[^,]*car[^,]*'
+```
+
 #### **created**: The creation date of the file.
 
 > [!NOTE]  

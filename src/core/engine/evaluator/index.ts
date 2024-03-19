@@ -7,6 +7,7 @@ interface Properties {
   name: string;
   extension: string;
   size: number;
+  content: string;
   created: Date;
   modified: Date;
   accessed: Date;
@@ -40,10 +41,13 @@ export class Evaluator {
         return value;
       case "size":
         return Number(value);
+      case "content":
+        return value;
       case "created":
       case "modified":
       case "accessed":
         return new Date(value);
+
       default:
         throw new Error(`Unsupported property type: ${type}`);
     }
@@ -56,6 +60,7 @@ export class Evaluator {
       name: parse(path).name,
       extension: parse(path).ext.slice(1),
       size: stats.size,
+      content: stats.isFile() ? await Bun.file(path).text() : "",
       created: stats.birthtimeMs === 0 ? stats.ctime : stats.birthtime,
       modified: stats.mtime,
       accessed: stats.atime,

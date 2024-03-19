@@ -14,17 +14,19 @@ export class Filter {
       throw new SyntaxError(`Unsupported target: '${target.value}'`);
     }
 
-    const startPath = path.join(this.directory, from.value);
+    const directory = path.join(this.directory, from.value);
 
-    if (!(await exists(startPath))) return [];
+    if (!(await exists(directory))) {
+      throw new Error(`Directory does not exist: ${directory}`);
+    }
 
-    const entries = await readdir(startPath, { withFileTypes: true });
+    const entries = await readdir(directory, { withFileTypes: true });
     const filtered = entries.filter((entry) => entry.name !== ".DS_Store");
 
     let results: string[] = [];
 
     for (const dirent of filtered) {
-      const entryPath = path.join(startPath, dirent.name);
+      const entryPath = path.join(directory, dirent.name);
 
       const isMatch = where
         ? await Evaluator.evaluate(where.condition, entryPath)

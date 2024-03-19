@@ -73,6 +73,18 @@ describe("File Filters (non-compound)", () => {
     expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 1"));
   });
 
+  it("should only select files with content 'hello'", async () => {
+    // Arrange
+    await createFile(directory, "test.txt", "find-me");
+    await createFile(directory, "test2.txt", "world");
+
+    // Act
+    await client.run(`SELECT 'files' FROM '' WHERE 'content' = 'find-me'`);
+
+    // Assert
+    expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 1"));
+  });
+
   it("should only select files with created dates that are greater than 01.01.2021", async () => {
     // Arrange
     await createFile(directory, "test.txt");

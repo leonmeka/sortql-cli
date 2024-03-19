@@ -8,7 +8,7 @@ import { CopyOperation } from "@sortql/core/engine/operations/copy";
 import { UnarchiveOperation } from "@sortql/core/engine/operations/unarchive";
 
 export class Engine {
-  private _query: Query | null = null;
+  private _query: Query | null;
 
   constructor() {
     this._query = null;
