@@ -1,6 +1,6 @@
 # sortQL Documentation
 
-Welcome to the official documentation for **sortQL**. This documentation provides a detailed overview of the query syntax, supported operations, and properties, as well as some examples on how you might use **sortQL** in your projects.
+This documentation provides a detailed overview of the query syntax, supported operations, and properties, as well as some examples on how you might use **sortQL** in your projects.
 
 ## Table of Contents
 
@@ -27,24 +27,24 @@ To get started, please refer to our [quick start guide](../readme.md#quick-start
 **sortQL**'s syntax is inspired by SQL and is designed to be intuitive and easy to use. The basic structure of a **sortQL** query is as follows:
 
 ```sql
-ACTION target FROM path WHERE property = value AND/OR property = value TO path
+-- This is a comment
+OPERATION 'target' FROM 'path' (WHERE 'property' <operator> 'value') (AND/OR 'property' <operator> 'value') (TO 'path')
 ```
 
 As you might notice, the query is made up of several components. Below is a brief explanation of each component:
 
-- **ACTION**: The type of operation to be performed (e.g., SELECT, MOVE, COPY, DELETE, ARCHIVE, UNARCHIVE).
-- **target**: The type of target (= **files** or **folders**).
-- **path**: The path to the target files or folders.
-- **property**: The property to be checked (e.g., extension, size, created, etc.).
-- **value**: The value to be compared. (e.g., 'txt', 1000, '01/01/2021', etc.).
-- **AND/OR**: The logical operator to combine multiple conditions.
+- **OPERATION**: The type of operation to be performed (e.g., SELECT, MOVE, COPY, DELETE, ARCHIVE, UNARCHIVE).
+- **TARGET**: The type of target (= **'files'** or **'folders'**).
+- **FROM**: The source path where the operation will be performed.
+- **WHERE**: The condition used to filter files or folders based on specific properties (optional).
+- **PROPERTY**: The property to be used for filtering (e.g., name, extension, size, created, modified, accessed).
+- **OPERATOR**: The comparison operator used to compare the property with a specific value (e.g., =, !=, >, <, >=, <=, LIKE).
+- **AND/OR**: The logical operator to combine multiple conditions (optional).
 - **TO**: The destination path used for some operations (e.g., MOVE, COPY, ARCHIVE, UNARCHIVE).
-
-In the following sections, we'll go into more detail about the supported operations and properties in **sortQL**.
 
 ### Supported Operations
 
-Operations are divided into two categories: file operations and folder operations. Each operation is designed to perform a specific task on files or folders.
+Operations are divided into two categories: **file** operations and **folder** operations. Thus, each operation is designed to perform a specific task on files or folders.
 
 **sortQL** supports the following operations:
 
@@ -52,50 +52,50 @@ Operations are divided into two categories: file operations and folder operation
 
 - SELECT: Selects files based on specific conditions:
   ```sql
-  SELECT files FROM ''
+  SELECT 'files' FROM ''
   ```
 - MOVE: Moves files to a different location based on specific conditions.
   ```sql
-  MOVE files FROM '' TO 'text-files'
+  MOVE 'files' FROM '' TO 'text-files'
   ```
 - COPY: Copies files to a different location based on specific conditions.
   ```sql
-  COPY files FROM '' TO 'backup'
+  COPY 'files' FROM '' TO 'backup'
   ```
 - DELETE: Deletes files based on specific conditions.
   ```sql
-  DELETE files FROM ''
+  DELETE 'files' FROM ''
   ```
 - ARCHIVE: Archives files to a different location based on specific conditions.
   ```sql
-  ARCHIVE files FROM '' TO 'archive'
+  ARCHIVE 'files' FROM '' TO 'archive'
   ```
 - UNARCHIVE: Unarchives files to a different location based on specific conditions.
   ```sql
-  UNARCHIVE files FROM '' TO 'unarchive'
+  UNARCHIVE 'files' FROM '' TO 'unarchive'
   ```
 
 #### Folder Operations
 
 - SELECT: Selects folders based on specific conditions.
   ```sql
-  SELECT folders FROM ''
+  SELECT 'folders' FROM ''
   ```
 - MOVE: Moves folders to a different location based on specific conditions.
   ```sql
-  MOVE folders FROM '' TO 'projects'
+  MOVE 'folders' FROM '' TO 'projects'
   ```
 - COPY: Copies folders to a different location based on specific conditions.
   ```sql
-  COPY folders FROM '' TO 'backup'
+  COPY 'folders' FROM '' TO 'backup'
   ```
 - DELETE: Deletes folders based on specific conditions.
   ```sql
-  DELETE folders FROM ''
+  DELETE 'folders' FROM ''
   ```
 - ARCHIVE: Archives folders to a different location based on specific conditions.
   ```sql
-  ARCHIVE folders FROM '' TO 'archive'
+  ARCHIVE 'folders' FROM '' TO 'archive'
   ```
 
 ### Supported Properties
@@ -109,16 +109,16 @@ Operations are divided into two categories: file operations and folder operation
 > [!NOTE]  
 > Allowed values: Any string. Regular expressions are supported.
 
-Working with the name property:
+Example:
 
 ```sql
 -- Select files with a specific name
-SELECT files FROM '' WHERE name = 'example.txt'
+SELECT 'files' FROM '' WHERE 'name' = 'example'
 ```
 
 ```sql
 -- Select files with a name that matches a pattern
-SELECT files FROM '' WHERE name = 'example.*'
+SELECT 'files' FROM '' WHERE 'name' LIKE 'example.*'
 ```
 
 #### **extension**: The file extension.
@@ -126,16 +126,16 @@ SELECT files FROM '' WHERE name = 'example.*'
 > [!NOTE]  
 > Allowed values: Any string. Regular expressions are supported.
 
-Working with the extension property:
+Example:
 
 ```sql
 -- Select files with a specific extension
-SELECT files FROM '' WHERE extension = 'txt'
+SELECT 'files' FROM '' WHERE 'extension' = 'txt'
 ```
 
 ```sql
--- Select files with extensions other than 'txt' and 'pdf'
-SELECT files FROM '' WHERE extension != '(txt|pdf)'
+-- Select files with extensions 'txt' and 'pdf'
+SELECT 'files' FROM '' WHERE 'extension' LIKE '(txt|pdf)'
 ```
 
 #### **size**: The size of the file in bytes.
@@ -143,67 +143,67 @@ SELECT files FROM '' WHERE extension != '(txt|pdf)'
 > [!NOTE]  
 > Allowed values: Any integer. Comparison operators are supported.
 
-Working with the size property:
+Example:
 
 ```sql
 -- Select files with file size greater than 100000 bytes (= 100KB)
-SELECT files FROM '' WHERE size > 100000
+SELECT 'files' FROM '' WHERE 'size' > 100000
 ```
 
 ```sql
 -- Select files with file size less than or equal to 1000000 bytes (= 1MB)
-SELECT files FROM '' WHERE size <= 1000000
+SELECT 'files' FROM '' WHERE 'size' <= 1000000
 ```
 
 #### **created**: The creation date of the file.
 
 > [!NOTE]  
-> Allowed values: Any date string in the format 'MM/DD/YYYY'. Comparison operators are supported.
+> Allowed values: Any date string. Comparison operators are supported.
 
-Working with the created property:
+Example:
 
 ```sql
 -- Select files created after a specific date
-SELECT files FROM '' WHERE created > '01/01/2021'
+SELECT 'files' FROM '' WHERE 'created' > '01.01.2021'
 ```
 
 ```sql
 -- Select files created before a specific date
-SELECT files FROM '' WHERE created < '01/01/2021'
+SELECT 'files' FROM '' WHERE 'created' < '01.01.2021'
 ```
 
 #### **modified**: The last modified date of the file.
 
 > [!NOTE]  
-> Allowed values: Any date string in the format 'MM/DD/YYYY'. Comparison operators are supported.
+> Allowed values: Any date string. Comparison operators are supported.
 
-Working with the modified property:
+Example:
 
 ```sql
 -- Select files modified after a specific date
-SELECT files FROM '' WHERE modified > '01/01/2021'
+SELECT 'files' FROM '' WHERE 'modified' > '01.01.2021'
 ```
 
 ```sql
 -- Select files modified before a specific date
-SELECT files FROM '' WHERE modified < '01/01/2021'
+SELECT 'files' FROM '' WHERE 'modified' < '01.01.2021'
 ```
 
 #### **accessed**: The last accessed date of the file.
 
 > [!NOTE]
-> Allowed values: Any date string in the format 'MM/DD/YYYY'. Comparison operators are supported.
+> Allowed values: Any date string. Comparison operators are supported.
 
-Working with the accessed property:
+Example:
 
 ```sql
 -- Select files accessed after a specific date
-SELECT files FROM '' WHERE accessed > '01/01/2021'
+SELECT 'files' FROM '' WHERE 'accessed' > '01.01.2021'
 ```
 
 ```sql
 -- Select files accessed before a specific date
-SELECT files FROM '' WHERE accessed < '01/01/2021'
+SELECT 'files' FROM '' WHERE 'accessed' < '01.01.2021'
 ```
 
 #### Folder Properties
@@ -213,16 +213,67 @@ SELECT files FROM '' WHERE accessed < '01/01/2021'
 > [!NOTE]
 > Allowed values: Any string. Regular expressions are supported.
 
-Working with the name property:
+Example:
 
 ```sql
 -- Select folders with a specific name
-SELECT folders FROM '' WHERE name = 'example'
+SELECT 'folders' FROM '' WHERE 'name' = 'example'
 ```
 
 ```sql
 -- Select folders with a name that matches a pattern
-SELECT folders FROM '' WHERE name = 'example.*'
+SELECT 'folders' FROM '' WHERE 'name' LIKE 'project-*'
+```
+
+#### **created**: The creation date of the folder.
+
+> [!NOTE]  
+> Allowed values: Any date string. Comparison operators are supported.
+
+Example:
+
+```sql
+-- Select folders created after a specific date
+SELECT 'folders' FROM '' WHERE 'created' > '01.01.2021'
+```
+
+```sql
+-- Select folders created before a specific date
+SELECT 'folders' FROM '' WHERE 'created' < '01.01.2021'
+```
+
+#### **modified**: The last modified date of the folder.
+
+> [!NOTE]  
+> Allowed values: Any date string. Comparison operators are supported.
+
+Example:
+
+```sql
+-- Select folders modified after a specific date
+SELECT 'folders' FROM '' WHERE 'modified' > '01.01.2021'
+```
+
+```sql
+-- Select folders modified before a specific date
+SELECT 'folders' FROM '' WHERE 'modified' < '01.01.2021'
+```
+
+#### **accessed**: The last accessed date of the folder.
+
+> [!NOTE]
+> Allowed values: Any date string. Comparison operators are supported.
+
+Example:
+
+```sql
+-- Select folders accessed after a specific date
+SELECT 'folders' FROM '' WHERE 'accessed' > '01.01.2021'
+```
+
+```sql
+-- Select folders accessed before a specific date
+SELECT 'folders' FROM '' WHERE 'accessed' < '01.01.2021'
 ```
 
 ## Advanced Usage
@@ -233,6 +284,7 @@ SELECT folders FROM '' WHERE name = 'example.*'
 
 **sortQL** supports the following conditional operators:
 
+- **LIKE**: Similar to SQL's **LIKE** operator, it allows you to match properties with regex patterns.
 - **=**: Equal to.
 - **!=**: Not equal to.
 - **>**: Greater than.
@@ -244,17 +296,17 @@ You can use these operators to compare properties with specific values. Below ar
 
 ```sql
 -- Select files with file size greater than 100000 bytes (= 100KB)
-SELECT files FROM '' WHERE size > 100000
+SELECT 'files' FROM '' WHERE 'size' > 100000
 ```
 
 ```sql
 -- Move files created between specific dates to a different location
-MOVE files FROM '' WHERE created >= '01/01/2021' AND created <= '12/31/2021' TO 'projects_2021'
+MOVE 'files' FROM '' WHERE 'created' >= '01.01.2021' AND 'created' <= '31.12.2021' TO 'projects_2021'
 ```
 
 ```sql
 -- Delete files with extensions other than 'txt' and 'pdf'
-DELETE files FROM '' WHERE extension != '(txt|pdf)'
+DELETE 'files' FROM '' WHERE 'extension' LIKE '?!(txt|pdf)'
 ```
 
 ### Logical Operators
@@ -265,7 +317,7 @@ A valid example of using logical operators:
 
 ```sql
 -- Select big files created after a specific date
-SELECT files FROM '' WHERE size > 100000 AND created > '01/01/2021'
+SELECT 'files' FROM '' WHERE 'size' > 100000 AND 'created' > '01.01.2021'
 ```
 
 ### Regular Expressions
@@ -276,12 +328,12 @@ Here's an example of using regular expressions to match files with a specific ex
 
 ```sql
 -- Select files with extensions 'txt' and 'pdf'
-SELECT files FROM '' WHERE extension = '(txt|pdf)'
+SELECT 'files' FROM '' WHERE 'extension' LIKE '(txt|pdf)'
 ```
 
 ```sql
 -- Select files with names that match a specific pattern
-SELECT files FROM '' WHERE name = 'example.*'
+SELECT 'files' FROM '' WHERE 'name' LIKE 'example.*'
 ```
 
 ## Examples and Use Cases
@@ -294,9 +346,9 @@ Suppose you have a directory containing various types of files, including docume
 
 ```sql
 -- Move documents to a different subfolder
-MOVE files FROM '' WHERE extension = '(docx|doc|pdf)' TO 'documents'
-MOVE files FROM '' WHERE extension = '(pptx|ppt)' TO 'presentations'
-MOVE files FROM '' WHERE extension = '(xlsx|xls)' TO 'spreadsheets'
+MOVE 'files' FROM '' WHERE 'extension' LIKE '(docx|doc|pdf)' TO 'documents'
+MOVE 'files' FROM '' WHERE 'extension' LIKE '(pptx|ppt)' TO 'presentations'
+MOVE 'files' FROM '' WHERE 'extension' LIKE '(xlsx|xls)' TO 'spreadsheets'
 ```
 
 ### Example 2: Deleting Files Older Than a Specific Date
@@ -305,7 +357,7 @@ You have a directory with a large number of files and want to delete bigger file
 
 ```sql
 -- Delete files older than a specific date
-DELETE files FROM '' WHERE created < '01/01/2021'
+DELETE 'files' FROM '' WHERE 'created' < '01.01.2021'
 ```
 
 ### Example 3: Archiving Files Based on Size
@@ -314,7 +366,7 @@ You have a directory with a large number of files and want to archive files that
 
 ```sql
 -- Archive files based on size
-ARCHIVE files FROM '' WHERE size > 100000000 TO 'archive'
+ARCHIVE 'files' FROM '' WHERE 'size' > 100000000 TO 'archive'
 ```
 
 ### Example 4: Copying Folders Based on Name
@@ -323,5 +375,5 @@ You have a directory with several subfolders and want to copy all folders that c
 
 ```sql
 -- Copy folders based on name
-COPY folders FROM '' WHERE name = '*project*' TO 'old-projects'
+COPY 'folders' FROM '' WHERE 'name' LIKE '*project*' TO 'old-projects'
 ```

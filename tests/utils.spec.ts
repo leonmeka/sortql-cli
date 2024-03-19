@@ -4,7 +4,7 @@ import { mkdir, exists } from "node:fs/promises";
 export const createFile = async (
   directory: string,
   name: string,
-  content = ""
+  content: string = ""
 ) => await Bun.write(path.join(directory, name), content);
 
 export const createFolder = async (directory: string, name: string) =>

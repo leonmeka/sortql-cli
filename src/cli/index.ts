@@ -3,17 +3,17 @@ import path from "path";
 import chokidar from "chokidar";
 import { homedir } from "os";
 
-import { QueryClient } from "@sortql/core";
+import { Client } from "@sortql/core";
 import { printHeader } from "@sortql/cli/dialogue";
 import { checkConfig } from "@sortql/cli/config";
 
-export const VERSION = "1.0.20";
+export const VERSION = "1.1.0";
 export const GITHUB_URL = "https://github.com/leonmeka/sortql";
 export const CONFIG_PATH = path.join(homedir(), ".sortql");
 
 let isBlocked = false;
 
-async function runQueries(client: QueryClient, queries: string) {
+async function runQueries(client: Client, queries: string) {
   if (isBlocked) {
     return;
   }
@@ -22,10 +22,7 @@ async function runQueries(client: QueryClient, queries: string) {
 
   try {
     const content = Bun.file(queries);
-
     await client.run(await content.text());
-
-    console.log(chalk.green("→ Queries ran successfully!"));
   } catch (error) {
     console.error(chalk.red("Error running queries:"), error);
   } finally {
@@ -34,7 +31,7 @@ async function runQueries(client: QueryClient, queries: string) {
 }
 
 async function watchDirectory(
-  client: QueryClient,
+  client: Client,
   config: {
     directory: string;
     queries: string;
@@ -62,7 +59,7 @@ export async function initSortQLCLI() {
   printHeader();
   const config = await checkConfig();
 
-  const client = new QueryClient(config.directory);
+  const client = new Client(config.directory);
 
   if (config.watch) {
     await watchDirectory(client, config);

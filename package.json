@@ -1,12 +1,12 @@
 {
   "name": "@sortql/sortql-cli",
-  "version": "1.0.20",
+  "version": "1.1.0",
   "author": "Leon Meka",
   "license": "MIT",
   "description": "A file management automation tool with SQL-like syntax",
   "scripts": {
     "dev": "bun --watch index.ts",
-    "test": "bun test --coverage",
+    "test": "bun test --coverage --watch",
     "build": "bun build index.ts --outdir dist --target bun --minify && npm link",
     "prepare": "husky"
   },
