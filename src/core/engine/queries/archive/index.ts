@@ -4,28 +4,23 @@ import archiver from "archiver";
 
 import { createWriteStream } from "node:fs";
 
-import { Query } from "@sortql/core/queries";
-import { Target } from "@sortql/core/parsers";
-import { LogicalCondition } from "@sortql/core/filter";
+import { Query } from "@sortql/core/engine/queries";
+import { ArchiveStatement } from "@sortql/core/parser/types";
 
 export class ArchiveQuery extends Query {
-  constructor(
-    directory: string,
-    target: Target,
-    from: string,
-    public to: string,
-    where?: LogicalCondition
-  ) {
-    super(directory, target, from, where);
+  constructor(directory: string, public statement: ArchiveStatement) {
+    super(directory);
     this.validate();
   }
 
   async validate() {
-    if (path.extname(this.to) === "") {
+    const { from, to } = this.statement;
+
+    if (path.extname(to.value) === "") {
       throw new SyntaxError("   ↳ [ARCHIVE] Destination cannot be a directory");
     }
 
-    if (this.to === this.from) {
+    if (to.value === from.value) {
       throw new SyntaxError(
         "   ↳ [ARCHIVE] Cannot archive to the same location"
       );
@@ -33,8 +28,9 @@ export class ArchiveQuery extends Query {
   }
 
   async execute() {
-    const { directory, target, to } = this;
-    const results = await this.filter.apply(this);
+    const { target, to } = this.statement;
+
+    const results = await this.filter.apply(this.statement);
 
     console.log(
       chalk.yellowBright(`   ↳ [ARCHIVE]: ${results.length} to ${to}`)
@@ -44,19 +40,19 @@ export class ArchiveQuery extends Query {
       return;
     }
 
-    const output = createWriteStream(path.join(directory, to));
+    const output = createWriteStream(path.join(this.directory, to.value));
     const archive = archiver("zip");
 
     archive.pipe(output);
 
     for (const result of results) {
-      const destination = path.join(directory, to);
+      const destination = path.join(this.directory, to.value);
 
-      if (target === "folders") {
+      if (target.value === "folders") {
         archive.directory(path.basename(result), destination);
       }
 
-      if (target === "files") {
+      if (target.value === "files") {
         archive.append(destination, { name: path.basename(result) });
       }
     }

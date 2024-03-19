@@ -1,4 +1,4 @@
-import { doesExist, createFile, createFolder } from "tests/utils";
+import { doesExist, createFile, createFolder } from "tests/utils.spec";
 import { mkdir, rmdir } from "node:fs/promises";
 import path from "path";
 
@@ -12,16 +12,16 @@ import {
   Mock,
 } from "bun:test";
 
-import { QueryClient } from "@sortql/core";
+import { Client } from "@sortql/core";
 
 const directory = path.join(process.cwd(), "./tests/mock-directory");
 
 describe("File Operations", () => {
-  let client: QueryClient;
+  let client: Client;
   let spy: Mock<any>;
 
   beforeEach(async () => {
-    client = new QueryClient(directory);
+    client = new Client(directory);
     spy = spyOn(console, "log");
 
     if (!(await doesExist(directory, ""))) {
@@ -43,7 +43,7 @@ describe("File Operations", () => {
     await createFile(directory, testFile);
 
     // Act
-    await client.run(`SELECT files FROM ''`);
+    await client.run(`SELECT 'files' FROM ''`);
 
     // Assert
     expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 1"));
@@ -55,7 +55,7 @@ describe("File Operations", () => {
     await createFile(directory, testFile);
 
     // Act
-    await client.run(`DELETE files FROM ''`);
+    await client.run(`DELETE 'files' FROM ''`);
 
     // Assert
     expect(await doesExist(directory, testFile)).toBe(false);
@@ -67,7 +67,7 @@ describe("File Operations", () => {
     await createFile(directory, testFile);
 
     // Act
-    await client.run(`MOVE files FROM '' TO 'moved'`);
+    await client.run(`MOVE 'files' FROM '' TO 'moved'`);
 
     // Assert
     expect(await doesExist(directory, testFile)).toBe(false);
@@ -80,7 +80,7 @@ describe("File Operations", () => {
     await createFile(directory, testFile);
 
     // Act
-    await client.run(`COPY files FROM '' TO 'copied'`);
+    await client.run(`COPY 'files' FROM '' TO 'copied'`);
 
     // Assert
     expect(await doesExist(directory, testFile)).toBe(true);
@@ -93,7 +93,7 @@ describe("File Operations", () => {
     await createFile(directory, testFile);
 
     // Act
-    await client.run(`ARCHIVE files FROM '' TO 'archive.zip'`);
+    await client.run(`ARCHIVE 'files' FROM '' TO 'archive.zip'`);
 
     // Assert
     expect(await doesExist(directory, "archive.zip")).toBe(true);
@@ -104,10 +104,10 @@ describe("File Operations", () => {
     const testFile = "test.txt";
     await createFile(directory, testFile);
 
-    await client.run(`ARCHIVE files FROM '' TO 'archive.zip'`);
+    await client.run(`ARCHIVE 'files' FROM '' TO 'archive.zip'`);
 
     // Act
-    await client.run(`UNARCHIVE files FROM '' TO 'unarchived'`);
+    await client.run(`UNARCHIVE 'files' FROM '' TO 'unarchived'`);
 
     // Assert
     expect(await doesExist(directory, "unarchived")).toBe(true);
@@ -115,11 +115,11 @@ describe("File Operations", () => {
 });
 
 describe("Folder Operations", () => {
-  let client: QueryClient;
+  let client: Client;
   let spy: Mock<any>;
 
   beforeEach(async () => {
-    client = new QueryClient(directory);
+    client = new Client(directory);
     spy = spyOn(console, "log");
 
     if (!(await doesExist(directory, ""))) {
@@ -142,7 +142,7 @@ describe("Folder Operations", () => {
     await createFile(directory, `${testFolder}/test.txt`);
 
     // Act
-    await client.run(`SELECT folders FROM ''`);
+    await client.run(`SELECT 'folders' FROM ''`);
 
     // Assert
     expect(await doesExist(directory, testFolder)).toBe(true);
@@ -157,7 +157,7 @@ describe("Folder Operations", () => {
     await createFile(directory, `${testFolder}/test.txt`);
 
     // Act
-    await client.run(`DELETE folders FROM ''`);
+    await client.run(`DELETE 'folders' FROM ''`);
 
     // Assert
     expect(await doesExist(directory, testFolder)).toBe(false);
@@ -172,7 +172,7 @@ describe("Folder Operations", () => {
     await createFile(directory, `${testFolder}/test.txt`);
 
     // Act
-    await client.run(`MOVE folders FROM '' TO 'moved'`);
+    await client.run(`MOVE 'folders' FROM '' TO 'moved'`);
 
     // Assert
     expect(await doesExist(directory, testFolder)).toBe(false);
@@ -188,7 +188,7 @@ describe("Folder Operations", () => {
     await createFile(directory, `${testFolder}/test.txt`);
 
     // Act
-    await client.run(`COPY folders FROM '' TO 'copied'`);
+    await client.run(`COPY 'folders' FROM '' TO 'copied'`);
 
     // Assert
     expect(await doesExist(directory, testFolder)).toBe(true);
@@ -205,7 +205,7 @@ describe("Folder Operations", () => {
     await createFolder(directory, testFolder);
 
     // Act
-    await client.run(`ARCHIVE folders FROM '' TO 'archive.zip'`);
+    await client.run(`ARCHIVE 'folders' FROM '' TO 'archive.zip'`);
 
     // Assert
     expect(await doesExist(directory, "archive.zip")).toBe(true);

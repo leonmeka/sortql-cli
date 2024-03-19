@@ -1,25 +1,19 @@
 import chalk from "chalk";
 import path from "path";
 
-import { Query } from "@sortql/core/queries";
-import { Target } from "@sortql/core/parsers";
-import { LogicalCondition } from "@sortql/core/filter";
+import { Query } from "@sortql/core/engine/queries";
+import { SelectStatement } from "@sortql/core/parser/types";
 
 export class SelectQuery extends Query {
-  constructor(
-    directory: string,
-    target: Target,
-    from: string,
-    where?: LogicalCondition
-  ) {
-    super(directory, target, from, where);
+  constructor(directory: string, public statement: SelectStatement) {
+    super(directory);
     this.validate();
   }
 
   validate() {}
 
   async execute() {
-    const results = await this.filter.apply(this);
+    const results = await this.filter.apply(this.statement);
 
     const hasResults = results.length > 0;
     const relativeResults = results.map(

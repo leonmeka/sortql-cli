@@ -1,40 +1,32 @@
 import chalk from "chalk";
 
-import { QueryParser } from "@sortql/core/parsers";
+import { Parser } from "@sortql/core/parser";
+import { Engine } from "@sortql/core/engine";
 
-const QUERY_COMMENT_PREFIX = "--";
+export type Target = "files" | "folders";
 
-export class QueryClient {
+export class Client {
   directory: string;
-  queryParser: QueryParser;
+  parser: Parser;
+  engine: Engine;
 
   constructor(directory: string) {
     this.directory = directory;
-    this.queryParser = new QueryParser(directory);
+    this.parser = new Parser(directory);
+    this.engine = new Engine();
   }
 
   async run(content: string) {
-    const queries = content
-      .split("\n")
-      .map((line) => line.trim())
-      .filter((line) => line && !line.startsWith(QUERY_COMMENT_PREFIX));
+    try {
+      console.log(chalk.blue(`→ Parsing queries...`));
+      const parsed = this.parser.parse(content);
+      console.log(chalk.green(`✓ Queries parsed successfully!`));
 
-    console.log(chalk.blue(`→ Running ${queries.length} queries...`));
-
-    for (const query of queries) {
-      const tokens = this.tokenize(query);
-      const parsedQuery = this.queryParser.parse(tokens);
-      if (parsedQuery) await parsedQuery.execute();
+      console.log(chalk.blue(`→ Executing queries...`));
+      await this.engine.execute(parsed);
+      console.log(chalk.green(`✓ Queries executed successfully!`));
+    } catch (e: any) {
+      console.log(chalk.red(`✗ Error: ${e.message}`));
     }
-  }
-
-  tokenize(query: string): string[] {
-    return (
-      query
-        .match(/'[^']*'|"[^"]*"|\S+/g)
-        ?.map((token) =>
-          token[0] === `'` || token[0] === `"` ? token.slice(1, -1) : token
-        ) || []
-    );
   }
 }

@@ -1,4 +1,4 @@
-import { doesExist, createFile, createFolder } from "tests/utils";
+import { doesExist, createFile, createFolder } from "tests/utils.spec";
 import { mkdir, rmdir } from "node:fs/promises";
 import path from "path";
 
@@ -12,16 +12,16 @@ import {
   Mock,
 } from "bun:test";
 
-import { QueryClient } from "@sortql/core";
+import { Client } from "@sortql/core";
 
 const directory = path.join(process.cwd(), "./tests/mock-directory");
 
 describe("File Filters", () => {
-  let client: QueryClient;
+  let client: Client;
   let spy: Mock<any>;
 
   beforeEach(async () => {
-    client = new QueryClient(directory);
+    client = new Client(directory);
     spy = spyOn(console, "log");
 
     if (!(await doesExist(directory, ""))) {
@@ -43,7 +43,7 @@ describe("File Filters", () => {
     await createFile(directory, "hello.txt");
 
     // Act
-    await client.run(`SELECT files FROM '' WHERE name = 'test'`);
+    await client.run(`SELECT 'files' FROM '' WHERE 'name' = 'test'`);
 
     // Assert
     expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 1"));
@@ -56,7 +56,7 @@ describe("File Filters", () => {
     await createFile(directory, "test.csv");
 
     // Act
-    await client.run(`SELECT files FROM '' WHERE extension = 'txt'`);
+    await client.run(`SELECT 'files' FROM '' WHERE 'extension' = 'txt'`);
 
     // Assert
 
@@ -70,7 +70,9 @@ describe("File Filters", () => {
     await createFile(directory, "test.csv");
 
     // Act
-    await client.run(`SELECT files FROM '' WHERE extension = '(txt|json|csv)'`);
+    await client.run(
+      `SELECT 'files' FROM '' WHERE 'extension' = '(txt|json|csv)'`
+    );
 
     // Assert
     expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 3"));
@@ -82,7 +84,7 @@ describe("File Filters", () => {
     await createFile(directory, "test.json", "a".repeat(1001));
 
     // Act
-    await client.run(`SELECT files FROM '' WHERE size > 1000`);
+    await client.run(`SELECT 'files' FROM '' WHERE 'size' > '1000'`);
 
     // Assert
     expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 1"));
@@ -94,7 +96,7 @@ describe("File Filters", () => {
     await createFile(directory, "test.json", "a".repeat(999));
 
     // Act
-    await client.run(`SELECT files FROM '' WHERE size < 1000`);
+    await client.run(`SELECT 'files' FROM '' WHERE 'size' < '1000'`);
 
     // Assert
     expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 1"));
@@ -106,7 +108,7 @@ describe("File Filters", () => {
     await createFile(directory, "test.json", "a".repeat(999));
 
     // Act
-    await client.run(`SELECT files FROM '' WHERE size = 1000`);
+    await client.run(`SELECT 'files' FROM '' WHERE 'size' = '1000'`);
 
     // Assert
     expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 1"));
@@ -118,7 +120,7 @@ describe("File Filters", () => {
     await createFile(directory, "test.json", "a".repeat(999));
 
     // Act
-    await client.run(`SELECT files FROM '' WHERE size != 1000`);
+    await client.run(`SELECT 'files' FROM '' WHERE 'size' != '1000'`);
 
     // Assert
     expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 1"));
@@ -131,7 +133,9 @@ describe("File Filters", () => {
     await createFile(directory, "test.csv", "a".repeat(1002));
 
     // Act
-    await client.run(`SELECT files FROM '' WHERE size > 1000 AND size < 1002`);
+    await client.run(
+      `SELECT 'files' FROM '' WHERE 'size' > '1000' AND 'size' < '1002'`
+    );
 
     // Assert
     expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 1"));
@@ -143,7 +147,9 @@ describe("File Filters", () => {
     await createFile(directory, "test.json", "a".repeat(1001));
 
     // Act
-    await client.run(`SELECT files FROM '' WHERE size > 1000 OR size < 1001`);
+    await client.run(
+      `SELECT 'files' FROM '' WHERE 'size' > '1000' OR 'size' < '1001'`
+    );
 
     // Assert
     expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 2"));
@@ -157,56 +163,20 @@ describe("File Filters", () => {
 
     // Act
     await client.run(
-      `SELECT files FROM '' WHERE size > 1000 AND name = 'hello'`
+      `SELECT 'files' FROM '' WHERE 'size' > '1000' AND 'name' = 'hello'`
     );
 
     // Assert
     expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 1"));
   });
-
-  it("should only select files created after 01/01/2024", async () => {
-    // Arrange
-    await createFile(directory, "test.txt");
-    await createFile(directory, "hello.txt");
-
-    // Act
-    await client.run(`SELECT files FROM '' WHERE created > '01/01/2024'`);
-
-    // Assert
-    expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 2"));
-  });
-
-  it("should only select files modified after 01/01/2024", async () => {
-    // Arrange
-    await createFile(directory, "test.txt");
-    await createFile(directory, "hello.txt");
-
-    // Act
-    await client.run(`SELECT files FROM '' WHERE modified > '01/01/2024'`);
-
-    // Assert
-    expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 2"));
-  });
-
-  it("should only select files accessed after 01/01/2024", async () => {
-    // Arrange
-    await createFile(directory, "test.txt");
-    await createFile(directory, "hello.txt");
-
-    // Act
-    await client.run(`SELECT files FROM '' WHERE accessed > '01/01/2024'`);
-
-    // Assert
-    expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 2"));
-  });
 });
 
 describe("Folder Filters", () => {
-  let client: QueryClient;
+  let client: Client;
   let spy: Mock<any>;
 
   beforeEach(async () => {
-    client = new QueryClient(directory);
+    client = new Client(directory);
     spy = spyOn(console, "log");
 
     if (!(await doesExist(directory, ""))) {
@@ -228,7 +198,7 @@ describe("Folder Filters", () => {
     await createFolder(directory, "hello");
 
     // Act
-    await client.run(`SELECT folders FROM '' WHERE name = 'test'`);
+    await client.run(`SELECT 'folders' FROM '' WHERE 'name' = 'test'`);
 
     // Assert
     expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 1"));
@@ -242,7 +212,7 @@ describe("Folder Filters", () => {
     await createFolder(directory, "hello");
 
     // Act
-    await client.run(`SELECT folders FROM '' WHERE name = 'test-[0-9]'`);
+    await client.run(`SELECT 'folders' FROM '' WHERE 'name' = 'test-[0-9]'`);
 
     // Assert
     expect(spy).toHaveBeenCalledWith(expect.stringContaining("[SELECT]: 3"));

@@ -5,12 +5,17 @@ import { promises as fs } from "node:fs";
 
 import { VERSION, GITHUB_URL, CONFIG_PATH } from "@sortql/cli";
 
+function clearConsole() {
+  process.stdout.write("\u001b[3J\u001b[1J");
+  console.clear();
+}
+
 export function printHeader(config?: {
   directory: string;
   queries: string;
   watch: boolean;
 }) {
-  console.clear();
+  clearConsole();
 
   const boxenOptions = {
     padding: 1,
