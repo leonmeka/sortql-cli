@@ -17,7 +17,7 @@ export const createImage = async (directory: string, name: string) => {
 
 export const createVideo = async (directory: string, name: string) => {
   const video = await fetch(
-    "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+    "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4"
   );
   const buffer = await video.arrayBuffer();
   const file = new Uint8Array(buffer);

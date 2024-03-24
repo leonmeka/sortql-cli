@@ -136,7 +136,7 @@ describe("File Operations", () => {
 
   it("should convert an audio file", async () => {
     // Arrange
-    await createVideo(directory, "test.mp3");
+    await createAudio(directory, "test.mp3");
 
     // Act
     await client.run(
@@ -150,16 +150,16 @@ describe("File Operations", () => {
 
   it("should convert a video file", async () => {
     // Arrange
-    await createAudio(directory, "test.mp4");
+    await createVideo(directory, "test.mp4");
 
     // Act
     await client.run(
-      `CONVERT 'files' FROM '' WHERE 'extension' = 'mp4' TO 'webm'`
+      `CONVERT 'files' FROM '' WHERE 'extension' = 'mp4' TO 'mov'`
     );
 
     // Assert
     expect(await doesExist(directory, "test.mp4")).toBe(true);
-    expect(await doesExist(directory, "test.webm")).toBe(true);
+    expect(await doesExist(directory, "test.mov")).toBe(true);
   });
 });
 
