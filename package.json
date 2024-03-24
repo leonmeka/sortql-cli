@@ -11,7 +11,7 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@types/fluent-ffmpeg": "^2.1.24",
+    "@ffmpeg-installer/ffmpeg": "^1.1.0",
     "adm-zip": "^0.5.12",
     "archiver": "^7.0.1",
     "boxen": "^7.1.1",
@@ -23,6 +23,7 @@
     "sharp": "^0.33.3"
   },
   "devDependencies": {
+    "@types/fluent-ffmpeg": "^2.1.24",
     "@types/adm-zip": "^0.5.5",
     "@types/bun": "latest",
     "@types/archiver": "^6.0.2",
