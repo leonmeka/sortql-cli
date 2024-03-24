@@ -13,7 +13,7 @@ export class ArchiveOperation extends Operation {
     this.validate();
   }
 
-  async validate() {
+  validate() {
     const { from, to } = this.statement as ArchiveStatement;
 
     if (path.extname(to.value) === "") {

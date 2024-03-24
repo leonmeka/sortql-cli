@@ -45,13 +45,16 @@ export interface ArchiveStatement extends StatementWithTo {}
 
 export interface UnarchiveStatement extends StatementWithTo {}
 
+export interface ConvertStatement extends StatementWithTo {}
+
 export type Statement =
   | SelectStatement
   | DeleteStatement
   | MoveStatement
   | CopyStatement
   | ArchiveStatement
-  | UnarchiveStatement;
+  | UnarchiveStatement
+  | ConvertStatement;
 
 export interface Query extends ASTNode {
   directory: string;

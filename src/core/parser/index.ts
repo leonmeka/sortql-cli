@@ -3,6 +3,7 @@ import {
   ASTNode,
   ArchiveStatement,
   BinaryExpression,
+  ConvertStatement,
   CopyStatement,
   DeleteStatement,
   Expression,
@@ -74,6 +75,9 @@ export class Parser {
           break;
         case "UNARCHIVE":
           query.statements.push(this.UnarchiveStatement());
+          break;
+        case "CONVERT":
+          query.statements.push(this.ConvertStatement());
           break;
         case "SEMICOLON":
           this.consume("SEMICOLON");
@@ -149,6 +153,18 @@ export class Parser {
 
     return {
       type: "UnarchiveStatement",
+      target: this.StringLiteral(),
+      from: this.FromClause(),
+      where: this.WhereClause(),
+      to: this.ToClause(),
+    };
+  }
+
+  private ConvertStatement(): ConvertStatement {
+    this.consume("CONVERT");
+
+    return {
+      type: "ConvertStatement",
       target: this.StringLiteral(),
       from: this.FromClause(),
       where: this.WhereClause(),

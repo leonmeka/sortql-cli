@@ -16,6 +16,7 @@ const spec = new Spec([
   { pattern: /^\bCOPY\b/, type: "COPY" },
   { pattern: /^\bARCHIVE\b/, type: "ARCHIVE" },
   { pattern: /^\bUNARCHIVE\b/, type: "UNARCHIVE" },
+  { pattern: /^\bCONVERT\b/, type: "CONVERT" },
 
   // REQUIRED KEYWORDS: FROM, WHERE
   { pattern: /^\bFROM\b/, type: "FROM" },

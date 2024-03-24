@@ -76,6 +76,10 @@ Operations are divided into two categories: **file** operations and **folder** o
   ```sql
   UNARCHIVE 'files' FROM '' TO 'unarchived'
   ```
+- CONVERT: Converts files to a different format based on specific conditions. (Supported files: image, audio, video)
+  ```sql
+  CONVERT 'files' FROM '' TO 'jpg'
+  ```
 
 #### Folder Operations
 
@@ -403,4 +407,13 @@ You have a directory with several subfolders and want to copy all folders that c
 ```sql
 -- Copy folders based on name
 COPY 'folders' FROM '' WHERE 'name' LIKE '*project*' TO 'old-projects'
+```
+
+### Example 5: Converting MOV Files to MP4
+
+You have a shared directory between Windows and Mac, and you want to convert all MOV files to MP4 for better compatibility:
+
+```sql
+-- Convert MOV files to MP4
+CONVERT 'files' FROM 'shared' WHERE 'extension' = 'mov' TO 'mp4'
 ```

@@ -23,8 +23,8 @@ async function runQueries(client: Client, queries: string) {
   try {
     const content = Bun.file(queries);
     await client.run(await content.text());
-  } catch (error) {
-    console.error(chalk.red("Error running queries:"), error);
+  } catch (error: any) {
+    console.error(chalk.red("Error running queries:"), error.message);
   } finally {
     isBlocked = false;
   }

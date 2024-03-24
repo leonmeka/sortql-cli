@@ -1,4 +1,11 @@
-import { doesExist, createFile, createFolder } from "tests/utils.spec";
+import {
+  doesExist,
+  createFile,
+  createFolder,
+  createImage,
+  createAudio,
+  createVideo,
+} from "tests/utils";
 import { mkdir, rmdir } from "node:fs/promises";
 import path from "path";
 
@@ -111,6 +118,48 @@ describe("File Operations", () => {
 
     // Assert
     expect(await doesExist(directory, "unarchived")).toBe(true);
+  });
+
+  it("should convert an image file", async () => {
+    // Arrange
+    await createImage(directory, "test.jpg");
+
+    // Act
+    await client.run(
+      `CONVERT 'files' FROM '' WHERE 'extension' = 'jpg' TO 'png'`
+    );
+
+    // Assert
+    expect(await doesExist(directory, "test.jpg")).toBe(true);
+    expect(await doesExist(directory, "test.png")).toBe(true);
+  });
+
+  it("should convert an audio file", async () => {
+    // Arrange
+    await createVideo(directory, "test.mp3");
+
+    // Act
+    await client.run(
+      `CONVERT 'files' FROM '' WHERE 'extension' = 'mp3' TO 'wav'`
+    );
+
+    // Assert
+    expect(await doesExist(directory, "test.mp3")).toBe(true);
+    expect(await doesExist(directory, "test.wav")).toBe(true);
+  });
+
+  it("should convert a video file", async () => {
+    // Arrange
+    await createAudio(directory, "test.mp4");
+
+    // Act
+    await client.run(
+      `CONVERT 'files' FROM '' WHERE 'extension' = 'mp4' TO 'webm'`
+    );
+
+    // Assert
+    expect(await doesExist(directory, "test.mp4")).toBe(true);
+    expect(await doesExist(directory, "test.webm")).toBe(true);
   });
 });
 

@@ -17,16 +17,12 @@ export class Client {
   }
 
   async run(content: string) {
-    try {
-      console.log(chalk.blue(`→ Parsing queries...`));
-      const parsed = this.parser.parse(content);
-      console.log(chalk.green(`✓ Queries parsed successfully!`));
+    console.log(chalk.blue(`→ Parsing queries...`));
+    const parsed = this.parser.parse(content);
+    console.log(chalk.green(`✓ Queries parsed successfully!`));
 
-      console.log(chalk.blue(`→ Executing queries...`));
-      await this.engine.execute(parsed);
-      console.log(chalk.green(`✓ Queries executed successfully!`));
-    } catch (e: any) {
-      console.log(chalk.red(`✗ Error: ${e.message}`));
-    }
+    console.log(chalk.blue(`→ Executing queries...`));
+    await this.engine.execute(parsed);
+    console.log(chalk.green(`✓ Queries executed successfully!`));
   }
 }

@@ -6,6 +6,7 @@ import { MoveOperation } from "@sortql/core/engine/operations/move";
 import { ArchiveOperation } from "@sortql/core/engine/operations/archive";
 import { CopyOperation } from "@sortql/core/engine/operations/copy";
 import { UnarchiveOperation } from "@sortql/core/engine/operations/unarchive";
+import { ConvertOperation } from "@sortql/core/engine/operations/convert";
 
 export class Engine {
   private _query: Query | null;
@@ -45,6 +46,9 @@ export class Engine {
         break;
       case "UnarchiveStatement":
         await new UnarchiveOperation(directory, statement).execute();
+        break;
+      case "ConvertStatement":
+        await new ConvertOperation(directory, statement).execute();
         break;
       default:
         break;
