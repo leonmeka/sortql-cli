@@ -74,7 +74,7 @@ We're using bun's built-in test runner for testing core functionality. To run th
 bun run test
 ```
 
-This will run all tests (*.spec.ts files) and prints the overall test coverage across the codebase. We aim for 100% coverage here.
+This will run all tests (\*.spec.ts files) and prints the overall test coverage across the codebase. We aim for 100% coverage here.
 
 ## Building
 
