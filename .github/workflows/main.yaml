@@ -3,11 +3,11 @@ name: CI/CD
 on: [push, pull_request]
 
 jobs:
-  dependencies:
+  prepare:
     name: Install Dependencies 📦
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+     - uses: actions/checkout@v2
       - name: Install ffmpeg (Ubuntu)
         if: runner.os == 'Linux'
         run: sudo apt-get install ffmpeg
@@ -16,12 +16,15 @@ jobs:
         run: choco install ffmpeg
       - name: Verify ffmpeg installation
         run: ffmpeg -version
-      - uses: oven-sh/setup-bun@v1
-      - name: Install dependencies
-        run: bun install
+
   test:
     name: Run Tests 🧪
     runs-on: ubuntu-latest
+    needs: prepare
     steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v1
+      - name: Install dependencies
+        run: bun install
       - name: Run tests
         run: bun test
