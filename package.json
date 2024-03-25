@@ -36,6 +36,7 @@
     "jest": "^29.7.0",
     "jest-esbuild": "^0.3.0",
     "ts-jest": "^29.1.2",
+    "ts-node": "^10.9.2",
     "typescript": "^5.4.3"
   },
   "peerDependencies": {
