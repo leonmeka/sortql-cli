@@ -144,7 +144,7 @@ Addtionally, you can specify if you want to watch for changes. This will automat
 ```
 
 > [!NOTE]
-> Once you press enter, **sortQL** will save your configuration in `~/.sortql`. This will allow you to run **sortQL** without having to specify the path to the queries.sql file and the directory every time you run it. To change the configuration, simply run `npx sortql --config`.
+> Once you press enter, **sortQL** will save your configuration in `~/.sortql`. This will allow you to run **sortQL** without having to specify the path to the queries.sql file and the directory every time you run it. To change the configuration, simply run `npx @sortql/sortql-cli@latest --config`.
 
 After saving the configuration, **sortQL** will start running the queries and display the results in the terminal.
 
