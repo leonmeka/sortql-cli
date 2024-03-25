@@ -1,5 +1,6 @@
 import { parse } from "path";
-import { stat } from "node:fs/promises";
+
+import { stat, readFile } from "node:fs/promises";
 
 import { BinaryExpression, Expression } from "@sortql/core/parser/types";
 import { Properties, PropertyKey } from "@sortql/core/engine/evaluator/types";
@@ -49,7 +50,7 @@ export class Evaluator {
       name: parse(path).name,
       extension: parse(path).ext.slice(1),
       size: stats.size,
-      content: stats.isFile() ? await Bun.file(path).text() : "",
+      content: stats.isFile() ? (await readFile(path)).toString() : "",
       created: stats.birthtimeMs === 0 ? stats.ctime : stats.birthtime,
       modified: stats.mtime,
       accessed: stats.atime,

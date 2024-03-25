@@ -84,18 +84,6 @@ Before you begin, ensure you have installed Node.js:
 
 - [Node.js](https://nodejs.org/en/download/)
 
-This project also depends on the bun runtime. You can install it by running the following command:
-
-### Bun Installation
-
-```bash
-if [[ "$OSTYPE" == "linux-gnu"* || "$OSTYPE" == "darwin"* ]]; then
-    curl -fsSL https://bun.sh/install | bash
-elif [[ "$OSTYPE" == "msys"* || "$OSTYPE" == "cygwin"* || "$OSTYPE" == "win32" ]]; then
-    powershell.exe -Command "irm bun.sh/install.ps1|iex"
-fi
-```
-
 ## Usage
 
 ### 1. Create a queries.sql file

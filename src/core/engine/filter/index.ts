@@ -1,5 +1,7 @@
 import path from "path";
-import { readdir, exists } from "node:fs/promises";
+
+import { readdir } from "node:fs/promises";
+import { existsSync } from "node:fs";
 
 import { Statement } from "@sortql/core/parser/types";
 import { Evaluator } from "@sortql/core/engine/evaluator";
@@ -16,7 +18,7 @@ export class Filter {
 
     const directory = path.join(this.directory, from.value);
 
-    if (!(await exists(directory))) {
+    if (!existsSync(directory)) {
       throw new Error(`Directory does not exist: ${directory}`);
     }
 

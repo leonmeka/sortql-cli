@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
-    "target": "es2022",
-    "module": "es2022",
+    "module": "ESNext",
+    "target": "ESNext",
+
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "moduleResolution": "node",
@@ -9,9 +10,11 @@
     "skipLibCheck": true,
     "outDir": "dist",
     "rootDir": ".",
+
     "baseUrl": ".",
     "paths": {
-      "@sortql/*": ["src/*"]
+      "@sortql/*": ["src/*"],
+      "@tests/*": ["tests/*"]
     }
   }
 }
