@@ -7,7 +7,9 @@ import { Client } from "@sortql/core";
 import { printHeader } from "@sortql/cli/dialogue";
 import { checkConfig } from "@sortql/cli/config";
 
-export const VERSION = "1.2.0";
+import { readFile } from "node:fs/promises";
+
+export const VERSION = "1.3.0";
 export const GITHUB_URL = "https://github.com/leonmeka/sortql";
 export const CONFIG_PATH = path.join(homedir(), ".sortql");
 
@@ -21,8 +23,8 @@ async function runQueries(client: Client, queries: string) {
   isBlocked = true;
 
   try {
-    const content = Bun.file(queries);
-    await client.run(await content.text());
+    const content = await readFile(queries);
+    await client.run(content.toString());
   } catch (error: any) {
     console.error(chalk.red("Error running queries:"), error.message);
   } finally {

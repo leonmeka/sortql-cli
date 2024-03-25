@@ -80,39 +80,9 @@ For more information on how to use **sortQL**, please refer to the [documentatio
 
 ## Prerequisites
 
-Before you begin, ensure you have installed Node.js:
+Before you begin, ensure you have installed Node.js (<= v.20.11.1 TLS) on your machine. You can download the latest version from the official website:
 
-- [Node.js](https://nodejs.org/en/download/)
-
-This project also depends on the bun runtime. You can install it by running the following command:
-
-### MacOS and Linux
-
-```bash
-curl -fsSL https://bun.sh/install | bash
-```
-
-### Windows
-
-```bash
-powershell -c "irm bun.sh/install.ps1|iex"
-```
-
-## Installation
-
-To install **sortQL**, run the following command:
-
-```bash
-npm install -g npx @sortql/sortql-cli
-```
-
-## Upgrading
-
-In case you already have **sortQL** installed, you can upgrade to the latest version with:
-
-```bash
-npm upgrade -g @sortql/sortql-cli
-```
+- [Node.js](https://nodejs.org/en/download)
 
 ## Usage
 
@@ -134,7 +104,7 @@ SELECT 'files' FROM ''
 Now that you have the queries.sql file, you can run **sortQL** from the terminal. Simply run the following command:
 
 ```bash
-npx sortql
+npx @sortql/sortql-cli@latest
 ```
 
 ### 3. Where do you want to run the queries?
@@ -162,7 +132,7 @@ Addtionally, you can specify if you want to watch for changes. This will automat
 ```
 
 > [!NOTE]
-> Once you press enter, **sortQL** will save your configuration in `~/.sortql`. This will allow you to run **sortQL** without having to specify the path to the queries.sql file and the directory every time you run it. To change the configuration, simply run `npx sortql --config`.
+> Once you press enter, **sortQL** will save your configuration in `~/.sortql`. This will allow you to run **sortQL** without having to specify the path to the queries.sql file and the directory every time you run it. To change the configuration, simply run `npx @sortql/sortql-cli@latest --config`.
 
 After saving the configuration, **sortQL** will start running the queries and display the results in the terminal.
 

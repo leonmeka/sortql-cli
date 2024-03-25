@@ -1,6 +1,7 @@
 import chalk from "chalk";
 import path from "path";
 
+import { writeFile, readFile } from "node:fs/promises";
 import { access } from "node:fs/promises";
 
 import { CONFIG_PATH } from "@sortql/cli";
@@ -19,7 +20,7 @@ async function updateConfig(filePath: string) {
 
   const config = { directory, queries, watch };
 
-  await Bun.write(filePath, JSON.stringify(config, null, 2));
+  await writeFile(filePath, JSON.stringify(config, null, 2));
 
   console.log(chalk.green("→ Created new .sortql config! \n"));
 
@@ -35,7 +36,7 @@ export async function checkConfig() {
     console.log(chalk.blue("→ Checking for .sortql config file..."));
 
     await access(CONFIG_PATH);
-    const config = JSON.parse(await Bun.file(CONFIG_PATH).text());
+    const config = JSON.parse((await readFile(CONFIG_PATH)).toString());
 
     console.log(
       chalk.green(`→ Found .sortql config file in ${CONFIG_PATH} \n`)
