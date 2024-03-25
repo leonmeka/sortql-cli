@@ -13,7 +13,7 @@ This documentation provides a detailed overview of the query syntax, supported o
       1. [File Properties](#file-properties)
       2. [Folder Properties](#folder-properties)
 3. [Advanced Usage](#advanced-usage)
-   1. [Conditional Operators](#conditional-operators)
+   1. [Comparative Operators](#comparative-operators)
    2. [Logical Operators](#logical-operators)
    3. [Regular Expressions](#regular-expressions)
 4. [Tips and Tricks](#helpful-tips)
@@ -52,54 +52,54 @@ Operations are divided into two categories: **file** operations and **folder** o
 
 #### File Operations
 
-- SELECT: Selects files based on specific conditions:
+- SELECT: Selects files.
   ```sql
   SELECT 'files' FROM ''
   ```
-- MOVE: Moves files to a different location based on specific conditions.
+- MOVE: Moves files to a different location.
   ```sql
   MOVE 'files' FROM '' TO 'text-files'
   ```
-- COPY: Copies files to a different location based on specific conditions.
+- COPY: Copies files to a different location.
   ```sql
   COPY 'files' FROM '' TO 'backup'
   ```
-- DELETE: Deletes files based on specific conditions.
+- DELETE: Deletes files.
   ```sql
   DELETE 'files' FROM ''
   ```
-- ARCHIVE: Archives files to a zip file based on specific conditions.
+- ARCHIVE: Archives files to a zip file.
   ```sql
   ARCHIVE 'files' FROM '' TO 'archive.zip'
   ```
-- UNARCHIVE: Unarchives files to a different location based on specific conditions.
+- UNARCHIVE: Unarchives files to a different location.
   ```sql
   UNARCHIVE 'files' FROM '' TO 'unarchived'
   ```
-- CONVERT: Converts files to a different format based on specific conditions. (Supported files: image, audio, video)
+- CONVERT: Converts files to a different format. (Supported files: image, audio, video)
   ```sql
   CONVERT 'files' FROM '' TO 'jpg'
   ```
 
 #### Folder Operations
 
-- SELECT: Selects folders based on specific conditions.
+- SELECT: Selects folders.
   ```sql
   SELECT 'folders' FROM ''
   ```
-- MOVE: Moves folders to a different location based on specific conditions.
+- MOVE: Moves folders to a different location.
   ```sql
   MOVE 'folders' FROM '' TO 'projects'
   ```
-- COPY: Copies folders to a different location based on specific conditions.
+- COPY: Copies folders to a different location.
   ```sql
   COPY 'folders' FROM '' TO 'backup'
   ```
-- DELETE: Deletes folders based on specific conditions.
+- DELETE: Deletes folders.
   ```sql
   DELETE 'folders' FROM ''
   ```
-- ARCHIVE: Archives folders to a zip file based on specific conditions.
+- ARCHIVE: Archives folders to a zip file.
   ```sql
   ARCHIVE 'folders' FROM '' TO 'archive.zip'
   ```
@@ -301,11 +301,11 @@ SELECT 'folders' FROM '' WHERE 'accessed' < '01.01.2021'
 
 ## Advanced Usage
 
-**sortQL** supports advanced features such as conditional operators and regular expressions to provide more flexibility and control over file and folder operations.
+**sortQL** supports advanced features such as comparative operators and regular expressions to provide more flexibility and control over file and folder operations.
 
-### Conditional Operators
+### Comparative Operators
 
-**sortQL** supports the following conditional operators:
+**sortQL** supports the following comparative operators:
 
 - **LIKE**: Similar to SQL's **LIKE** operator, it allows you to match properties with regex patterns.
 - **=**: Equal to.
@@ -315,7 +315,7 @@ SELECT 'folders' FROM '' WHERE 'accessed' < '01.01.2021'
 - **>=**: Greater than or equal to.
 - **<=**: Less than or equal to.
 
-You can use these operators to compare properties with specific values. Below are some examples of using conditional operators:
+You can use these operators to compare properties with specific values. Below are some examples of using comparative operators:
 
 ```sql
 -- Select files with file size greater than 100000 bytes (= 100KB)

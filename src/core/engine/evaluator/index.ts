@@ -2,18 +2,7 @@ import { parse } from "path";
 import { stat } from "node:fs/promises";
 
 import { BinaryExpression, Expression } from "@sortql/core/parser/types";
-
-interface Properties {
-  name: string;
-  extension: string;
-  size: number;
-  content: string;
-  created: Date;
-  modified: Date;
-  accessed: Date;
-}
-
-export type PropertyKey = keyof Properties;
+import { Properties, PropertyKey } from "@sortql/core/engine/evaluator/types";
 
 export class Evaluator {
   static async evaluate(
