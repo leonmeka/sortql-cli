@@ -86,32 +86,14 @@ Before you begin, ensure you have installed Node.js:
 
 This project also depends on the bun runtime. You can install it by running the following command:
 
-### MacOS and Linux
+### Bun Installation
 
 ```bash
-curl -fsSL https://bun.sh/install | bash
-```
-
-### Windows
-
-```bash
-powershell -c "irm bun.sh/install.ps1|iex"
-```
-
-## Installation
-
-To install **sortQL**, run the following command:
-
-```bash
-npm install -g npx @sortql/sortql-cli
-```
-
-## Upgrading
-
-In case you already have **sortQL** installed, you can upgrade to the latest version with:
-
-```bash
-npm upgrade -g @sortql/sortql-cli
+if [[ "$OSTYPE" == "linux-gnu"* || "$OSTYPE" == "darwin"* ]]; then
+    curl -fsSL https://bun.sh/install | bash
+elif [[ "$OSTYPE" == "msys"* || "$OSTYPE" == "cygwin"* || "$OSTYPE" == "win32" ]]; then
+    powershell.exe -Command "irm bun.sh/install.ps1|iex"
+fi
 ```
 
 ## Usage
@@ -134,7 +116,7 @@ SELECT 'files' FROM ''
 Now that you have the queries.sql file, you can run **sortQL** from the terminal. Simply run the following command:
 
 ```bash
-npx sortql
+npx @sortql/sortql-cli@latest
 ```
 
 ### 3. Where do you want to run the queries?
