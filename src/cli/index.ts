@@ -7,7 +7,7 @@ import { Client } from "@sortql/core";
 import { printHeader } from "@sortql/cli/dialogue";
 import { checkConfig } from "@sortql/cli/config";
 
-export const VERSION = "1.1.4";
+export const VERSION = "1.2.0";
 export const GITHUB_URL = "https://github.com/leonmeka/sortql";
 export const CONFIG_PATH = path.join(homedir(), ".sortql");
 
