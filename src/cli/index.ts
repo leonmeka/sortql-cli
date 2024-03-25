@@ -9,7 +9,7 @@ import { checkConfig } from "@sortql/cli/config";
 
 import { readFile } from "node:fs/promises";
 
-export const VERSION = "1.2.0";
+export const VERSION = "1.2.1";
 export const GITHUB_URL = "https://github.com/leonmeka/sortql";
 export const CONFIG_PATH = path.join(homedir(), ".sortql");
 

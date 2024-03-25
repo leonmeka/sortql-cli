@@ -80,9 +80,9 @@ For more information on how to use **sortQL**, please refer to the [documentatio
 
 ## Prerequisites
 
-Before you begin, ensure you have installed Node.js:
+Before you begin, ensure you have installed Node.js (<= v.20.11.1 TLS) on your machine. You can download the latest version from the official website:
 
-- [Node.js](https://nodejs.org/en/download/)
+- [Node.js](https://nodejs.org/en/download)
 
 ## Usage
 
