@@ -11,19 +11,16 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@ffmpeg-installer/ffmpeg": "^1.1.0",
     "adm-zip": "^0.5.12",
     "archiver": "^7.0.1",
     "boxen": "^7.1.1",
     "chalk": "^5.3.0",
     "chokidar": "^3.6.0",
-    "fluent-ffmpeg": "^2.1.2",
     "husky": "^9.0.11",
     "inquirer": "^9.2.16",
     "sharp": "^0.33.3"
   },
   "devDependencies": {
-    "@types/fluent-ffmpeg": "^2.1.24",
     "@types/adm-zip": "^0.5.5",
     "@types/bun": "latest",
     "@types/archiver": "^6.0.2",
