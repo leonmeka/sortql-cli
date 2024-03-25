@@ -22,7 +22,7 @@ This documentation provides a detailed overview of the query syntax, supported o
 
 ## Getting Started
 
-To get started, please refer to our [quick start guide](../readme.md#quick-start). This guide will walk you through the installation process and provide you with a basic understanding of how to use **sortQL**.
+To get started, please refer to our [quick start guide](readme.md). This guide will walk you through the installation process and provide you with a basic understanding of how to use **sortQL**.
 
 ## Query Syntax
 
