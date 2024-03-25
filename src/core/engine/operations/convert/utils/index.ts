@@ -2,6 +2,9 @@ import sharp from "sharp";
 import ffmpeg from "fluent-ffmpeg";
 import path from "path";
 
+import installer from "@ffmpeg-installer/ffmpeg";
+ffmpeg.setFfmpegPath(installer.path);
+
 export async function convertImage(input: string, output: string) {
   await sharp(input).toFile(output);
 }
