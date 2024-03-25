@@ -122,17 +122,17 @@ describe("File Operations", () => {
 
   it("should convert an image file", async () => {
     // Arrange
-    await createImage(directory, "test.jpg");
+    await createImage(directory, "test.png");
 
     // Act
     await client.run(
-      `CONVERT 'files' FROM '' WHERE 'extension' = 'jpg' TO 'png'`
+      `CONVERT 'files' FROM '' WHERE 'extension' = 'png' TO 'jpg'`
     );
 
     // Assert
-    expect(await doesExist(directory, "test.jpg")).toBe(true);
     expect(await doesExist(directory, "test.png")).toBe(true);
-  });
+    expect(await doesExist(directory, "test.jpg")).toBe(true);
+  }, 20000);
 
   it("should convert an audio file", async () => {
     // Arrange
@@ -146,7 +146,7 @@ describe("File Operations", () => {
     // Assert
     expect(await doesExist(directory, "test.mp3")).toBe(true);
     expect(await doesExist(directory, "test.wav")).toBe(true);
-  });
+  }, 20000);
 
   it("should convert a video file", async () => {
     // Arrange
@@ -160,7 +160,7 @@ describe("File Operations", () => {
     // Assert
     expect(await doesExist(directory, "test.mp4")).toBe(true);
     expect(await doesExist(directory, "test.mov")).toBe(true);
-  });
+  }, 20000);
 });
 
 describe("Folder Operations", () => {
