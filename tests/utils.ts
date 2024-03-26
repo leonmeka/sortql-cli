@@ -1,16 +1,15 @@
 import path from "path";
-import { mkdir, writeFile, stat } from "node:fs/promises";
-
-const SAMPLE_IMAGE = "https://via.placeholder.com/150";
-const SAMPLE_VIDEO =
-  "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4";
-const SAMPLE_AUDIO =
-  "https://github.com/SergLam/Audio-Sample-files/raw/master/sample.mp3";
+import { mkdir, writeFile, readFile, stat } from "node:fs/promises";
 
 export const TEST_DIRECTORY = path.join(
   process.cwd(),
   "./tests/.mock-directory"
 );
+const SAMPLE_PATH = path.join(process.cwd(), "./tests/assets");
+
+const SAMPLE_IMAGE = `${SAMPLE_PATH}/sample.png`;
+const SAMPLE_VIDEO = `${SAMPLE_PATH}/sample.mp4`;
+const SAMPLE_AUDIO = `${SAMPLE_PATH}/sample.mp3`;
 
 export const createFile = async (
   directory: string,
@@ -18,28 +17,22 @@ export const createFile = async (
   content: string = ""
 ) => await writeFile(path.join(directory, name), content);
 
-const fetchAsset = async (url: string): Promise<Uint8Array> => {
-  const response = await fetch(url);
-
-  if (!response.ok) {
-    throw new Error(`Failed to fetch ${url}`);
-  }
-
-  return new Uint8Array(await response.arrayBuffer());
+const getAsset = async (path: string): Promise<Buffer> => {
+  return await readFile(path);
 };
 
 export const createImage = async (directory: string, name: string) => {
-  const image = await fetchAsset(SAMPLE_IMAGE);
+  const image = await getAsset(SAMPLE_IMAGE);
   await writeFile(path.join(directory, name), image);
 };
 
 export const createVideo = async (directory: string, name: string) => {
-  const video = await fetchAsset(SAMPLE_VIDEO);
+  const video = await getAsset(SAMPLE_VIDEO);
   await writeFile(path.join(directory, name), video);
 };
 
 export const createAudio = async (directory: string, name: string) => {
-  const audio = await fetchAsset(SAMPLE_AUDIO);
+  const audio = await getAsset(SAMPLE_AUDIO);
   await writeFile(path.join(directory, name), audio);
 };
 

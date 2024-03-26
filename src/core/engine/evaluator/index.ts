@@ -28,11 +28,10 @@ export class Evaluator {
     switch (type) {
       case "name":
       case "extension":
+      case "content":
         return value;
       case "size":
         return Number(value);
-      case "content":
-        return value;
       case "created":
       case "modified":
       case "accessed":
@@ -49,8 +48,8 @@ export class Evaluator {
     return {
       name: parse(path).name,
       extension: parse(path).ext.slice(1),
-      size: stats.size,
       content: stats.isFile() ? (await readFile(path)).toString() : "",
+      size: stats.size,
       created: stats.birthtimeMs === 0 ? stats.ctime : stats.birthtime,
       modified: stats.mtime,
       accessed: stats.atime,

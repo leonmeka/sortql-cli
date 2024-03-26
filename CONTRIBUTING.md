@@ -37,7 +37,7 @@ git clone [your-fork-url]
 
 ```bash
 cd [project-name]
-pnpm install
+npm install
 ```
 
 ## Development
@@ -45,7 +45,7 @@ pnpm install
 Once you have cloned the repository and installed the dependencies, you can start developing by running the following command:
 
 ```bash
-pnpm run dev
+npm run dev
 ```
 
 This will start the cli in development mode, allowing you to make changes and see the results in real-time.
@@ -55,7 +55,7 @@ This will start the cli in development mode, allowing you to make changes and se
 We're using Jest for testing. To run the tests, simply run the following command:
 
 ```bash
-pnpm run test
+npm run test
 ```
 
 This will run all tests (\*.spec.ts files) and prints the overall test coverage across the codebase. We aim for 100% coverage here.
@@ -65,5 +65,5 @@ This will run all tests (\*.spec.ts files) and prints the overall test coverage 
 To build the project, run the following command:
 
 ```bash
-pnpm run build
+npm run build
 ```
